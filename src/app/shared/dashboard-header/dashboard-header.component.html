@@ -150,16 +150,37 @@
                         Menu
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link active" href="/app"><i
-                                class="fa fa-fw fa-user-circle"></i>Dashboard <span
-                                class="badge badge-success">6</span></a>
-                        
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="/app/user-management"><i
+                        <a class="nav-link" href="/app/user-management" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i
                                 class="fa fa-fw fa-user-circle"></i>User Management <span
                                 class="badge badge-success">6</span></a>
-                        
+                        <div id="submenu-1" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="app/manage-chairpersons">Manage Chairpersons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="app/manage-context-users">Manage Context Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="ecommerce-product-single.html">Manage Evaluators</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="ecommerce-product-checkout.html">Manage Club's Users</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Activity Management</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Reports</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Sign Out</a>
                     </li>
                 </ul>
             </div>
