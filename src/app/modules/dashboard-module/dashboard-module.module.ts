@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { DashboardModuleRoutingModule } from './dashboard-module-routing.module';
 import { HomeComponent } from './govener/home/home.component';
 import { UserManagementComponent } from './govener/user-management/user-management.component';
@@ -22,7 +24,9 @@ import { ClubUsersComponent } from './govener/club-users/club-users.component';
   ],
   imports: [
     CommonModule,
-    DashboardModuleRoutingModule
+    DashboardModuleRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModuleModule { }

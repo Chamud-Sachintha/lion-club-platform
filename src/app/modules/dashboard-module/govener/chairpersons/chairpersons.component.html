@@ -19,18 +19,18 @@
         <div class="card">
             <h5 class="card-header">Manage All Region Chairpersons</h5>
             <div class="card-body">
-                <form>
+                <form [formGroup]="this.regionChairPersonForm" (ngSubmit)="onSubmitCreateRegionChairPerson()">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Code :</label>
-                                <input id="inputText3" type="text" class="form-control">
+                                <input id="inputText3" type="text" class="form-control" formControlName="code">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Name :</label>
-                                <input id="inputText3" type="text" class="form-control">
+                                <input id="inputText3" type="text" class="form-control" formControlName="name">
                             </div>
                         </div>
                     </div>
@@ -38,8 +38,16 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Email :</label>
-                                <input id="inputText3" type="text" class="form-control">
+                                <input id="inputText3" type="text" class="form-control" formControlName="email">
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Add Chairperson">
+                        </div>
+                        <div class="col-6">
+                            <input type="reset" class="btn btn-warning btn-sm" value="Reset Feilds">
                         </div>
                     </div>
                 </form>
