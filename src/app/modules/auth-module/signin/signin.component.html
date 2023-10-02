@@ -5,13 +5,24 @@
                         src="../assets/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your
                     user information.</span></div>
             <div class="card-body">
-                <form>
+                <form [formGroup]="this.userAuthForm" (ngSubmit)="onSubmitUserAuthForm()">
                     <div class="form-group">
                         <input class="form-control form-control-lg" id="username" type="text" placeholder="Username"
-                            autocomplete="off">
+                            autocomplete="off" formControlName="userName">
                     </div>
                     <div class="form-group">
-                        <input class="form-control form-control-lg" id="password" type="password" placeholder="Password">
+                        <input class="form-control form-control-lg" id="password" type="password" placeholder="Password" formControlName="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-select">Login As a</label>
+                        <select class="form-control" id="input-select" formControlName="flag">
+                            <option value="G">Governer</option>
+                            <option value="RC">Region Chairperson</option>
+                            <option value="ZC">Zone Chairperson</option>
+                            <option value="CNTU">Context User</option>
+                            <option value="CU">Club User</option>
+                            <option value="E">Evaluator</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="custom-control custom-checkbox">
@@ -19,7 +30,7 @@
                                 Me</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!this.userAuthForm.valid">Sign in</button>
                 </form>
             </div>
             <div class="card-footer bg-white p-0  ">
