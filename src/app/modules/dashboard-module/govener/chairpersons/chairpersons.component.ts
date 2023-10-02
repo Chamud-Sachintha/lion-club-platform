@@ -13,11 +13,42 @@ export class ChairpersonsComponent implements OnInit {
 
   chairPersonModel = new ChairPerson();
   regionChairPersonForm!: FormGroup;
+  zonalChairPersonForm!: FormGroup;
 
   constructor(private router: Router, private userService: UsersService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.initCreateRegionChairPersonForm();
+    this.initCreateZonalChairPersonsForm();
+  }
+
+  onSubmitCreateZonalChairPerson() {
+    const code = this.zonalChairPersonForm.controls['code'].value;
+    const name = this.zonalChairPersonForm.controls['name'].value;
+    const email = this.zonalChairPersonForm.controls['email'].value;
+
+    if (code == "") {
+
+    } else if (name == "") {
+
+    } else if (email == "") {
+
+    } else {
+      this.chairPersonModel.zonalChairpersonCode = code;
+      this.chairPersonModel.fullName = name;
+      this.chairPersonModel.email = email;
+
+      this.chairPersonModel.token = sessionStorage.getItem("authToken");
+      this.chairPersonModel.flag = sessionStorage.getItem("role");
+    }
+  }
+
+  initCreateZonalChairPersonsForm() {
+    this.regionChairPersonForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required]
+    })
   }
 
   onSubmitCreateRegionChairPerson() {
