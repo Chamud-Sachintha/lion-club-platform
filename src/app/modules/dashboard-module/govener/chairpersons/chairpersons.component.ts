@@ -40,11 +40,19 @@ export class ChairpersonsComponent implements OnInit {
 
       this.chairPersonModel.token = sessionStorage.getItem("authToken");
       this.chairPersonModel.flag = sessionStorage.getItem("role");
+
+      this.userService.createZonalChairPerson(this.chairPersonModel).subscribe((resp: any) => {
+        if (resp.code === 1) {
+          console.log(resp);
+        }
+      }, (err) => {
+
+      })
     }
   }
 
   initCreateZonalChairPersonsForm() {
-    this.regionChairPersonForm = this.formBuilder.group({
+    this.zonalChairPersonForm = this.formBuilder.group({
       code: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required]

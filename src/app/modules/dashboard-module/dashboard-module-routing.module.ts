@@ -4,6 +4,8 @@ import { HomeComponent } from './govener/home/home.component';
 import { UserManagementComponent } from './govener/user-management/user-management.component';
 import { ChairpersonsComponent } from './govener/chairpersons/chairpersons.component';
 import { ContextUsersComponent } from './govener/context-users/context-users.component';
+import { EvaluatorsComponent } from './govener/evaluators/evaluators.component';
+import { ClubUsersComponent } from './govener/club-users/club-users.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,16 @@ const routes: Routes = [
       {
         path: 'manage-context-users',
         component: ContextUsersComponent
+      },
+
+      {
+        path: 'manage-evaluators',
+        component: EvaluatorsComponent
+      },
+
+      {
+        path: 'manage-club-users',
+        component: ClubUsersComponent
       }
     ]
   }
