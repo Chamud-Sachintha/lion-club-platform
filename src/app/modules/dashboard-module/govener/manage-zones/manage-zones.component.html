@@ -19,24 +19,19 @@
         <div class="card">
             <h5 class="card-header">Manage All Zones</h5>
             <div class="card-body">
-                <form>
+                <form [formGroup]="this.addZoneDetailsForm" (ngSubmit)="onSubmitCreateZoneDetailsForm()">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Zone Code :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="code">
+                                <input id="inputText3" type="text" class="form-control" formControlName="zoneCode">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Zone Chairperson</label>
-                                <select class="form-control" id="input-select" formControlName="flag">
-                                    <option value="G">Governer</option>
-                                    <option value="RC">Region Chairperson</option>
-                                    <option value="ZC">Zone Chairperson</option>
-                                    <option value="CNTU">Context User</option>
-                                    <option value="CU">Club User</option>
-                                    <option value="E">Evaluator</option>
+                                <select class="form-control" id="input-select" formControlName="chairPersonCode">
+                                    <option value="{{ chairPerson.zonalChairpersonCode }}" *ngFor="let chairPerson of this.zonalChairPersonList">{{ chairPerson.zonalChairpersonCode }} - {{ chairPerson.fullName }}</option>
                                 </select>
                             </div>
                         </div>
@@ -45,13 +40,8 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Region</label>
-                                <select class="form-control" id="input-select" formControlName="flag">
-                                    <option value="G">Governer</option>
-                                    <option value="RC">Region Chairperson</option>
-                                    <option value="ZC">Zone Chairperson</option>
-                                    <option value="CNTU">Context User</option>
-                                    <option value="CU">Club User</option>
-                                    <option value="E">Evaluator</option>
+                                <select class="form-control" id="input-select" formControlName="reCode">
+                                    <option value="{{ eachRegion.regionCode }}" *ngFor="let eachRegion of this.regionList">{{ eachRegion.regionCode }}</option>
                                 </select>
                             </div>
                         </div>

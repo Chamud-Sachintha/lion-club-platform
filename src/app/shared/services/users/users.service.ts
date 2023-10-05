@@ -4,6 +4,7 @@ import { ChairPerson } from 'src/app/models/ChairPerson/chair-person';
 import { ClubUser } from 'src/app/models/ClubUser/club-user';
 import { ContextUser } from 'src/app/models/ContextUser/context-user';
 import { Evaluvator } from 'src/app/models/Evaluvator/evaluvator';
+import { Request } from 'src/app/models/Request/request';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -36,5 +37,15 @@ export class UsersService {
   createEvaluator(evaluatortModel: Evaluvator) {
     const path = environment.apiRoot + "addEvaluvator";
     return this.http.post(path, evaluatortModel);
+  }
+
+  getRegionChairPersonList(requestModel: Request) {
+    const path = environment.apiRoot + "region-chair-person-list";
+    return this.http.post(path, requestModel);
+  }
+
+  getZonalChairPersonList(requestModel: Request) {
+    const path = environment.apiRoot + "get_zonal-chair-person-list";
+    return this.http.post(path, requestModel);
   }
 }

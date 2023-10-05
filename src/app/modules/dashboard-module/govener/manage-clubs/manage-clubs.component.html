@@ -19,52 +19,32 @@
         <div class="card">
             <h5 class="card-header">Manage All Clubs</h5>
             <div class="card-body">
-                <form>
+                <form [formGroup]="this.addClubForm" (ngSubmit)="onSubmitAddClubDetailsForm()">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Club Code :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="code">
+                                <input id="inputText3" type="text" class="form-control" formControlName="clubCode">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Zone Chairperson</label>
-                                <select class="form-control" id="input-select" formControlName="flag">
-                                    <option value="G">Governer</option>
-                                    <option value="RC">Region Chairperson</option>
-                                    <option value="ZC">Zone Chairperson</option>
-                                    <option value="CNTU">Context User</option>
-                                    <option value="CU">Club User</option>
-                                    <option value="E">Evaluator</option>
+                                <label for="input-select" class="col-form-label">Select Zone Code</label>
+                                <select class="form-control" id="input-select" formControlName="zoneCode">
+                                    <option value="{{ eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Region</label>
-                                <select class="form-control" id="input-select" formControlName="flag">
-                                    <option value="G">Governer</option>
-                                    <option value="RC">Region Chairperson</option>
-                                    <option value="ZC">Zone Chairperson</option>
-                                    <option value="CNTU">Context User</option>
-                                    <option value="CU">Club User</option>
-                                    <option value="E">Evaluator</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Add Zone">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Add Club">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-body border-top">
-                <h3>List of Zones Available</h3>
+                <h3>List of Clubs Available</h3>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="table-responsive">
