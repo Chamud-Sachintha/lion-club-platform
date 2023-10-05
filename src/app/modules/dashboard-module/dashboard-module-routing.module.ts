@@ -9,6 +9,10 @@ import { ClubUsersComponent } from './govener/club-users/club-users.component';
 import { ManageRegionsComponent } from './govener/manage-regions/manage-regions.component';
 import { ManageZonesComponent } from './govener/manage-zones/manage-zones.component';
 import { ManageClubsComponent } from './govener/manage-clubs/manage-clubs.component';
+import { ActivityMainCategoryComponent } from './govener/activity-main-category/activity-main-category.component';
+import { ActivityFirstSubCategoryComponent } from './govener/activity-first-sub-category/activity-first-sub-category.component';
+import { ActivitySecondSubCategoryComponent } from './govener/activity-second-sub-category/activity-second-sub-category.component';
+import { ActivityComponent } from './govener/activity/activity.component';
 
 const routes: Routes = [
   {
@@ -63,6 +67,26 @@ const routes: Routes = [
       {
         path: 'manage-clubs',
         component: ManageClubsComponent
+      },
+
+      {
+        path: 'activity-main-category',
+        component: ActivityMainCategoryComponent
+      },
+
+      {
+        path: 'activity-first-sub-category',
+        component: ActivityFirstSubCategoryComponent
+      },
+
+      {
+        path: 'activity-second-sub-category',
+        component: ActivitySecondSubCategoryComponent
+      },
+
+      {
+        path: 'activity',
+        component: ActivityComponent
       }
     ]
   }

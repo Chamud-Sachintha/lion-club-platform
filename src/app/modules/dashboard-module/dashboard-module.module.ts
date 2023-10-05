@@ -13,7 +13,10 @@ import { ClubUsersComponent } from './govener/club-users/club-users.component';
 import { ManageRegionsComponent } from './govener/manage-regions/manage-regions.component';
 import { ManageZonesComponent } from './govener/manage-zones/manage-zones.component';
 import { ManageClubsComponent } from './govener/manage-clubs/manage-clubs.component';
-
+import { ActivityMainCategoryComponent } from './govener/activity-main-category/activity-main-category.component';
+import { ActivityFirstSubCategoryComponent } from './govener/activity-first-sub-category/activity-first-sub-category.component';
+import { ActivitySecondSubCategoryComponent } from './govener/activity-second-sub-category/activity-second-sub-category.component';
+import { ActivityComponent } from './govener/activity/activity.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,11 @@ import { ManageClubsComponent } from './govener/manage-clubs/manage-clubs.compon
        ClubUsersComponent,
        ManageRegionsComponent,
        ManageZonesComponent,
-       ManageClubsComponent
+       ManageClubsComponent,
+       ActivityMainCategoryComponent,
+       ActivityFirstSubCategoryComponent,
+       ActivitySecondSubCategoryComponent,
+       ActivityComponent,
   ],
   imports: [
     CommonModule,
