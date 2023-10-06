@@ -19,7 +19,7 @@
         <div class="card">
             <h5 class="card-header">Manage All Main Categories</h5>
             <div class="card-body">
-                <form>
+                <form [formGroup]="this.addMainCategoryForm" (ngSubmit)="onSubmitCreateMainCategoryForm()">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">

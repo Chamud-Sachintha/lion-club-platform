@@ -19,7 +19,7 @@
         <div class="card">
             <h5 class="card-header">Manage All Second Sub Categories</h5>
             <div class="card-body">
-                <form>
+                <form [formGroup]="addsecondSubCategoryForm" (ngSubmit)="onSubmitCreateSecondSubCategoryForm()">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
@@ -30,8 +30,8 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select First Sub Category</label>
-                                <select class="form-control" id="input-select" formControlName="chairPersonCode">
-                                    <option value="0">Sample Value</option>
+                                <select class="form-control" id="input-select" formControlName="firstCategoryCode">
+                                    <option value="{{ firstCategory.firstSubCategoryCode }}" *ngFor="let firstCategory of this.firstSubCategoryList">{{ this.firstCategory.categoryName }}</option>
                                 </select>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Name :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="name">
+                                <input id="inputText3" type="text" class="form-control" formControlName="categoryName">
                             </div>
                         </div>
                     </div>
