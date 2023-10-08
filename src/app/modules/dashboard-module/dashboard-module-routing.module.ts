@@ -13,6 +13,7 @@ import { ActivityMainCategoryComponent } from './govener/activity-main-category/
 import { ActivityFirstSubCategoryComponent } from './govener/activity-first-sub-category/activity-first-sub-category.component';
 import { ActivitySecondSubCategoryComponent } from './govener/activity-second-sub-category/activity-second-sub-category.component';
 import { ActivityComponent } from './govener/activity/activity.component';
+import { ProofDocumentsComponent } from './govener/proof-documents/proof-documents.component';
 
 const routes: Routes = [
   {
@@ -87,6 +88,11 @@ const routes: Routes = [
       {
         path: 'activity',
         component: ActivityComponent
+      },
+
+      {
+        path: 'proof-documents',
+        component: ProofDocumentsComponent
       }
     ]
   }
