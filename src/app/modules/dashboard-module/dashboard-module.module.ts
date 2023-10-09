@@ -21,6 +21,7 @@ import { ProofDocumentsComponent } from './govener/proof-documents/proof-documen
 
 import { TagInputModule } from 'ngx-chips';
 import { PointTablesComponent } from './govener/point-tables/point-tables.component';
+import { SubmitActivityComponent } from './club-user/submit-activity/submit-activity.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PointTablesComponent } from './govener/point-tables/point-tables.compon
        ActivityComponent,
        ProofDocumentsComponent,
        PointTablesComponent,
+       SubmitActivityComponent,
   ],
   imports: [
     CommonModule,

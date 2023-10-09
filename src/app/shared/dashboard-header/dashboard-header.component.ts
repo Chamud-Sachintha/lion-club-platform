@@ -19,7 +19,7 @@ export class DashboardHeaderComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.checkMenuPermissionForUser();
-    }, 500);
+    }, 600);
   }
 
   checkMenuPermissionForUser() {

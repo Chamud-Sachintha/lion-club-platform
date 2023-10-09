@@ -19,18 +19,18 @@
         <div class="card">
             <h5 class="card-header">Manage All Activities</h5>
             <div class="card-body">
-                <form>
+                <form [formGroup]="addNewActivityForm" (ngSubmit)="onSubmitCreateNewActivityForm()">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Code :</label>
-                                <input id="inputText3" type="text" class="form-control">
+                                <input id="inputText3" type="text" class="form-control" formControlName="code">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Main Activity Category</label>
-                                <select class="form-control" id="input-select">
+                                <select class="form-control" id="input-select" formControlName="mainCatCode">
                                     <option value="{{ this.mainCategory.mainCategoryCode }}" *ngFor="let mainCategory of this.mainCategoryList">{{ this.mainCategory.mainCategoryCode }}</option>
                                 </select>
                             </div>
@@ -40,7 +40,7 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select First Sub Activity Category</label>
-                                <select class="form-control" id="input-select">
+                                <select class="form-control" id="input-select" formControlName="firstCatCode">
                                     <option value="{{ this.firstSubCategory.firstSubCategoryCode }}" *ngFor="let firstSubCategory of this.firstSubCategoryList">{{ this.firstSubCategory.firstSubCategoryCode }}</option>
                                 </select>
                             </div>
@@ -48,7 +48,7 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Second Sub Activity Category</label>
-                                <select class="form-control" id="input-select">
+                                <select class="form-control" id="input-select" formControlName="secondCatCode">
                                     <option value="{{ this.secondSubCategory.secondSubCategoryCode }}" *ngFor="let secondSubCategory of this.secondCategoryList">{{ this.secondSubCategory.secondSubCategoryCode }}</option>
                                 </select>
                             </div>
@@ -58,14 +58,15 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Name :</label>
-                                <input id="inputText3" type="text" class="form-control">
+                                <input id="inputText3" type="text" class="form-control" formControlName="activityName">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Authorized Users</label>
-                                <select class="form-control" id="input-select">
-                                    <option value="0">Sample Value</option>
+                                <select class="form-control" id="input-select" formControlName="authUserCode">
+                                    <option value="1">Context Users</option>
+                                    <option value="2">Club Users</option>
                                 </select>
                             </div>
                         </div>
@@ -74,13 +75,13 @@
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Required Point Template</label>
-                                <select class="form-control" id="input-select">
+                                <select class="form-control" id="input-select" formControlName="templateCode">
                                     <option value="{{ this.eachTemplate.templateName }}" *ngFor="let eachTemplate of this.templateList">{{ this.eachTemplate.templateName }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 mt-4">
-                            <tag-input [onlyFromAutocomplete]="true">
+                            <tag-input [onlyFromAutocomplete]="true" formControlName="documentCode">
                                 <tag-input-dropdown 
                                         [showDropdownIfEmpty]="true"
                                         [autocompleteObservable]="requestAutocompleteItemsFake">
