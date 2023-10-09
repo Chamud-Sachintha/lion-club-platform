@@ -14,6 +14,7 @@ import { ActivityFirstSubCategoryComponent } from './govener/activity-first-sub-
 import { ActivitySecondSubCategoryComponent } from './govener/activity-second-sub-category/activity-second-sub-category.component';
 import { ActivityComponent } from './govener/activity/activity.component';
 import { ProofDocumentsComponent } from './govener/proof-documents/proof-documents.component';
+import { PointTablesComponent } from './govener/point-tables/point-tables.component';
 
 const routes: Routes = [
   {
@@ -80,7 +81,7 @@ const routes: Routes = [
         component: ActivityFirstSubCategoryComponent
       },
 
-      {
+    {
         path: 'activity-second-sub-category',
         component: ActivitySecondSubCategoryComponent
       },
@@ -93,6 +94,11 @@ const routes: Routes = [
       {
         path: 'proof-documents',
         component: ProofDocumentsComponent
+      },
+
+      {
+        path: 'point-tables',
+        component: PointTablesComponent
       }
     ]
   }

@@ -19,6 +19,9 @@ import { ActivitySecondSubCategoryComponent } from './govener/activity-second-su
 import { ActivityComponent } from './govener/activity/activity.component';
 import { ProofDocumentsComponent } from './govener/proof-documents/proof-documents.component';
 
+import { TagInputModule } from 'ngx-chips';
+import { PointTablesComponent } from './govener/point-tables/point-tables.component';
+
 @NgModule({
   declarations: [
   
@@ -36,12 +39,14 @@ import { ProofDocumentsComponent } from './govener/proof-documents/proof-documen
        ActivitySecondSubCategoryComponent,
        ActivityComponent,
        ProofDocumentsComponent,
+       PointTablesComponent,
   ],
   imports: [
     CommonModule,
     DashboardModuleRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TagInputModule
   ]
 })
 export class DashboardModuleModule { }
