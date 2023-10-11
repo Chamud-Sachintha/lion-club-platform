@@ -5,4 +5,6 @@ export class ChairPerson {
     email!: string;
     flag!: any;
     token!: any;
+    regionCode!: string;
+    zoneCode!: string;
 }

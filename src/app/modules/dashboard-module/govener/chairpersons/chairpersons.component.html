@@ -41,6 +41,14 @@
                                 <input id="inputText3" type="text" class="form-control" formControlName="email">
                             </div>
                         </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="input-select" class="col-form-label">Select Region</label>
+                                <select class="form-control" id="input-select" formControlName="reCode">
+                                    <option value="{{ eachRegion.regionCode }}" *ngFor="let eachRegion of this.regionList">{{ eachRegion.regionCode }}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-2">
@@ -178,6 +186,14 @@
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Email :</label>
                                 <input id="inputText3" type="text" class="form-control" formControlName="email">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="input-select" class="col-form-label">Select Zone Code</label>
+                                <select class="form-control" id="input-select" formControlName="zoneCode">
+                                    <option value="{{ eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option>
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@ export class UsersService {
   }
 
   createClubUser(clubUserModel: ClubUser) {
-    const path = environment.apiRoot + "";
+    const path = environment.apiRoot + "addClubUser";
     return this.http.post(path, clubUserModel);
   }
 

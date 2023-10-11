@@ -28,23 +28,20 @@ export class ManageZonesComponent implements OnInit {
   ngOnInit(): void {
     this.initAddZoneDetailsForm();
     this.getRegionList();
-    this.getZonalChairPersonList();
+    // this.getZonalChairPersonList();
   }
 
   onSubmitCreateZoneDetailsForm() {
     const zoneCode = this.addZoneDetailsForm.controls['zoneCode'].value;
-    const chairPersonCode = this.addZoneDetailsForm.controls['chairPersonCode'].value;
+    // const chairPersonCode = this.addZoneDetailsForm.controls['chairPersonCode'].value;
     const reCode = this.addZoneDetailsForm.controls['reCode'].value;
 
     if (zoneCode == "") {
-
-    } else if (chairPersonCode == "") {
 
     } else if (reCode == "") {
 
     } else {
       this.zonalInfoModel.zoneCode = zoneCode;
-      this.zonalInfoModel.chairPersonCode = chairPersonCode;
       this.zonalInfoModel.regionCode = reCode;
       this.zonalInfoModel.token = sessionStorage.getItem("authToken");
       this.zonalInfoModel.flag = sessionStorage.getItem("role");
@@ -60,20 +57,20 @@ export class ManageZonesComponent implements OnInit {
     }
   }
 
-  getZonalChairPersonList() {
-    this.requestModel.token = sessionStorage.getItem("authToken");
-    this.requestModel.flag = sessionStorage.getItem("role");
+  // getZonalChairPersonList() {
+  //   this.requestModel.token = sessionStorage.getItem("authToken");
+  //   this.requestModel.flag = sessionStorage.getItem("role");
 
-    this.usersService.getZonalChairPersonList(this.requestModel).subscribe((resp: any) => {
-      const dataList = JSON.parse(JSON.stringify(resp));
+  //   this.usersService.getZonalChairPersonList(this.requestModel).subscribe((resp: any) => {
+  //     const dataList = JSON.parse(JSON.stringify(resp));
 
-      if (resp.code === 1) {
-        dataList.data[0].forEach((chairPerson: ChairPerson) => {
-          this.zonalChairPersonList.push(chairPerson);
-        })
-      }
-    }, (err) => {})
-  }
+  //     if (resp.code === 1) {
+  //       dataList.data[0].forEach((chairPerson: ChairPerson) => {
+  //         this.zonalChairPersonList.push(chairPerson);
+  //       })
+  //     }
+  //   }, (err) => {})
+  // }
 
   getRegionList() {
     this.requestModel.token = sessionStorage.getItem("authToken");

@@ -12,6 +12,7 @@ declare var $: any;
 export class DashboardHeaderComponent implements OnInit {
 
   governerPerm = false;
+  clubUserPerm = false;
   menuPermModel = new Perm();
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -22,6 +23,13 @@ export class DashboardHeaderComponent implements OnInit {
     }, 600);
   }
 
+  onClickSignOut() {
+    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("role");
+
+    location.reload();
+  }
+
   checkMenuPermissionForUser() {
     this.menuPermModel.token = sessionStorage.getItem("authToken");
     this.menuPermModel.flag = sessionStorage.getItem("role");
@@ -30,6 +38,9 @@ export class DashboardHeaderComponent implements OnInit {
       if (resp.code === 1) {
         if (this.menuPermModel.flag === "G") {
           this.governerPerm = true;
+        } else if (this.menuPermModel.flag == "CU") {
+          this.governerPerm = false;
+          this.clubUserPerm = true;
         }
       }
     }, (err) => {

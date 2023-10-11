@@ -4,4 +4,5 @@ export class ClubUser {
     clubUserCode!: string;
     fullName!: string;
     email!: string;
+    clubCode!: string;
 }

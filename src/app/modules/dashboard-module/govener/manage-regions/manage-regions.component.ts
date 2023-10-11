@@ -24,24 +24,6 @@ export class ManageRegionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCreateNewRegionForm();
-    this.getRegionChairPersonList();
-  }
-
-  getRegionChairPersonList() {
-    this.requestModel.token = sessionStorage.getItem("authToken");
-    this.requestModel.flag = sessionStorage.getItem("role");
-
-    this.userServcie.getRegionChairPersonList(this.requestModel).subscribe((resp: any) => {
-      const dataList = JSON.parse(JSON.stringify(resp));
-
-      if (resp.code === 1) {
-        dataList.data[0].forEach((eachPerson: ChairPerson) => {
-          this.regionChairPersonList.push(eachPerson)
-        })
-      }
-    }, (err) => {
-
-    })
   }
 
   onSubmitAddRegionDetailsForm() {
@@ -50,13 +32,10 @@ export class ManageRegionsComponent implements OnInit {
 
     if (reCode == "") {
 
-    } else if (chairPersonCode == "") {
-
     } else {
       this.regionModel.token = sessionStorage.getItem("authToken");
       this.regionModel.flag = sessionStorage.getItem("role");
       this.regionModel.regionCode = reCode;
-      this.regionModel.chairPersonCode = chairPersonCode;
 
       this.regionService.createNewRegion(this.regionModel).subscribe((resp) => {
         console.log(resp)

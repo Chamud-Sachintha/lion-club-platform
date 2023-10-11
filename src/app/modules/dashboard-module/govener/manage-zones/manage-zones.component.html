@@ -29,22 +29,20 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Zone Chairperson</label>
-                                <select class="form-control" id="input-select" formControlName="chairPersonCode">
-                                    <option value="{{ chairPerson.zonalChairpersonCode }}" *ngFor="let chairPerson of this.zonalChairPersonList">{{ chairPerson.zonalChairpersonCode }} - {{ chairPerson.fullName }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Region</label>
                                 <select class="form-control" id="input-select" formControlName="reCode">
                                     <option value="{{ eachRegion.regionCode }}" *ngFor="let eachRegion of this.regionList">{{ eachRegion.regionCode }}</option>
                                 </select>
                             </div>
                         </div>
+                        <!-- <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="input-select" class="col-form-label">Select Zone Chairperson</label>
+                                <select class="form-control" id="input-select" formControlName="chairPersonCode">
+                                    <option value="{{ chairPerson.zonalChairpersonCode }}" *ngFor="let chairPerson of this.zonalChairPersonList">{{ chairPerson.zonalChairpersonCode }} - {{ chairPerson.fullName }}</option>
+                                </select>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">

@@ -3,5 +3,4 @@ export class Zone {
     flag!: any;
     zoneCode!: string;
     regionCode!: string;
-    chairPersonCode!: string;
 }

@@ -22,25 +22,33 @@
                 <form [formGroup]="this.addRegionDetailsForm" (ngSubmit)="onSubmitAddRegionDetailsForm()">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="inputText3" class="col-form-label">Region Code :</label>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Region Code :</label>
                                 <input id="inputText3" type="text" class="form-control" formControlName="reCode">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Add Region">
+                        </div>
+                        <!-- <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Region Chairperson</label>
                                 <select class="form-control" id="input-select" formControlName="chairPersonCode">
                                     <option value="{{ this.eachPerson.reChairPersonCode }}" *ngFor="let eachPerson of this.regionChairPersonList">{{ eachPerson.reChairPersonCode }} - {{ eachPerson.fullName }}</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <input type="submit" class="btn btn-primary btn-sm" value="Add Region">
                         </div>
-                    </div>
+                    </div> -->
                 </form>
             </div>
             <div class="card-body border-top">

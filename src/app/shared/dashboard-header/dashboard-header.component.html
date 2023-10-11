@@ -138,6 +138,7 @@
 
 <div class="nav-left-sidebar sidebar-dark">
     <div class="menu-list">
+        <!-- governer permission -->
         <nav class="navbar navbar-expand-lg navbar-light" *ngIf="this.governerPerm">
             <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -151,6 +152,24 @@
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/app/user-management" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i
+                                class="fa fa-fw fa-user-circle"></i>Section Management <span
+                                class="badge badge-success">6</span></a>
+                        <div id="submenu-2" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="app/manage-regions">Manage Regions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="app/manage-zones">Manage Zones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="app/manage-clubs">Manage Clubs</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="/app/user-management" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i
@@ -169,24 +188,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="app/manage-club-users">Manage Club's Users</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/app/user-management" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i
-                                class="fa fa-fw fa-user-circle"></i>Section Management <span
-                                class="badge badge-success">6</span></a>
-                        <div id="submenu-2" class="collapse submenu" style="">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="app/manage-regions">Manage Regions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="app/manage-zones">Manage Zones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="app/manage-clubs">Manage Clubs</a>
                                 </li>
                             </ul>
                         </div>
@@ -222,7 +223,29 @@
                         <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Reports</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Sign Out</a>
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle" (click)="onClickSignOut()"></i>Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- club user permission -->
+        <nav class="navbar navbar-expand-lg navbar-light" *ngIf="this.clubUserPerm">
+            <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-divider">
+                        Menu
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle" (click)="onClickSignOut()"></i>Sign Out</a>
                     </li>
                 </ul>
             </div>
