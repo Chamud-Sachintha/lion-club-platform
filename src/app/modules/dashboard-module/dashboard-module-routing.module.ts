@@ -15,6 +15,7 @@ import { ActivitySecondSubCategoryComponent } from './govener/activity-second-su
 import { ActivityComponent } from './govener/activity/activity.component';
 import { ProofDocumentsComponent } from './govener/proof-documents/proof-documents.component';
 import { PointTablesComponent } from './govener/point-tables/point-tables.component';
+import { SubmitActivityComponent } from './club-user/submit-activity/submit-activity.component';
 
 const routes: Routes = [
   {
@@ -99,6 +100,14 @@ const routes: Routes = [
       {
         path: 'point-tables',
         component: PointTablesComponent
+      },
+
+
+      // club user routing starts here
+
+      {
+        path: 'submit-activity',
+        component: SubmitActivityComponent
       }
     ]
   }

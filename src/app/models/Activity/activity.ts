@@ -1,3 +1,5 @@
+import { Document } from "../Document/document";
+
 export class Activity {
     token!: any;
     flag!: any;
@@ -9,4 +11,5 @@ export class Activity {
     authUserCode!: string;
     templateCode!: string;
     documentCode!: string;
+    documents: Document[] = [];
 }

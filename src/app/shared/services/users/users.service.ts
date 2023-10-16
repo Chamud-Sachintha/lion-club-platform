@@ -48,4 +48,9 @@ export class UsersService {
     const path = environment.apiRoot + "get_zonal-chair-person-list";
     return this.http.post(path, requestModel);
   }
+
+  getClubUserInfoByEmail(requestModel: Request) {
+    const path = environment.apiRoot + "get-club-user-info";
+    return this.http.post(path, requestModel);
+  }
 }
