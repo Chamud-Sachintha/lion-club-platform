@@ -20,4 +20,9 @@ export class ZoneService {
     const path = environment.apiRoot + "get_zone-list";
     return this.http.post(path, requestModel);
   }
+
+  getZoneListByReCode(zoneModel: Zone) {
+    const path = environment.apiRoot + "get-zone-list-by-re-code";
+    return this.http.post(path, zoneModel);
+  }
 }

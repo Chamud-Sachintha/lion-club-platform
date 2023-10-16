@@ -22,6 +22,7 @@ import { ProofDocumentsComponent } from './govener/proof-documents/proof-documen
 import { TagInputModule } from 'ngx-chips';
 import { PointTablesComponent } from './govener/point-tables/point-tables.component';
 import { SubmitActivityComponent } from './club-user/submit-activity/submit-activity.component';
+import { FeedActivityDataComponent } from './context-user/feed-activity-data/feed-activity-data.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SubmitActivityComponent } from './club-user/submit-activity/submit-acti
        ProofDocumentsComponent,
        PointTablesComponent,
        SubmitActivityComponent,
+       FeedActivityDataComponent,
   ],
   imports: [
     CommonModule,

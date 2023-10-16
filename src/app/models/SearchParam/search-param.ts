@@ -1,6 +1,6 @@
-export class Region {
+export class SearchParam {
     token!: any;
     flag!: any;
     regionCode!: string;
-    contextUserCode!: any;
+    contextUserCode!: string;
 }

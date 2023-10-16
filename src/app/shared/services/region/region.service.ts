@@ -20,4 +20,9 @@ export class RegionService {
     const path = environment.apiRoot + "get-region-list";
     return this.http.post(path, requestModel);
   }
+
+  getRegionListByUserCode(requestModel: Region) {
+    const path = environment.apiRoot + "get-region-list-by-usercode";
+    return this.http.post(path, requestModel);
+  }
 }

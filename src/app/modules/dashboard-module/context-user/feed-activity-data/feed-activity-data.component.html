@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Manage All Regions Here. </h2>
+            <h2 class="pageheader-title">Manage All Activity First Sub categories Here. </h2>
             <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
             <div class="page-breadcrumb">
                 <nav aria-label="breadcrumb">
@@ -17,42 +17,31 @@
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <h5 class="card-header">Manage All Regions</h5>
+            <h5 class="card-header">Manage Club Activities Here</h5>
             <div class="card-body">
-                <form [formGroup]="this.addRegionDetailsForm" (ngSubmit)="onSubmitAddRegionDetailsForm()">
+                <form action="">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Region Code :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="reCode">
+                                <label for="input-select" class="col-form-label">Select Main Activity Category</label>
+                                <select class="form-control" id="input-select" formControlName="mainCategoryCode" #ref (change)="onChangeRegion(ref.value)">
+                                    <option value="{{ this.region.regionCode }}" *ngFor="let region of this.regionList">{{ this.region.regionCode }}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Context User</label>
-                                <select class="form-control" id="input-select" formControlName="contextUserCode">
-                                    <option value="{{ this.contextUser.contextUserCode }}" *ngFor="let contextUser of this.contextUserList">{{ this.contextUser.contextUserCode }} - {{ this.contextUser.fullName }}</option>
+                                <label for="input-select" class="col-form-label">Select Main Activity Category</label>
+                                <select class="form-control" id="input-select" formControlName="mainCategoryCode">
+                                    <option value="{{ this.eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option>
                                 </select>
                             </div>
-                        </div>
-                        <!-- <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Region Chairperson</label>
-                                <select class="form-control" id="input-select" formControlName="chairPersonCode">
-                                    <option value="{{ this.eachPerson.reChairPersonCode }}" *ngFor="let eachPerson of this.regionChairPersonList">{{ eachPerson.reChairPersonCode }} - {{ eachPerson.fullName }}</option>
-                                </select>
-                            </div>
-                        </div> -->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Add Region">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-body border-top">
-                <h3>List of Regions Available</h3>
+                <h3>List of Club Activities Available</h3>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="table-responsive">

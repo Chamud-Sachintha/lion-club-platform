@@ -53,4 +53,9 @@ export class UsersService {
     const path = environment.apiRoot + "get-club-user-info";
     return this.http.post(path, requestModel);
   }
+
+  getContextUserList(requestMode: Request) {
+    const path = environment.apiRoot + "get-context-user-list";
+    return this.http.post(path, requestMode);
+  }
 }

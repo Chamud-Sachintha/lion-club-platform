@@ -16,6 +16,7 @@ import { ActivityComponent } from './govener/activity/activity.component';
 import { ProofDocumentsComponent } from './govener/proof-documents/proof-documents.component';
 import { PointTablesComponent } from './govener/point-tables/point-tables.component';
 import { SubmitActivityComponent } from './club-user/submit-activity/submit-activity.component';
+import { FeedActivityDataComponent } from './context-user/feed-activity-data/feed-activity-data.component';
 
 const routes: Routes = [
   {
@@ -108,6 +109,13 @@ const routes: Routes = [
       {
         path: 'submit-activity',
         component: SubmitActivityComponent
+      },
+
+      // context user routing starts here
+
+      {
+        path: 'feed-data',
+        component: FeedActivityDataComponent
       }
     ]
   }

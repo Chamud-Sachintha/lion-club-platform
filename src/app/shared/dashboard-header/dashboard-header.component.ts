@@ -15,6 +15,7 @@ export class DashboardHeaderComponent implements OnInit {
 
   governerPerm = false;
   clubUserPerm = false;
+  contextUserPerm = false;
   menuPermModel = new Perm();
   requestModel = new Request();
 
@@ -41,11 +42,18 @@ export class DashboardHeaderComponent implements OnInit {
       if (resp.code === 1) {
         if (this.menuPermModel.flag === "G") {
           this.governerPerm = true;
+          this.contextUserPerm = false;
+          this.clubUserPerm = false;
         } else if (this.menuPermModel.flag == "CU") {
+          this.contextUserPerm = false;
           this.governerPerm = false;
           this.clubUserPerm = true;
 
           this.loadClubUserInfo();
+        } else if (this.menuPermModel.flag == "CNTU") {
+          this.governerPerm = false;
+          this.clubUserPerm = false;
+          this.contextUserPerm = true;
         }
       }
     }, (err) => {
