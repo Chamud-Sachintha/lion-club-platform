@@ -38,21 +38,17 @@ export class SubmitActivityComponent implements OnInit {
   }
 
   onSubmitAddClubActivityForm() {
-    console.log(this.submitActivityForm.value);
     const activityCode = this.submitActivityForm.controls['activityCode'].value;
-    const cost = this.submitActivityForm.controls['cost'].value;
-    const benificiaries = this.submitActivityForm.controls['benificiaries'].value;
-    const memberCount = this.submitActivityForm.controls['memberCount'].value;
+    const value = this.submitActivityForm.controls['value'].value;
+    const conditionType = this.submitActivityForm.controls['conditionType'].value;
     const documentValueList = this.selectedFiles;
 
     if (activityCode == "") {
 
-    } else if (cost == "") {
+    } else if (value == "") {
 
-    } else if (benificiaries == "") {
-
-    } else if (memberCount == "") {
-
+    } else if (conditionType == "") {
+      
     } else if (documentValueList.length == 0) {
       
     } else {
@@ -60,17 +56,13 @@ export class SubmitActivityComponent implements OnInit {
 
       this.clubActivityModel.activityCode = activityCode;
       this.clubCode = sessionStorage.getItem("clubCode");
-      this.clubActivityModel.activityCost = cost;
-      this.clubActivityModel.beneficiaries = benificiaries;
-      this.clubActivityModel.memberCount = memberCount;
+      this.clubActivityModel.value = value;
       this.token = sessionStorage.getItem("authToken");
       this.clubActivityModel.flag = sessionStorage.getItem("role");
 
       formData.append("activityCode", activityCode);
       formData.append("clubCode", this.clubCode);
-      formData.append("activityCost", cost);
-      formData.append("beneficiaries", benificiaries);
-      formData.append("memberCount", memberCount);
+      formData.append("value", value);
       formData.append("token", this.token);
       formData.append("flag", this.clubActivityModel.flag);
 
@@ -139,9 +131,8 @@ export class SubmitActivityComponent implements OnInit {
   initSubmitActivityForm() {
     this.submitActivityForm = this.formBuilder.group({
       activityCode: ['', Validators.required],
-      cost: ['', Validators.required],
-      benificiaries: ['', Validators.required],
-      memberCount: ['', Validators.required],
+      conditionType: ['', Validators.required],
+      value: ['', Validators.required],
       valueList: this.formBuilder.array([])
     })
   }

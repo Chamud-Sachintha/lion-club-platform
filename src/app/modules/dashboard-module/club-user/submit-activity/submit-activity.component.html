@@ -39,22 +39,18 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Cost :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="cost">
+                                <label for="input-select" class="col-form-label">Select Type</label>
+                                <select class="form-control" id="input-select" formControlName="conditionType">
+                                    <option value="1">Cost</option>
+                                    <option value="2">Beneficiaries</option>
+                                    <option value="3">Participants</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Beneficiaries :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="benificiaries">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Participants :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="memberCount">
+                                <label for="inputText3" class="col-form-label">Value :</label>
+                                <input id="inputText3" type="text" class="form-control" formControlName="value">
                             </div>
                         </div>
                     </div>

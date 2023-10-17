@@ -6,7 +6,8 @@ export class ClubActivity {
     activityCode!: string;
     clubCode!: any;
     activityCost!: number;
+    conditionType!: number;
     beneficiaries!: string;
-    memberCount!: string;
+    value!: string;
     documentList!: FormData;
 }
