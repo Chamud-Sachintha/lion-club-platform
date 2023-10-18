@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FirstSubCategory } from 'src/app/models/FirstSubCategory/first-sub-category';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -19,5 +20,10 @@ export class FirstSubCategoryService {
   getFirstSubcategoryList(requestModel: Request) {
     const path = environment.apiRoot + "get-first-sub-category-list";
     return this.http.post(path, requestModel);
+  }
+
+  getFirstCategoryListByMainCategory(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-firstCatList-by-mainCatCode";
+    return this.http.post(path, searchParamModel);
   }
 }

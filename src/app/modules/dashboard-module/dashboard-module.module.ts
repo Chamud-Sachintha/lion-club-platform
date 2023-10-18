@@ -24,6 +24,7 @@ import { PointTablesComponent } from './govener/point-tables/point-tables.compon
 import { SubmitActivityComponent } from './club-user/submit-activity/submit-activity.component';
 import { FeedActivityDataComponent } from './context-user/feed-activity-data/feed-activity-data.component';
 import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activities/manage-club-activities.component';
+import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activiti
        SubmitActivityComponent,
        FeedActivityDataComponent,
        ManageClubActivitiesComponent,
+       SubmitNewActivityComponent,
   ],
   imports: [
     CommonModule,

@@ -83,6 +83,15 @@
                             <label for="formFile" class="form-label">Add Required Proof Documents</label>
                             <input class="form-control" type="file" (change)="onFileSelected($event)" id="formFile" multiple>
                         </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="input-select" class="col-form-label">Select Club Code</label>
+                                <select class="form-control" id="input-select" #maiActivityRef (change)="onChangeMainActivityCode(maiActivityRef.value)">
+                                    <option value="">-- Select Main Category --</option>
+                                    <option value="{{ this.eachClub.clubCode }}" *ngFor="let eachClub of this.clubList">{{ this.eachClub.clubCode }}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">

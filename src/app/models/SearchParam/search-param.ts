@@ -3,4 +3,7 @@ export class SearchParam {
     flag!: any;
     regionCode!: string;
     contextUserCode!: string;
+    mainCategoryCode!: string;
+    firstCategoryCode!: string;
+    secondCategoryCode!: string;
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Club } from 'src/app/models/Club/club';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -18,5 +19,10 @@ export class ClubService {
   getClubList(clubModel: Club) {
     const path = environment.apiRoot + "get-club-list";
     return this.http.post(path, clubModel);
+  }
+
+  getClubListByContextUserCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "club-list-by-context-user";
+    return this.http.post(path, searchParamModel);
   }
 }
