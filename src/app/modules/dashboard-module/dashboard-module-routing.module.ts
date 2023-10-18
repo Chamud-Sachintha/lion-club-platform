@@ -17,6 +17,7 @@ import { ProofDocumentsComponent } from './govener/proof-documents/proof-documen
 import { PointTablesComponent } from './govener/point-tables/point-tables.component';
 import { SubmitActivityComponent } from './club-user/submit-activity/submit-activity.component';
 import { FeedActivityDataComponent } from './context-user/feed-activity-data/feed-activity-data.component';
+import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activities/manage-club-activities.component';
 
 const routes: Routes = [
   {
@@ -116,6 +117,12 @@ const routes: Routes = [
       {
         path: 'feed-data',
         component: FeedActivityDataComponent
+      },
+
+      //eveluvator routings starts here
+      {
+        path:'manage-lub-activities',
+        component: ManageClubActivitiesComponent
       }
     ]
   }

@@ -23,18 +23,39 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
+                                <label for="input-select" class="col-form-label">Select Main Category</label>
+                                <select class="form-control" id="input-select" formControlName="activityCode" #activityRef (click)="onChangeActivity(activityRef.value)">
+                                    <option value="0" >Sample Value</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="input-select" class="col-form-label">Select First Category</label>
+                                <select class="form-control" id="input-select" formControlName="activityCode" #activityRef (click)="onChangeActivity(activityRef.value)">
+                                    <option value="0" >Sample Value</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="input-select" class="col-form-label">Select Second Category</label>
+                                <select class="form-control" id="input-select" formControlName="activityCode" #activityRef (click)="onChangeActivity(activityRef.value)">
+                                    <option value="0" >Sample Value</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Activity</label>
                                 <select class="form-control" id="input-select" formControlName="activityCode" #activityRef (click)="onChangeActivity(activityRef.value)">
                                     <option value="{{ eachActivity.activityCode }}" *ngFor="let eachActivity of this.activityList">{{ this.eachActivity.activityCode }} - {{ this.eachActivity.activityName }}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Main Category :</label>
-                                <input id="inputText3" type="text" class="form-control" disabled>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">

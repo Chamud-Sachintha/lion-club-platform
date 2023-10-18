@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Main Activity Category</label>
+                                <label for="input-select" class="col-form-label">Select Region</label>
                                 <select class="form-control" id="input-select" formControlName="mainCategoryCode" #ref (change)="onChangeRegion(ref.value)">
                                     <option value="{{ this.region.regionCode }}" *ngFor="let region of this.regionList">{{ this.region.regionCode }}</option>
                                 </select>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Main Activity Category</label>
+                                <label for="input-select" class="col-form-label">Select Zone</label>
                                 <select class="form-control" id="input-select" formControlName="mainCategoryCode">
                                     <option value="{{ this.eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option>
                                 </select>

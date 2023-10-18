@@ -23,6 +23,7 @@ import { TagInputModule } from 'ngx-chips';
 import { PointTablesComponent } from './govener/point-tables/point-tables.component';
 import { SubmitActivityComponent } from './club-user/submit-activity/submit-activity.component';
 import { FeedActivityDataComponent } from './context-user/feed-activity-data/feed-activity-data.component';
+import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activities/manage-club-activities.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FeedActivityDataComponent } from './context-user/feed-activity-data/fee
        PointTablesComponent,
        SubmitActivityComponent,
        FeedActivityDataComponent,
+       ManageClubActivitiesComponent,
   ],
   imports: [
     CommonModule,
