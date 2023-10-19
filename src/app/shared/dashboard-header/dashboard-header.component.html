@@ -278,5 +278,30 @@
                 </ul>
             </div>
         </nav>
+
+        <!-- evaluvator user permission -->
+        <nav class="navbar navbar-expand-lg navbar-light" *ngIf="this.evaluvatorPerm">
+            <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-divider">
+                        Menu
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/manage-lub-activities"><i class="fa fa-fw fa-user-circle"></i>Check Activities</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="app/home"><i class="fa fa-fw fa-user-circle" (click)="onClickSignOut()"></i>Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
 </div>

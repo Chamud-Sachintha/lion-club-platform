@@ -10,6 +10,7 @@ export class Activity {
     secondCatCode!: string;
     authUserCode!: string;
     templateCode!: string;
+    pointTemplateCode!: string;
     documentCode!: string;
     documents: Document[] = [];
 }

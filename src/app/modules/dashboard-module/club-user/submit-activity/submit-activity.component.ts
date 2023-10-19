@@ -7,10 +7,12 @@ import { MainCategory } from 'src/app/models/MainCategory/main-category';
 import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { SecondSubCategory } from 'src/app/models/SecondSubCategory/second-sub-category';
+import { ValueList } from 'src/app/models/ValueList/value-list';
 import { ActivityService } from 'src/app/shared/services/activity/activity.service';
 import { ClubActivityServiceService } from 'src/app/shared/services/club-activity-service/club-activity-service.service';
 import { FirstSubCategoryService } from 'src/app/shared/services/first-sub-category/first-sub-category.service';
 import { MainCategoryService } from 'src/app/shared/services/main-category/main-category.service';
+import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
 
 @Component({
@@ -26,6 +28,7 @@ export class SubmitActivityComponent implements OnInit {
   submitActivityForm!: FormGroup;
   clubActivityModel = new ClubActivity();
   searchParamModel = new SearchParam();
+  pointTemplateObjModel = new SearchParam();
   firstCategoryList: FirstSubCategory[] = [];
   mainCategoryList: MainCategory[] = [];
   secondCategoryList: SecondSubCategory[] = [];
@@ -33,6 +36,8 @@ export class SubmitActivityComponent implements OnInit {
   isDocListHave = false;
   documentAddState = 0;
   selectedFiles: File[] = [];
+  selectedImageFiles: File[] = [];
+  templateValueList: ValueList[] = [];
   clubCode!: any;
   token!: any;
   firstCatgoryCode!: string;
@@ -41,12 +46,43 @@ export class SubmitActivityComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private activityService: ActivityService, private clubActivityService: ClubActivityServiceService
             , private firstCategoryService: FirstSubCategoryService
             , private mainCategoryService: MainCategoryService
-            , private secondCategoryService: SecondSubCategoryService) {}
+            , private secondCategoryService: SecondSubCategoryService
+            , private pointTemplateService: PointTemplateService) {}
 
   ngOnInit(): void {
     this.initSubmitActivityForm();
     this.getMainActivityCategoryList();
     // this.getActivityList();
+  }
+
+  onChangeActivity(activityCode: any) {
+    this.activityInfo.token = sessionStorage.getItem("authToken");
+    this.activityInfo.flag = sessionStorage.getItem("role");
+    this.activityInfo.activityCode = activityCode;
+
+    this.activityService.getActivityInfoByCode(this.activityInfo).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        const pointTemplateCode = dataList.data[0].pointTemplateCode;
+
+        this.pointTemplateObjModel.token = sessionStorage.getItem("authToken");
+        this.pointTemplateObjModel.flag = sessionStorage.getItem("role");
+        this.pointTemplateObjModel.pointTemplateCode = pointTemplateCode;
+
+        this.pointTemplateService.getTemplateObjByCode(this.pointTemplateObjModel).subscribe((info: any) => {
+
+          const valueList = JSON.parse(JSON.stringify(info));
+
+          if (info.code === 1) {
+            valueList.data[0].forEach((eachValue: ValueList) => {
+              this.templateValueList.push(eachValue)
+            })
+          }
+        })
+      }
+    }, (err) => {})
   }
 
   onChangeSecoondSubCategory(secondCategoryValue: any) {
@@ -130,15 +166,19 @@ export class SubmitActivityComponent implements OnInit {
     console.log(this.selectedFiles)
   }
 
+  onImageFileSelected($event: any) {
+    this.selectedImageFiles = Array.from($event.target.files);
+  }
+
   onSubmitAddClubActivityForm() {
     const activityCode = this.submitActivityForm.controls['activityCode'].value;
-    const value = this.submitActivityForm.controls['value'].value;
+    const value = this.selectedImageFiles;
     const conditionType = this.submitActivityForm.controls['conditionType'].value;
     const documentValueList = this.selectedFiles;
 
     if (activityCode == "") {
 
-    } else if (value == "") {
+    } else if (value.length == 0) {
 
     } else if (conditionType == "") {
       
@@ -149,18 +189,22 @@ export class SubmitActivityComponent implements OnInit {
 
       this.clubActivityModel.activityCode = activityCode;
       this.clubCode = sessionStorage.getItem("clubCode");
-      this.clubActivityModel.value = value;
+      // this.clubActivityModel.value = value;
       this.token = sessionStorage.getItem("authToken");
       this.clubActivityModel.flag = sessionStorage.getItem("role");
 
       formData.append("activityCode", activityCode);
       formData.append("clubCode", this.clubCode);
-      formData.append("value", value);
+      // formData.append("value", value);
       formData.append("token", this.token);
       formData.append("flag", this.clubActivityModel.flag);
 
       this.selectedFiles.forEach((el, index) => {
         formData.append("file" + index, el)
+      })
+
+      this.selectedImageFiles.forEach((el, index) => {
+        formData.append("image" + index, el);
       })
 
       this.clubActivityModel.documentList = formData;
@@ -225,7 +269,6 @@ export class SubmitActivityComponent implements OnInit {
     this.submitActivityForm = this.formBuilder.group({
       activityCode: ['', Validators.required],
       conditionType: ['', Validators.required],
-      value: ['', Validators.required],
       valueList: this.formBuilder.array([])
     })
   }

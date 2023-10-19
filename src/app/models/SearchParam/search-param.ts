@@ -6,4 +6,5 @@ export class SearchParam {
     mainCategoryCode!: string;
     firstCategoryCode!: string;
     secondCategoryCode!: string;
+    pointTemplateCode!: string;
 }
