@@ -26,6 +26,7 @@ export class ActivityComponent implements OnInit {
   mainCategoryList: MainCategory[] = [];
   firstSubCategoryList: FirstSubCategory[] = [];
   secondCategoryList: SecondSubCategory[] = [];
+  activityList: Activity[] = [];
   proofDocList: ProofDoc[] = [];
   doccCodeList: any[] = [];
   requestModel = new Request();
@@ -47,6 +48,23 @@ export class ActivityComponent implements OnInit {
     this.getSecondActivityCategoryList();
     this.getProofDocList();
     this.getAllTemplateList();
+    this.loadAllActivityList();
+  }
+
+  loadAllActivityList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.activityService.getActivityList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachActivity: Activity) => {
+          this.activityList.push(eachActivity);
+        })
+      }
+    })
   }
 
   onSubmitCreateNewActivityForm() {
