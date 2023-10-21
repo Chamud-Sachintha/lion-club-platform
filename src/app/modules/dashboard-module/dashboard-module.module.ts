@@ -25,6 +25,7 @@ import { SubmitActivityComponent } from './club-user/submit-activity/submit-acti
 import { FeedActivityDataComponent } from './context-user/feed-activity-data/feed-activity-data.component';
 import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activities/manage-club-activities.component';
 import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
+import { CheckInformationsComponent } from './region-chairperson/check-informations/check-informations.component';
 
 @NgModule({
   declarations: [
@@ -48,13 +49,14 @@ import { SubmitNewActivityComponent } from './context-user/submit-new-activity/s
        FeedActivityDataComponent,
        ManageClubActivitiesComponent,
        SubmitNewActivityComponent,
+       CheckInformationsComponent,
   ],
   imports: [
     CommonModule,
     DashboardModuleRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    TagInputModule
+    TagInputModule,
   ]
 })
 export class DashboardModuleModule { }

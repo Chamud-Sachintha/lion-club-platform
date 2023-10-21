@@ -17,6 +17,8 @@ export class DashboardHeaderComponent implements OnInit {
   clubUserPerm = false;
   contextUserPerm = false;
   evaluvatorPerm = false;
+  regionChairPersonPerm = false;
+  zonalChairPersonPerm = false;
   menuPermModel = new Perm();
   requestModel = new Request();
 
@@ -46,11 +48,15 @@ export class DashboardHeaderComponent implements OnInit {
           this.contextUserPerm = false;
           this.evaluvatorPerm = false;
           this.clubUserPerm = false;
+          this.regionChairPersonPerm = false;
+          this.zonalChairPersonPerm = false;
         } else if (this.menuPermModel.flag == "CU") {
           this.contextUserPerm = false;
           this.governerPerm = false;
           this.evaluvatorPerm = false;
           this.clubUserPerm = true;
+          this.regionChairPersonPerm = false;
+          this.zonalChairPersonPerm = false;
 
           this.loadClubUserInfo();
         } else if (this.menuPermModel.flag == "CNTU") {
@@ -58,11 +64,31 @@ export class DashboardHeaderComponent implements OnInit {
           this.clubUserPerm = false;
           this.evaluvatorPerm = false;
           this.contextUserPerm = true;
+          this.regionChairPersonPerm = false;
+          this.zonalChairPersonPerm = false;
         } else if (this.menuPermModel.flag == "E") {
           this.governerPerm = false;
           this.clubUserPerm = false;
           this.contextUserPerm = false;
           this.evaluvatorPerm = true;
+          this.regionChairPersonPerm = false;
+          this.zonalChairPersonPerm = false;
+        } else if (this.menuPermModel.flag == "RC") {
+          this.governerPerm = false;
+          this.clubUserPerm = false;
+          this.contextUserPerm = false;
+          this.evaluvatorPerm = false;
+          this.regionChairPersonPerm = true;
+          this.zonalChairPersonPerm = false;
+        } else if (this.menuPermModel.flag == "ZC") {
+          this.governerPerm = false;
+          this.clubUserPerm = false;
+          this.contextUserPerm = false;
+          this.evaluvatorPerm = false;
+          this.regionChairPersonPerm = false;
+          this.zonalChairPersonPerm = true;
+        } else {
+          this.router.navigate(['auth']);
         }
       }
     }, (err) => {

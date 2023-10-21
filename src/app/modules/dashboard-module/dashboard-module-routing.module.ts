@@ -19,6 +19,8 @@ import { SubmitActivityComponent } from './club-user/submit-activity/submit-acti
 import { FeedActivityDataComponent } from './context-user/feed-activity-data/feed-activity-data.component';
 import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activities/manage-club-activities.component';
 import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
+import { CheckInformationsComponent as ReCheckInfoComponent } from './region-chairperson/check-informations/check-informations.component';
+import { CheckInformationsComponent as ZonalCheckInfoComponent } from './zonal-chairperson/check-informations/check-informations.component';
 
 const routes: Routes = [
   {
@@ -128,6 +130,18 @@ const routes: Routes = [
       {
         path:'manage-lub-activities',
         component: ManageClubActivitiesComponent
+      },
+
+      // region chairperson routings starts here
+      {
+        path: 'region-info-list',
+        component: ReCheckInfoComponent
+      },
+
+      // zonal chairperson routings starts here
+      {
+        path: 'zonal-info-list',
+        component: ZonalCheckInfoComponent
       }
     ]
   }

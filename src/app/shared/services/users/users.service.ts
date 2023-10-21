@@ -5,6 +5,7 @@ import { ClubUser } from 'src/app/models/ClubUser/club-user';
 import { ContextUser } from 'src/app/models/ContextUser/context-user';
 import { Evaluvator } from 'src/app/models/Evaluvator/evaluvator';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -57,5 +58,10 @@ export class UsersService {
   getContextUserList(requestMode: Request) {
     const path = environment.apiRoot + "get-context-user-list";
     return this.http.post(path, requestMode);
+  }
+
+  getRegionChairPersonData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "load-re-chairperson-data";
+    return this.http.post(path, searchParamModel)
   }
 }

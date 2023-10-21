@@ -2,5 +2,5 @@ export class Zone {
     token!: any;
     flag!: any;
     zoneCode!: string;
-    regionCode!: string;
+    regionCode!: any;
 }

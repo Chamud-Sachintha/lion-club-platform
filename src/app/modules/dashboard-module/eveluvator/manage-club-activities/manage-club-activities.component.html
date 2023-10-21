@@ -1,96 +1,217 @@
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="page-header">
-            <h2 class="pageheader-title">Manage All Activity First Sub categories Here. </h2>
-            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
-            <div class="page-breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="page-header">
+      <h2 class="pageheader-title">
+        Manage All Activity First Sub categories Here.
+      </h2>
+      <p class="pageheader-text">
+        Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
+        facilisis faucibus at enim quis massa lobortis rutrum.
+      </p>
+      <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#" class="breadcrumb-link">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              E-Commerce Dashboard Template
+            </li>
+          </ol>
+        </nav>
+      </div>
     </div>
+  </div>
 </div>
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h5 class="card-header">Manage Club Activities Here</h5>
-            <div class="card-body">
-                <form action="">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Region</label>
-                                <select class="form-control" id="input-select" #region (change)="onChangeRegion(region.value)">
-                                    <option value="">-- Select Region --</option>
-                                    <option value="{{ this.eachRegion.regionCode }}" *ngFor="let eachRegion of this.regionList">{{ this.eachRegion.regionCode }}</option>
-                                </select>
-                            </div>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <h5 class="card-header">Manage Club Activities Here</h5>
+      <div class="card-body">
+        <form action="">
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="input-select" class="col-form-label"
+                  >Select Region</label
+                >
+                <select
+                  class="form-control"
+                  id="input-select"
+                  #region
+                  (change)="onChangeRegion(region.value)"
+                >
+                  <option value="">-- Select Region --</option>
+                  <option
+                    value="{{ this.eachRegion.regionCode }}"
+                    *ngFor="let eachRegion of this.regionList"
+                  >
+                    {{ this.eachRegion.regionCode }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="input-select" class="col-form-label"
+                  >Select Zone</label
+                >
+                <select
+                  class="form-control"
+                  id="input-select"
+                  formControlName="mainCategoryCode"
+                >
+                  <option value="">-- Select Zone --</option>
+                  <option
+                    value="{{ this.eachZone.zoneCode }}"
+                    *ngFor="let eachZone of this.zoneList"
+                  >
+                    {{ this.eachZone.zoneCode }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button class="btn btn-primary btn-sm">
+                Filter Informations
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-body border-top">
+        <h3>List of Club Activities Available</h3>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered first">
+                <thead>
+                  <tr>
+                    <th>Activity Code</th>
+                    <th>Club Code</th>
+                    <th>Create Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let eachActivity of this.clubActivityList">
+                    <td>{{ eachActivity.activityCode }}</td>
+                    <td>{{ eachActivity.clubCode }}</td>
+                    <td>{{ eachActivity.createTime | date }}</td>
+                    <td>
+                      <div class="row">
+                        <div class="col-md-3 col-lg-3 col-sm-12">
+                          <button
+                            class="btn btn-success btn-sm"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                            (click)="getClubActivityInfo(eachActivity.activityCode)"
+                          >
+                            See
+                          </button>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Zone</label>
-                                <select class="form-control" id="input-select" formControlName="mainCategoryCode">
-                                    <option value="">-- Select Zone --</option>
-                                    <option value="{{ this.eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option>
-                                </select>
-                            </div>
+                          <button class="btn btn-danger btn-sm">Delete</button>
                         </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Activity Code</th>
+                    <th>Club Code</th>
+                    <th>Create Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Check Activity</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="checkClubActivityForm">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label">Activity Name :</label>
+                        <input id="inputText3" type="text" class="form-control" formControlName="activityName">
                     </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="inputText3" class="col-form-label">Club Code :</label>
+                        <input id="inputText3" type="text" class="form-control" formControlName="clubCode">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <button class="btn btn-primary btn-sm">Filter Informations</button>
+                            <h5>Proof Documents</h5>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="card-body border-top">
-                <h3>List of Club Activities Available</h3>
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered first">
-                                <thead>
-                                    <tr>
-                                        <th>Activity Code</th>
-                                        <th>Club Code</th>
-                                        <th>Create Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let eachActivity of this.clubActivityList">
-                                        <td>{{ eachActivity.activityCode }}</td>
-                                        <td>{{ eachActivity.clubCode }}</td>
-                                        <td>{{ eachActivity.createTime | date }}</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-3 col-lg-3 col-sm-12">
-                                                    <button class="btn btn-success btn-sm">See</button>
-                                                </div>
-                                                <div class="col-md-6 col-lg-6 col-sm-12">
-                                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Activity Code</th>
-                                        <th>Club Code</th>
-                                        <th>Create Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                        <div class="col-12 mt-2 ms-3" *ngFor="let eachDoc of this.clubActivityDocList">
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ eachDoc.documentName }}
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" (click)="onClickViewDocument(eachDoc.documentName)">View Document</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Uploaded Activity Images</h5>
+                        </div>
+                        <div class="col-12 mt-2 ms-3" *ngFor="let eachImage of this.clubActiviyImageList">
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ eachImage.imageName }}
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" (click)="onClickViewImage(eachImage.imageName)">View Document</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+      </div>
     </div>
+  </div>
 </div>

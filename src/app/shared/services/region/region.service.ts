@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Region } from 'src/app/models/Region/region';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({

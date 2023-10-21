@@ -25,4 +25,19 @@ export class ClubActivityServiceService {
     const path = environment.apiRoot + "club-activity-list";
     return this.http.post(path, searchParamModel);
   }
+
+  getClubActivityDocByCode(searchParam: SearchParam) {
+    const path = environment.apiRoot + "get-activity-doc-list-by-code";
+    return this.http.post(path, searchParam);
+  }
+
+  getClubActivityImagesByCode(searchParam: SearchParam) {
+    const path = environment.apiRoot + "get-activity-image-list-by-code";
+    return this.http.post(path, searchParam);
+  }
+
+  getClubSctivityInfoByCode(searchParam: SearchParam) {
+    const path = environment.apiRoot + "get-activity-info-by-code";
+    return this.http.post(path, searchParam);
+  }
 }
