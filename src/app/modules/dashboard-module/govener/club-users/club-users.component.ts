@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Club } from 'src/app/models/Club/club';
 import { ClubUser } from 'src/app/models/ClubUser/club-user';
+import { Request } from 'src/app/models/Request/request';
 import { ClubService } from 'src/app/shared/services/club/club.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
@@ -15,6 +16,8 @@ export class ClubUsersComponent implements OnInit {
 
   clubMode = new Club();
   clubUserModel = new ClubUser();
+  requestModel = new Request();
+  clubUserList: ClubUser[] = [];
   registerClubUserForm!: FormGroup;
 
   clubList: Club[] = [];
@@ -25,6 +28,23 @@ export class ClubUsersComponent implements OnInit {
   ngOnInit(): void {
     this.initCreateClubUsersForm();
     this.getClubList();
+    this.loadClubUsersList();
+  }
+
+  loadClubUsersList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.userServcie.getClubUsersList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachUser: ClubUser) => {
+          this.clubUserList.push(eachUser);
+        })
+      }
+    })
   }
 
   getClubList() {

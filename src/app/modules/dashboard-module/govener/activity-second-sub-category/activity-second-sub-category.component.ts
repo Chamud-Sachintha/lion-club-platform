@@ -16,6 +16,7 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
 
   firstSubCategoryList: FirstSubCategory[] = [];
   secondSubCategoryModel = new SecondSubCategory();
+  secondSubCategoryList: SecondSubCategory[] = [];
   requestModel = new Request();
   addsecondSubCategoryForm!: FormGroup;
 
@@ -25,6 +26,23 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.initCreateSecondSubCategoryForm();
     this.getFirstSubCategoryList();
+    this.loadSecondSubCategoryList();
+  }
+
+  loadSecondSubCategoryList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.secondSubCategoryService.getSecondCategoryList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachCategory: SecondSubCategory) => {
+          this.secondSubCategoryList.push(eachCategory)
+        })
+      }
+    })
   }
 
   getFirstSubCategoryList() {

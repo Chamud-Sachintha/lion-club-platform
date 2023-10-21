@@ -64,4 +64,14 @@ export class UsersService {
     const path = environment.apiRoot + "load-re-chairperson-data";
     return this.http.post(path, searchParamModel)
   }
+
+  getEvaluvatorsList(requestMode: Request) {
+    const path = environment.apiRoot + "get-evaluvators-list";
+    return this.http.post(path, requestMode);
+  }
+
+  getClubUsersList(requestModel: Request) {
+    const path = environment.apiRoot + "get-club-user-list";
+    return this.http.post(path, requestModel);
+  }
 }

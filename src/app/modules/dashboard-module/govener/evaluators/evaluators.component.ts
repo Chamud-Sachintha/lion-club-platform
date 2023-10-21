@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Evaluvator } from 'src/app/models/Evaluvator/evaluvator';
+import { Request } from 'src/app/models/Request/request';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
 @Component({
@@ -12,12 +13,31 @@ import { UsersService } from 'src/app/shared/services/users/users.service';
 export class EvaluatorsComponent implements OnInit {
 
   evaluvatorModel = new Evaluvator();
+  requestModel = new Request();
+  evaluvatorList: Evaluvator[] = [];
   registerEvaluatorForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {}
 
   ngOnInit(): void {
     this.initCreateEvaluatorForm();
+    this.loadEvaluvatorsList();
+  }
+
+  loadEvaluvatorsList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.userService.getEvaluvatorsList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachUser: Evaluvator) => {
+          this.evaluvatorList.push(eachUser);
+        })
+      }
+    })
   }
 
   onSubmitRegisterEvaluatorsForm() {

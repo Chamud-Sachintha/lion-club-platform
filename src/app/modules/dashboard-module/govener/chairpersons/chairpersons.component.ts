@@ -18,6 +18,8 @@ export class ChairpersonsComponent implements OnInit {
 
   requestModel = new Request();
   regionList: Region[] = [];
+  regionChairpersonList: ChairPerson[] = [];
+  zonalChairpersonList: ChairPerson[] = [];
   chairPersonModel = new ChairPerson();
   regionChairPersonForm!: FormGroup;
   zonalChairPersonForm!: FormGroup;
@@ -32,6 +34,40 @@ export class ChairpersonsComponent implements OnInit {
     this.initCreateZonalChairPersonsForm();
     this.getRegionList();
     this.getZoneList();
+    this.loadRegionChairpersonList();
+    this.loadZonalChairpersonList();
+  }
+
+  loadZonalChairpersonList() {
+    this.requestMdoel.token = sessionStorage.getItem("authToken");
+    this.requestMdoel.flag = sessionStorage.getItem("role");
+
+    this.userService.getZonalChairPersonList(this.requestMdoel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachUser: ChairPerson) => {
+          this.zonalChairpersonList.push(eachUser)
+        })
+      }
+    })
+  }
+
+  loadRegionChairpersonList() {
+    this.requestMdoel.token = sessionStorage.getItem("authToken");
+    this.requestMdoel.flag = sessionStorage.getItem("role");
+
+    this.userService.getRegionChairPersonList(this.requestMdoel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachUser: ChairPerson) => {
+          this.regionChairpersonList.push(eachUser);
+        })
+      }
+    })
   }
 
   getZoneList() {

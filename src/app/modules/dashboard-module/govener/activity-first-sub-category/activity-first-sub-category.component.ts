@@ -17,6 +17,7 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
   firstSubCategoryModel = new FirstSubCategory();
   mainCategoryList: MainCategory[] = [];
   requestModel = new Request();
+  firstSubCategoryList: FirstSubCategory[] = [];
   addFirstSubCategoryForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private firstSubCategoryService: FirstSubCategoryService
@@ -25,6 +26,23 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.initCreateFirstSubcategoryForm();
     this.getMainCategoryList();
+    this.loadFirstSubCategoryList();
+  }
+
+  loadFirstSubCategoryList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.firstSubCategoryService.getFirstSubcategoryList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachCatgory: FirstSubCategory) => {
+          this.firstSubCategoryList.push(eachCatgory);
+        })
+      }
+    })
   }
 
   getMainCategoryList() {
