@@ -17,6 +17,7 @@ export class ManageClubsComponent implements OnInit {
 
   clubModel = new Club();
   requestMdoel = new Request();
+  clubList: Club[] = [];
   zoneList: Zone[] = [];
   addClubForm!: FormGroup;
 
@@ -26,6 +27,21 @@ export class ManageClubsComponent implements OnInit {
   ngOnInit(): void {
     this.initAddClubForm();
     this.getZoneList();
+    this.loadClubList();
+  }
+
+  loadClubList() {
+    this.clubModel.token = sessionStorage.getItem("authToken");
+    this.clubModel.flag = sessionStorage.getItem("role");
+    
+    this.clubService.getClubList(this.clubModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      dataList.data[0].forEach((eachClub: Club) => {
+        this.clubList.push(eachClub);
+      })
+    })
   }
 
   onSubmitAddClubDetailsForm() {

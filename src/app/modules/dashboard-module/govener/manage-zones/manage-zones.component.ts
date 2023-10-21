@@ -18,6 +18,7 @@ export class ManageZonesComponent implements OnInit {
 
   zonalChairPersonList: ChairPerson[] = [];
   regionList: Region[] = [];
+  zoneList: Zone[] = [];
   requestModel = new Request();
   zonalInfoModel = new Zone();
   addZoneDetailsForm!: FormGroup;
@@ -28,7 +29,23 @@ export class ManageZonesComponent implements OnInit {
   ngOnInit(): void {
     this.initAddZoneDetailsForm();
     this.getRegionList();
-    // this.getZonalChairPersonList();
+    this.getZoneList();
+  }
+
+  getZoneList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.zoneService.getZoneList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachZone: Zone) => {
+          this.zoneList.push(eachZone)
+        })
+      }
+    })
   }
 
   onSubmitCreateZoneDetailsForm() {

@@ -17,6 +17,7 @@ export class ManageRegionsComponent implements OnInit {
 
   regionChairPersonList: ChairPerson[] = [];
   contextUserList: ContextUser[] = [];
+  regionList: Region[] = [];
   regionModel = new Region();
   requestModel = new Request();
   addRegionDetailsForm!: FormGroup;
@@ -27,6 +28,23 @@ export class ManageRegionsComponent implements OnInit {
   ngOnInit(): void {
     this.initCreateNewRegionForm();
     this.loadContextUserList();
+    this.getRegionList();
+  }
+
+  getRegionList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.regionService.getRegionList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachRegion: Region) => {
+          this.regionList.push(eachRegion);
+        })
+      }
+    })
   }
 
   loadContextUserList() {
