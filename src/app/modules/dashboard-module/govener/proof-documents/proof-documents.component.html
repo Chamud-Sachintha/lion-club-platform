@@ -1,143 +1,157 @@
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="page-header">
-            <h2 class="pageheader-title">Manage All Proof Documents Here. </h2>
-            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
-            <div class="page-breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Page Title</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="page-header">
+      <h2 class="pageheader-title">Manage All Proof Documents Here.</h2>
+      <p class="pageheader-text">
+        Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
+        facilisis faucibus at enim quis massa lobortis rutrum.
+      </p>
+      <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#" class="breadcrumb-link">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Page Title
+            </li>
+          </ol>
+        </nav>
+      </div>
     </div>
+  </div>
 </div>
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h5 class="card-header">Manage All Documents</h5>
-            <div class="card-body">
-                <form [formGroup]="addProofDocumentForm" (ngSubmit)="onSubmitCreateProofDocumentForm()">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Code :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="code">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Name :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Add Document">
-                        </div>
-                    </div>
-                </form>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <h5 class="card-header">Manage All Documents</h5>
+      <div class="card-body">
+        <form
+          [formGroup]="addProofDocumentForm"
+          (ngSubmit)="onSubmitCreateProofDocumentForm()"
+        >
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Code :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                />
+              </div>
             </div>
-            <div class="card-body border-top">
-                <h3>List of Evaluvators</h3>
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered first">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2012/12/02</td>
-                                        <td>$372,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Herrod Chandler</td>
-                                        <td>Sales Assistant</td>
-                                        <td>San Francisco</td>
-                                        <td>59</td>
-                                        <td>2012/08/06</td>
-                                        <td>$137,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rhona Davidson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>Tokyo</td>
-                                        <td>55</td>
-                                        <td>2010/10/14</td>
-                                        <td>$327,900</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Name :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <input
+                type="submit"
+                class="btn btn-primary btn-sm"
+                value="Add Document"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-body border-top">
+        <h3>List of Evaluvators</h3>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered first">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let eachDocument of this.prroofDocumentsList;
+                      index as i
+                    "
+                  >
+                    <td>{{ i }}</td>
+                    <td>{{ eachDocument.documentCode }}</td>
+                    <td>{{ eachDocument.documentName }}</td>
+                    <td>
+                      <button
+                        class="btn btn-primary btn-sm"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                      >
+                        Update
+                      </button>
+                      <button
+                        class="btn btn-danger btn-sm"
+                        style="margin-left: 10px"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>#</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <!-- model starts here -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </a>
+        </div>
+        <div class="modal-body">
+          <p>
+            Woohoo, You are readng this text in a modal! Use Bootstrap’s
+            JavaScript modal plugin to add dialogs to your site for lightboxes,
+            user notifications, or completely custom content.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+          <a href="#" class="btn btn-primary">Save changes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- models ends here -->
 </div>

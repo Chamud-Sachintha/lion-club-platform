@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
+import { Request } from 'src/app/models/Request/request';
 import { ProofDocumentsService } from 'src/app/shared/services/proof-documents/proof-documents.service';
 
 @Component({
@@ -11,12 +12,31 @@ import { ProofDocumentsService } from 'src/app/shared/services/proof-documents/p
 export class ProofDocumentsComponent implements OnInit {
 
   documentModel = new ProofDoc();
+  requestModel = new Request();
+  prroofDocumentsList: ProofDoc[] = [];
   addProofDocumentForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private documentService: ProofDocumentsService) {}
 
   ngOnInit(): void {
     this.initCreateProofDocumentForm();
+    this.loadProofDocumentsList()
+  }
+
+  loadProofDocumentsList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.documentService.getProofDocList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachDoc: ProofDoc) => {
+          this.prroofDocumentsList.push(eachDoc);
+        })
+      }
+    })
   }
 
   onSubmitCreateProofDocumentForm() {
