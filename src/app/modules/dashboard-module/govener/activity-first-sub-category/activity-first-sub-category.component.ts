@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FirstSubCategory } from 'src/app/models/FirstSubCategory/first-sub-category';
 import { MainCategory } from 'src/app/models/MainCategory/main-category';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { FirstSubCategoryService } from 'src/app/shared/services/first-sub-category/first-sub-category.service';
 import { MainCategoryService } from 'src/app/shared/services/main-category/main-category.service';
 
@@ -18,15 +19,60 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
   mainCategoryList: MainCategory[] = [];
   requestModel = new Request();
   firstSubCategoryList: FirstSubCategory[] = [];
+  searchParamModel = new SearchParam();
   addFirstSubCategoryForm!: FormGroup;
+  updateFirstCategoryForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private firstSubCategoryService: FirstSubCategoryService
             , private mainCategoryService: MainCategoryService) {}
 
   ngOnInit(): void {
     this.initCreateFirstSubcategoryForm();
+    this.initUpdateFirstCategoryForm();
     this.getMainCategoryList();
     this.loadFirstSubCategoryList();
+  }
+
+  onLoadFirstCategoryInfo(firstCategoryCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.firstCategoryCode = firstCategoryCode;
+
+    this.firstSubCategoryService.getFirstCategoryInfoByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.updateFirstCategoryForm.controls['code'].setValue(dataList.data[0].firstCategoryCode);
+        this.updateFirstCategoryForm.controls['mainCategoryCode'].setValue(dataList.data[0].mainCategoryCode);
+        this.updateFirstCategoryForm.controls['name'].setValue(dataList.data[0].categoryName)
+      }
+    })
+  }
+
+  onSubmitUpdateFirstCategoryForm() {
+    const firstCatCode = this.updateFirstCategoryForm.controls['code'].value;
+    const name = this.updateFirstCategoryForm.controls['name'].value;
+    const maincategoryCode = this.updateFirstCategoryForm.controls['mainCategoryCode'].value;
+
+    if (firstCatCode == "") {
+
+    } else if (name == "") {
+
+    } else {
+      this.firstSubCategoryModel.firstSubCategoryCode = firstCatCode;
+      this.firstSubCategoryModel.mainCategoryCode = maincategoryCode;
+      this.firstSubCategoryModel.categoryName = name;
+      this.firstSubCategoryModel.token = sessionStorage.getItem("authToken");
+      this.firstSubCategoryModel.flag = sessionStorage.getItem("role");
+
+      this.firstSubCategoryService.updateFirstCategoryByCode(this.firstSubCategoryModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp)
+        }
+      })
+    }
   }
 
   loadFirstSubCategoryList() {
@@ -85,6 +131,14 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
 
   initCreateFirstSubcategoryForm() {
     this.addFirstSubCategoryForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      mainCategoryCode: ['', Validators.required],
+      name: ['', Validators.required]
+    })
+  }
+
+  initUpdateFirstCategoryForm() {
+    this.updateFirstCategoryForm = this.formBuilder.group({
       code: ['', Validators.required],
       mainCategoryCode: ['', Validators.required],
       name: ['', Validators.required]

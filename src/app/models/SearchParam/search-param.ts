@@ -8,4 +8,5 @@ export class SearchParam {
     secondCategoryCode!: string;
     pointTemplateCode!: string;
     activityCode!: string;
+    documentCode!: string;
 }

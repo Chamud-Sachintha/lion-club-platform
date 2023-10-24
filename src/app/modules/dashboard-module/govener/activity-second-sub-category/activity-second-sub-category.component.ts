@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirstSubCategory } from 'src/app/models/FirstSubCategory/first-sub-category';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { SecondSubCategory } from 'src/app/models/SecondSubCategory/second-sub-category';
 import { FirstSubCategoryService } from 'src/app/shared/services/first-sub-category/first-sub-category.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
@@ -18,7 +19,9 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
   secondSubCategoryModel = new SecondSubCategory();
   secondSubCategoryList: SecondSubCategory[] = [];
   requestModel = new Request();
+  searchParamModel = new SearchParam();
   addsecondSubCategoryForm!: FormGroup;
+  updateSecondCategoryForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private firstSubCategoryService: FirstSubCategoryService
             , private secondSubCategoryService: SecondSubCategoryService) {}
@@ -27,6 +30,36 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
     this.initCreateSecondSubCategoryForm();
     this.getFirstSubCategoryList();
     this.loadSecondSubCategoryList();
+  }
+
+  onSubmitUpdateSecondCategoryForm() {
+    const code = this.addsecondSubCategoryForm.controls['code'].value;
+    const categoryName = this.addsecondSubCategoryForm.controls['categoryName'].value;
+    const firstCategoryCode = this.addsecondSubCategoryForm.controls['firstCategoryCode'].value;
+
+    if (code == "") {
+
+    } else if (categoryName == "") {
+
+    } else if (firstCategoryCode == "") {
+
+    } else {
+      
+    }
+  }
+
+  onLoadSecondCategoryInfo() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.secondSubCategoryService.getSecondCategoryInfoByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+
+      }
+    })
   }
 
   loadSecondSubCategoryList() {
@@ -87,6 +120,14 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
 
   initCreateSecondSubCategoryForm() {
     this.addsecondSubCategoryForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      firstCategoryCode: ['', Validators.required],
+      categoryName: ['', Validators.required]
+    })
+  }
+
+  initUpdateSecondSubCategoryForm() {
+    this.updateSecondCategoryForm = this.formBuilder.group({
       code: ['', Validators.required],
       firstCategoryCode: ['', Validators.required],
       categoryName: ['', Validators.required]
