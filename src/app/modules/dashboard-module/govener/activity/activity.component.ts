@@ -33,6 +33,7 @@ export class ActivityComponent implements OnInit {
   activityInfo = new Activity();
 
   addNewActivityForm!: FormGroup;
+  updateActivityForm!: FormGroup;
 
   constructor(private pointTemplateService: PointTemplateService, private mainCategoryService: MainCategoryService
     , private firstCategoryService: FirstSubCategoryService
@@ -43,12 +44,37 @@ export class ActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCreatenewActivityForm();
+    this.initUpdateActivcityForm();
     this.getMainActivityCategoryList();
     this.getFirstActivityCategoryList();
     this.getSecondActivityCategoryList();
     this.getProofDocList();
     this.getAllTemplateList();
     this.loadAllActivityList();
+  }
+
+  onSubmitUpdateActivityForm() {
+
+  }
+
+  onLoadActivityInfo(activityCode: string) {
+    this.activityInfo.token = sessionStorage.getItem("authToken");
+    this.activityInfo.flag = sessionStorage.getItem("role");
+    this.activityInfo.activityCode = activityCode;
+
+    this.activityService.getActivityInfoByCode(this.activityInfo).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        this.updateActivityForm.controls['code'].setValue(dataList.data[0].activityCode);
+        this.updateActivityForm.controls['mainCatCode'].setValue(dataList.data[0].mainCatCode);
+        this.updateActivityForm.controls['firstCatCode'].setValue(dataList.data[0].firstCatCode);
+        this.updateActivityForm.controls['secondCatCode'].setValue(dataList.data[0].secondCatCode);
+        this.updateActivityForm.controls['authUserCode'].setValue(dataList.data[0].authorizedUser);
+        this.updateActivityForm.controls['activityName'].setValue(dataList.data[0].activityName);
+      }
+    })
   }
 
   loadAllActivityList() {
@@ -123,6 +149,21 @@ export class ActivityComponent implements OnInit {
       templateCode: ['', Validators.required],
       documentCode: ['' ,Validators.required]
     })
+  }
+
+  initUpdateActivcityForm() {
+    this.updateActivityForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      activityName: ['', Validators.required],
+      mainCatCode: ['', Validators.required],
+      firstCatCode: ['', Validators.required],
+      secondCatCode: ['', Validators.required],
+      authUserCode: ['', Validators.required],
+      templateCode: ['', Validators.required],
+      documentCode: ['' ,Validators.required]
+    })
+
+    this.updateActivityForm.controls['code'].disable;
   }
 
   getProofDocList() {

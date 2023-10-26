@@ -1,197 +1,488 @@
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="page-header">
-            <h2 class="pageheader-title">Manage All Chairpersons Here. </h2>
-            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
-            <div class="page-breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Page Title</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="page-header">
+      <h2 class="pageheader-title">Manage All Chairpersons Here.</h2>
+      <p class="pageheader-text">
+        Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
+        facilisis faucibus at enim quis massa lobortis rutrum.
+      </p>
+      <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#" class="breadcrumb-link">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Page Title
+            </li>
+          </ol>
+        </nav>
+      </div>
     </div>
+  </div>
 </div>
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h5 class="card-header">Manage All Region Chairpersons</h5>
-            <div class="card-body">
-                <form [formGroup]="this.regionChairPersonForm" (ngSubmit)="onSubmitCreateRegionChairPerson()">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Code :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="code">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Name :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Email :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="email">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Region</label>
-                                <select class="form-control" id="input-select" formControlName="reCode">
-                                    <option value="{{ eachRegion.regionCode }}" *ngFor="let eachRegion of this.regionList">{{ eachRegion.regionCode }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Add Chairperson">
-                        </div>
-                        <div class="col-6">
-                            <input type="reset" class="btn btn-warning btn-sm" value="Reset Feilds">
-                        </div>
-                    </div>
-                </form>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <h5 class="card-header">Manage All Region Chairpersons</h5>
+      <div class="card-body">
+        <form
+          [formGroup]="this.regionChairPersonForm"
+          (ngSubmit)="onSubmitCreateRegionChairPerson()"
+        >
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Code :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                />
+              </div>
             </div>
-            <div class="card-body border-top">
-                <h3>List of Region Chairpersons</h3>
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered first">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Chair Person Code</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Reghion Code</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let eachUser of this.regionChairpersonList; index as i">
-                                        <td>{{ i }}</td>
-                                        <td>{{ eachUser.reChairPersonCode }}</td>
-                                        <td>{{ eachUser.fullName }}</td>
-                                        <td>{{ eachUser.email }}</td>
-                                        <td>{{ eachUser.regionCode }}</td>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm">Update</button>
-                                            <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Chair Person Code</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Reghion Code</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Name :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Email :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="input-select" class="col-form-label"
+                  >Select Region</label
+                >
+                <select
+                  class="form-control"
+                  id="input-select"
+                  formControlName="reCode"
+                >
+                  <option
+                    value="{{ eachRegion.regionCode }}"
+                    *ngFor="let eachRegion of this.regionList"
+                  >
+                    {{ eachRegion.regionCode }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <input
+                type="submit"
+                class="btn btn-primary btn-sm"
+                value="Add Chairperson"
+              />
+            </div>
+            <div class="col-6">
+              <input
+                type="reset"
+                class="btn btn-warning btn-sm"
+                value="Reset Feilds"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-body border-top">
+        <h3>List of Region Chairpersons</h3>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered first">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Chair Person Code</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Reghion Code</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let eachUser of this.regionChairpersonList;
+                      index as i
+                    "
+                  >
+                    <td>{{ i }}</td>
+                    <td>{{ eachUser.reChairPersonCode }}</td>
+                    <td>{{ eachUser.fullName }}</td>
+                    <td>{{ eachUser.email }}</td>
+                    <td>{{ eachUser.regionCode }}</td>
+                    <td>
+                      <button
+                        class="btn btn-primary btn-sm"
+                        (click)="
+                          onLoadReionChairPersonInfo(eachUser.reChairPersonCode)
+                        "
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                      >
+                        Update
+                      </button>
+                      <button
+                        class="btn btn-danger btn-sm"
+                        style="margin-left: 10px"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>#</th>
+                    <th>Chair Person Code</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Reghion Code</th>
+                    <th>Actions</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h5 class="card-header">Manage All Zone Chairpersons</h5>
-            <div class="card-body">
-                <form [formGroup]="this.zonalChairPersonForm" (ngSubmit)="onSubmitCreateZonalChairPerson()">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Code :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="code">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Name :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Email :</label>
-                                <input id="inputText3" type="text" class="form-control" formControlName="email">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Zone Code</label>
-                                <select class="form-control" id="input-select" formControlName="zoneCode">
-                                    <option value="{{ eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Add Chairperson">
-                        </div>
-                        <div class="col-6">
-                            <input type="reset" class="btn btn-warning btn-sm" value="Reset Feilds">
-                        </div>
-                    </div>
-                </form>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <h5 class="card-header">Manage All Zone Chairpersons</h5>
+      <div class="card-body">
+        <form
+          [formGroup]="this.zonalChairPersonForm"
+          (ngSubmit)="onSubmitCreateZonalChairPerson()"
+        >
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Code :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                />
+              </div>
             </div>
-            <div class="card-body border-top">
-                <h3>List of Zone Chairpersons</h3>
-                <table class="table table-striped table-bordered first">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Chair Person Code</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Zone Code</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let eachUser of this.zonalChairpersonList; index as i">
-                            <td>{{ i }}</td>
-                            <td>{{ eachUser.zonalChairpersonCode }}</td>
-                            <td>{{ eachUser.fullName }}</td>
-                            <td>{{ eachUser.email }}</td>
-                            <td>{{ eachUser.zoneCode }}</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm">Update</button>
-                                <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>Chair Person Code</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Reghion Code</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                </table>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Name :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
             </div>
-        </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Email :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="input-select" class="col-form-label"
+                  >Select Zone Code</label
+                >
+                <select
+                  class="form-control"
+                  id="input-select"
+                  formControlName="zoneCode"
+                >
+                  <option
+                    value="{{ eachZone.zoneCode }}"
+                    *ngFor="let eachZone of this.zoneList"
+                  >
+                    {{ this.eachZone.zoneCode }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <input
+                type="submit"
+                class="btn btn-primary btn-sm"
+                value="Add Chairperson"
+              />
+            </div>
+            <div class="col-6">
+              <input
+                type="reset"
+                class="btn btn-warning btn-sm"
+                value="Reset Feilds"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-body border-top">
+        <h3>List of Zone Chairpersons</h3>
+        <table class="table table-striped table-bordered first">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Chair Person Code</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Zone Code</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let eachUser of this.zonalChairpersonList; index as i">
+              <td>{{ i }}</td>
+              <td>{{ eachUser.zonalChairpersonCode }}</td>
+              <td>{{ eachUser.fullName }}</td>
+              <td>{{ eachUser.email }}</td>
+              <td>{{ eachUser.zoneCode }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="onLoadZonalChairPersonInfo(eachUser.zonalChairpersonCode)"
+                    data-toggle="modal"
+                    data-target="#exampleModalZone">Update</button>
+                <button class="btn btn-danger btn-sm" style="margin-left: 10px">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Chair Person Code</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Reghion Code</th>
+              <th>Actions</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
+  </div>
+
+  <!-- model starts here -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </a>
+        </div>
+        <div class="modal-body">
+          <form
+            [formGroup]="updateRegionChairpersonForm"
+            (ngSubmit)="onSubmitUpdateReionChairpersonForm()"
+          >
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="inputText3" class="col-form-label">Code :</label>
+                  <input
+                    id="inputText3"
+                    type="text"
+                    class="form-control"
+                    formControlName="code"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="input-select" class="col-form-label"
+                    >Select Region</label
+                  >
+                  <select
+                    class="form-control"
+                    id="input-select"
+                    formControlName="reCode"
+                  >
+                    <option
+                      value="{{ eachRegion.regionCode }}"
+                      *ngFor="let eachRegion of this.regionList"
+                    >
+                      {{ eachRegion.regionCode }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="inputText3" class="col-form-label">Name :</label>
+                  <input
+                    id="inputText3"
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="inputText3" class="col-form-label">Email :</label>
+                  <input
+                    id="inputText3"
+                    type="text"
+                    class="form-control"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+              <input type="text" formControlName="code" [hidden]="true" />
+            </div>
+            <div class="modal-footer mt-3">
+              <a href="#" class="btn btn-secondary" data-dismiss="modal"
+                >Close</a
+              >
+              <input
+                type="submit"
+                class="btn btn-primary"
+                value="Save Changes"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- models ends here -->
+
+  <!-- model starts here -->
+  <div
+    class="modal fade"
+    id="exampleModalZone"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </a>
+        </div>
+        <div class="modal-body">
+          <form
+            [formGroup]="updateZonalChairpersonForm"
+            (ngSubmit)="onSubmitUpdateZonalChairpersonForm()"
+          >
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="inputText3" class="col-form-label">Code :</label>
+                  <input
+                    id="inputText3"
+                    type="text"
+                    class="form-control"
+                    formControlName="code"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="input-select" class="col-form-label"
+                    >Select Zone Code</label
+                  >
+                  <select
+                    class="form-control"
+                    id="input-select"
+                    formControlName="zoneCode"
+                  >
+                    <option
+                      value="{{ eachZone.zoneCode }}"
+                      *ngFor="let eachZone of this.zoneList"
+                    >
+                      {{ this.eachZone.zoneCode }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="inputText3" class="col-form-label">Name :</label>
+                  <input
+                    id="inputText3"
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="inputText3" class="col-form-label">Email :</label>
+                  <input
+                    id="inputText3"
+                    type="text"
+                    class="form-control"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer mt-3">
+              <a href="#" class="btn btn-secondary" data-dismiss="modal"
+                >Close</a
+              >
+              <input
+                type="submit"
+                class="btn btn-primary"
+                value="Save Changes"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- models ends here -->
 </div>

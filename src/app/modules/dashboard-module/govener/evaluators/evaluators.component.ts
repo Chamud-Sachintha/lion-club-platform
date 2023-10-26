@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Evaluvator } from 'src/app/models/Evaluvator/evaluvator';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
 @Component({
@@ -15,13 +16,58 @@ export class EvaluatorsComponent implements OnInit {
   evaluvatorModel = new Evaluvator();
   requestModel = new Request();
   evaluvatorList: Evaluvator[] = [];
+  searchParamModel = new SearchParam();
   registerEvaluatorForm!: FormGroup;
+  updateEvaluvatorForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {}
 
   ngOnInit(): void {
     this.initCreateEvaluatorForm();
+    this.initUpdateEvaluvatorForm();
     this.loadEvaluvatorsList();
+  }
+
+  onLoadEvaluvatorInfo(userCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.evaluvatorCode = userCode;
+
+    this.userService.getEvaluvatorInfoByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.updateEvaluvatorForm.controls['code'].setValue(dataList.data[0].code);
+        this.updateEvaluvatorForm.controls['name'].setValue(dataList.data[0].name);
+        this.updateEvaluvatorForm.controls['email'].setValue(dataList.data[0].email);
+      }
+    })
+  }
+
+  onSubmitUpdateEvaluvatorForm() {
+    const code = this.updateEvaluvatorForm.controls['code'].value;
+    const name = this.updateEvaluvatorForm.controls['name'].value;
+    const email = this.updateEvaluvatorForm.controls['email'].value;
+
+    if (code == "") {
+
+    } else if (name == "") {
+
+    } else if (email == "") {
+      this.evaluvatorModel.evaluatorCode = code;
+      this.evaluvatorModel.fullName = name;
+      this.evaluvatorModel.email = email;
+      this.evaluvatorModel.token = sessionStorage.getItem("authToken");
+      this.evaluvatorModel.flag = sessionStorage.getItem("role");
+
+      this.userService.updateEvaluvatorByCode(this.evaluvatorModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp);
+        }
+      })
+    } 
   }
 
   loadEvaluvatorsList() {
@@ -72,6 +118,14 @@ export class EvaluatorsComponent implements OnInit {
 
   initCreateEvaluatorForm() {
     this.registerEvaluatorForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required]
+    })
+  }
+
+  initUpdateEvaluvatorForm() {
+    this.updateEvaluvatorForm = this.formBuilder.group({
       code: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required]

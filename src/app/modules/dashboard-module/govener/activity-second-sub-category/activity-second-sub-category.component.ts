@@ -28,14 +28,15 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCreateSecondSubCategoryForm();
+    this.initUpdateSecondSubCategoryForm();
     this.getFirstSubCategoryList();
     this.loadSecondSubCategoryList();
   }
 
   onSubmitUpdateSecondCategoryForm() {
-    const code = this.addsecondSubCategoryForm.controls['code'].value;
-    const categoryName = this.addsecondSubCategoryForm.controls['categoryName'].value;
-    const firstCategoryCode = this.addsecondSubCategoryForm.controls['firstCategoryCode'].value;
+    const code = this.updateSecondCategoryForm.controls['code'].value;
+    const categoryName = this.updateSecondCategoryForm.controls['categoryName'].value;
+    const firstCategoryCode = this.updateSecondCategoryForm.controls['firstCategoryCode'].value;
 
     if (code == "") {
 
@@ -44,20 +45,34 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
     } else if (firstCategoryCode == "") {
 
     } else {
-      
+      this.secondSubCategoryModel.secondSubCategoryCode = code;
+      this.secondSubCategoryModel.firstSubCategoryCode = firstCategoryCode;
+      this.secondSubCategoryModel.categoryName = categoryName;
+      this.secondSubCategoryModel.token = sessionStorage.getItem("authToken");
+      this.secondSubCategoryModel.flag = sessionStorage.getItem("role");
+
+      this.secondSubCategoryService.updateSecondCategoryByCode(this.secondSubCategoryModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp)
+        }
+      })
     }
   }
 
-  onLoadSecondCategoryInfo() {
+  onLoadSecondCategoryInfo(secondCategoryCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.secondCategoryCode = secondCategoryCode;
 
     this.secondSubCategoryService.getSecondCategoryInfoByCode(this.searchParamModel).subscribe((resp: any) => {
 
       const dataList = JSON.parse(JSON.stringify(resp));
 
       if (resp.code === 1) {
-
+        this.updateSecondCategoryForm.controls['code'].setValue(dataList.data[0].secondCategoryCode);
+        this.updateSecondCategoryForm.controls['categoryName'].setValue(dataList.data[0].categoryName);
+        this.updateSecondCategoryForm.controls['firstCategoryCode'].setValue(dataList.data[0].firstCategoryCode);
       }
     })
   }

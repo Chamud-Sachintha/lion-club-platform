@@ -74,7 +74,7 @@
                                         <td>{{ eachCategory.firstSubCategoryCode }}</td>
                                         <td>
                                             <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal" (click)="onLoadSecondCategoryInfo()">Update</button>
+                                            data-target="#exampleModal" (click)="onLoadSecondCategoryInfo(eachCategory.secondSubCategoryCode)">Update</button>
                                             <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
                                         </td>
                                     </tr>
@@ -134,19 +134,19 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="input-select" class="col-form-label"
-                      >Select Main Activity Category</label
+                      >Select First Activity Category</label
                     >
                     <select
                       class="form-control"
                       id="input-select"
-                      formControlName="mainCategoryCode"
+                      formControlName="firstCategoryCode"
                     >
-                      <!-- <option
-                        value="{{ category.mainCategoryCode }}"
-                        *ngFor="let category of this.mainCategoryList"
+                      <option
+                        value="{{ category.firstSubCategoryCode }}"
+                        *ngFor="let category of this.firstSubCategoryList"
                       >
                         {{ category.categoryName }}
-                      </option> -->
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -159,7 +159,7 @@
                       id="inputText3"
                       type="text"
                       class="form-control"
-                      formControlName="name"
+                      formControlName="categoryName"
                     />
                   </div>
                 </div>

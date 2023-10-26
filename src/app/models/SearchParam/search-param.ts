@@ -9,4 +9,8 @@ export class SearchParam {
     pointTemplateCode!: string;
     activityCode!: string;
     documentCode!: string;
+    reChairPersonCode!: string;
+    zonalChairpersonCode!: string;
+    evaluvatorCode!: string;
+    clubUserCode!: string;
 }

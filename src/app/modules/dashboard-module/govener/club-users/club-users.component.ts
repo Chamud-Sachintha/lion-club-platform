@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Club } from 'src/app/models/Club/club';
 import { ClubUser } from 'src/app/models/ClubUser/club-user';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { ClubService } from 'src/app/shared/services/club/club.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
@@ -18,7 +19,9 @@ export class ClubUsersComponent implements OnInit {
   clubUserModel = new ClubUser();
   requestModel = new Request();
   clubUserList: ClubUser[] = [];
+  searchParamModel = new SearchParam();
   registerClubUserForm!: FormGroup;
+  updateClubUserForm!: FormGroup;
 
   clubList: Club[] = [];
 
@@ -27,9 +30,59 @@ export class ClubUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCreateClubUsersForm();
+    this.initUpdateClubUserForm();
     this.getClubList();
     this.loadClubUsersList();
   }
+
+  onLoadClubUserInfo(clubUserCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.clubUserCode  = clubUserCode;
+
+    this.userServcie.getClubUserInfoByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.updateClubUserForm.controls['code'].setValue(dataList.data[0].code);
+        this.updateClubUserForm.controls['name'].setValue(dataList.data[0].name);
+        this.updateClubUserForm.controls['email'].setValue(dataList.data[0].email);
+        this.updateClubUserForm.controls['clubCode'].setValue(dataList.data[0].clubCode);
+      }
+    })
+  }
+
+  onSubmitUpdateClubUserForm() {
+    const code = this.updateClubUserForm.controls['code'].value;
+    const name = this.updateClubUserForm.controls['name'].value;
+    const email = this.updateClubUserForm.controls['email'].value;
+    const clubCode = this.updateClubUserForm.controls['clubCode'].value;
+
+    if (code == "") {
+
+    } else if (name == "") {
+
+    } else if (email == "") {
+
+    } else if (clubCode == "") {
+
+    } else {
+      this.clubUserModel.clubUserCode = code;
+      this.clubUserModel.fullName = name;
+      this.clubUserModel.email = email;
+      this.clubUserModel.clubCode = clubCode;
+      this.clubUserModel.token = sessionStorage.getItem("authToken");
+      this.clubUserModel.flag = sessionStorage.getItem("role");
+
+      this.userServcie.updateClubUserByCode(this.clubUserModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp)
+        }
+      })
+    }
+  } 
 
   loadClubUsersList() {
     this.requestModel.token = sessionStorage.getItem("authToken");
@@ -98,6 +151,15 @@ export class ClubUsersComponent implements OnInit {
 
   initCreateClubUsersForm() {
     this.registerClubUserForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      clubCode: ['', Validators.required]
+    })
+  }
+
+  initUpdateClubUserForm() {
+    this.updateClubUserForm = this.formBuilder.group({
       code: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required],

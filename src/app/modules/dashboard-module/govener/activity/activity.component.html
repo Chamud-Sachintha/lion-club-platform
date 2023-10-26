@@ -122,7 +122,8 @@
                                         <td>{{ eachActivity.secondCatCode }}</td>
                                         <td>{{ eachActivity.templateCode }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Update</button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#exampleModal" (click)="onLoadActivityInfo(eachActivity.activityCode)">Update</button>
                                             <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
                                         </td>
                                     </tr>
@@ -145,4 +146,101 @@
             </div>
         </div>
     </div>
+
+    <!-- model starts here -->
+  <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="updateActivityForm"
+          (ngSubmit)="onSubmitUpdateActivityForm()"
+        >
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Code :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="input-select" class="col-form-label">Select Main Activity Category</label>
+                    <select class="form-control" id="input-select" formControlName="mainCatCode">
+                        <option value="{{ this.mainCategory.mainCategoryCode }}" *ngFor="let mainCategory of this.mainCategoryList">{{ this.mainCategory.mainCategoryCode }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="input-select" class="col-form-label">Select First Sub Activity Category</label>
+                    <select class="form-control" id="input-select" formControlName="firstCatCode">
+                        <option value="{{ this.firstSubCategory.firstSubCategoryCode }}" *ngFor="let firstSubCategory of this.firstSubCategoryList">{{ this.firstSubCategory.firstSubCategoryCode }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="input-select" class="col-form-label">Select Second Sub Activity Category</label>
+                    <select class="form-control" id="input-select" formControlName="secondCatCode">
+                        <option value="{{ this.secondSubCategory.secondSubCategoryCode }}" *ngFor="let secondSubCategory of this.secondCategoryList">{{ this.secondSubCategory.secondSubCategoryCode }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="input-select" class="col-form-label">Select Authorized Users</label>
+                    <select class="form-control" id="input-select" formControlName="authUserCode">
+                        <option value="1">Context Users</option>
+                        <option value="2">Club Users</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Name :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="activityName"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer mt-3">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal"
+              >Close</a
+            >
+            <input
+              type="submit"
+              class="btn btn-primary"
+              value="Save Changes"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- models ends here -->
+
 </div>

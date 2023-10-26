@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContextUser } from 'src/app/models/ContextUser/context-user';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
 @Component({
@@ -15,13 +16,60 @@ export class ContextUsersComponent implements OnInit {
   contextUserModel = new ContextUser();
   requestModel = new Request();
   contextUserList: ContextUser[] = [];
+  searchParamModel = new SearchParam();
   registerContextUserForm!: FormGroup;
+  updateContextUserForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {}
 
   ngOnInit(): void {
     this.initCreateContextUserForm();
+    this.initUpdateContextUserForm();
     this.loadContextUserList();
+  }
+
+  onLoadContextUserInfo(contextUserCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.contextUserCode = contextUserCode;
+
+    this.userService.getContextUserInfoByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.updateContextUserForm.controls['code'].setValue(dataList.data[0].code);
+        this.updateContextUserForm.controls['name'].setValue(dataList.data[0].name);
+        this.updateContextUserForm.controls['email'].setValue(dataList.data[0].email);
+      }
+    })
+  }
+
+  onSubmitUpdateContextUserForm() {
+    const code = this.updateContextUserForm.controls['code'].value;
+    const name = this.updateContextUserForm.controls['name'].value;
+    const email = this.updateContextUserForm.controls['email'].value;
+
+    if (code == "") {
+
+    } else if (name == "") {
+
+    } else if (email == "") {
+
+    } else {
+      this.contextUserModel.contextUserCode = code;
+      this.contextUserModel.fullName = name;
+      this.contextUserModel.email = email;
+      this.contextUserModel.token = sessionStorage.getItem("authToken");
+      this.contextUserModel.flag = sessionStorage.getItem("role");
+
+      this.userService.updateContextUserByCode(this.contextUserModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp)
+        }
+      })
+    }
   }
 
   loadContextUserList() {
@@ -72,6 +120,14 @@ export class ContextUsersComponent implements OnInit {
 
   initCreateContextUserForm() {
     this.registerContextUserForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required]
+    })
+  }
+
+  initUpdateContextUserForm() {
+    this.updateContextUserForm = this.formBuilder.group({
       code: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required]

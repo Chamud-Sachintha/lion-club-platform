@@ -74,4 +74,50 @@ export class UsersService {
     const path = environment.apiRoot + "get-club-user-list";
     return this.http.post(path, requestModel);
   }
+
+  getZonalChairPersonInfoByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-zonal-user-info-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
+  getContextUserInfoByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-context-user-info-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
+
+  getEvaluvatorInfoByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-evaluvator-info-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
+  getClubUserInfoByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-club-user-info-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
+  updateRegionChairPersonByCode(chairPersonModel: ChairPerson) {
+    const path = environment.apiRoot + "update-reion-chair-user-by-code";
+    return this.http.post(path, chairPersonModel)
+  }
+
+  updateZonalChairPersonByCode(chairpersonModel: ChairPerson) {
+    const path = environment.apiRoot + "update-zonal-user-by-code";
+    return this.http.post(path, chairpersonModel);
+  }
+
+  updateContextUserByCode(contextUserMode: ContextUser) {
+    const path = environment.apiRoot + "update-context-user-by-code";
+    return this.http.post(path, contextUserMode);
+  }
+
+  updateEvaluvatorByCode(evaluvatorModel: Evaluvator) {
+    const path = environment.apiRoot + "update-evaluvator-by-code";
+    return this.http.post(path, evaluvatorModel);
+  }
+
+  updateClubUserByCode(clubUserModel: ClubUser) {
+    const path = environment.apiRoot + "update-club-user-by-code";
+    return this.http.post(path, clubUserModel);
+  }
 }

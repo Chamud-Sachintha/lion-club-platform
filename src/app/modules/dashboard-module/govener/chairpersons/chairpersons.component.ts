@@ -8,6 +8,7 @@ import { Region } from 'src/app/models/Region/region';
 import { RegionService } from 'src/app/shared/services/region/region.service';
 import { Zone } from 'src/app/models/Zone/zone';
 import { ZoneService } from 'src/app/shared/services/zone/zone.service';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 
 @Component({
   selector: 'app-chairpersons',
@@ -23,7 +24,10 @@ export class ChairpersonsComponent implements OnInit {
   chairPersonModel = new ChairPerson();
   regionChairPersonForm!: FormGroup;
   zonalChairPersonForm!: FormGroup;
+  updateRegionChairpersonForm!: FormGroup;
+  updateZonalChairpersonForm!: FormGroup;
   requestMdoel = new Request();
+  searchParamModel = new SearchParam();
   zoneList: Zone[] = [];
 
   constructor(private router: Router, private userService: UsersService, private formBuilder: FormBuilder, private regionService: RegionService
@@ -32,10 +36,104 @@ export class ChairpersonsComponent implements OnInit {
   ngOnInit(): void {
     this.initCreateRegionChairPersonForm();
     this.initCreateZonalChairPersonsForm();
+    this.initUpdateReionChairpersonForm();
+    this.initUpdateZonalChairpersonForm();
     this.getRegionList();
     this.getZoneList();
     this.loadRegionChairpersonList();
     this.loadZonalChairpersonList();
+  }
+
+  onLoadZonalChairPersonInfo(zonalChairpersonCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.zonalChairpersonCode = zonalChairpersonCode;
+
+    this.userService.getZonalChairPersonInfoByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.updateZonalChairpersonForm.controls['code'].setValue(dataList.data[0].code);
+        this.updateZonalChairpersonForm.controls['name'].setValue(dataList.data[0].name);
+        this.updateZonalChairpersonForm.controls['email'].setValue(dataList.data[0].email);
+        this.updateZonalChairpersonForm.controls['zoneCode'].setValue(dataList.data[0].zoneCode);
+      }
+    })
+  }
+
+  onSubmitUpdateZonalChairpersonForm() {
+    const code = this.updateZonalChairpersonForm.controls['code'].value;
+    const name = this.updateZonalChairpersonForm.controls['name'].value;
+    const email = this.updateZonalChairpersonForm.controls['email'].value;
+    const zoneCode = this.updateZonalChairpersonForm.controls['zoneCode'].value;
+
+    if (code == "") {
+
+    } else if (name == "") {
+
+    } else if (email == "") {
+
+    } else if (zoneCode == "") {
+
+    } else {
+      this.chairPersonModel.zonalChairpersonCode = code;
+      this.chairPersonModel.fullName = name;
+      this.chairPersonModel.email = email;
+      this.chairPersonModel.zoneCode = zoneCode;
+      this.chairPersonModel.token = sessionStorage.getItem("authToken");
+      this.chairPersonModel.flag = sessionStorage.getItem("role");
+
+      this.userService.updateZonalChairPersonByCode(this.chairPersonModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp);
+        }
+      })
+    }
+  }
+
+  onLoadReionChairPersonInfo(reChairPersonCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.reChairPersonCode = reChairPersonCode;
+
+    this.userService.getRegionChairPersonData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.updateRegionChairpersonForm.controls['code'].setValue(dataList.data[0].code);
+        this.updateRegionChairpersonForm.controls['name'].setValue(dataList.data[0].name);
+        this.updateRegionChairpersonForm.controls['email'].setValue(dataList.data[0].email);
+        this.updateRegionChairpersonForm.controls['reCode'].setValue(dataList.data[0].reCode);
+      }
+    })
+  } 
+
+  onSubmitUpdateReionChairpersonForm() {
+    const code = this.updateRegionChairpersonForm.controls['code'].value;
+    const reCode = this.updateRegionChairpersonForm.controls['reCode'].value;
+    const name = this.updateRegionChairpersonForm.controls['name'].value;
+    const email = this.updateRegionChairpersonForm.controls['email'].value;
+
+    if (reCode == "") {
+
+    } else if (name == "") {
+
+    } else {
+      this.chairPersonModel.reChairPersonCode = code;
+      this.chairPersonModel.fullName = name;
+      this.chairPersonModel.email = email;
+      this.chairPersonModel.regionCode = reCode;
+
+      this.userService.updateRegionChairPersonByCode(this.chairPersonModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp)
+        }
+      })
+    }
   }
 
   loadZonalChairpersonList() {
@@ -180,6 +278,24 @@ export class ChairpersonsComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', Validators.required],
       reCode: ['' ,Validators.required]
+    })
+  }
+
+  initUpdateReionChairpersonForm() {
+    this.updateRegionChairpersonForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      reCode: ['' ,Validators.required]
+    })
+  }
+
+  initUpdateZonalChairpersonForm() {
+    this.updateZonalChairpersonForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      zoneCode: ['' ,Validators.required]
     })
   }
 

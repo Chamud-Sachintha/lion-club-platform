@@ -31,4 +31,9 @@ export class SecondSubCategoryService {
     const path = environment.apiRoot + "get-second-cat-info-by-code";
     return this.http.post(path, searchParamModel);
   }
+
+  updateSecondCategoryByCode(secondCategoryModel: SecondSubCategory) {
+    const path = environment.apiRoot + "update-second-category-by-code";
+    return this.http.post(path, secondCategoryModel);
+  }
 }
