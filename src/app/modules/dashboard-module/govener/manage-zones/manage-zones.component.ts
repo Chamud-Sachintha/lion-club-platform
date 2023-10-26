@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ChairPerson } from 'src/app/models/ChairPerson/chair-person';
 import { Region } from 'src/app/models/Region/region';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { Zone } from 'src/app/models/Zone/zone';
 import { RegionService } from 'src/app/shared/services/region/region.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
@@ -21,15 +22,38 @@ export class ManageZonesComponent implements OnInit {
   zoneList: Zone[] = [];
   requestModel = new Request();
   zonalInfoModel = new Zone();
+  searchParamModel = new SearchParam();
   addZoneDetailsForm!: FormGroup;
+  updateZoneForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private usersService: UsersService
             , private regionService: RegionService, private zoneService: ZoneService) {}
 
   ngOnInit(): void {
     this.initAddZoneDetailsForm();
+    this.initUpdateZoneForm();
     this.getRegionList();
     this.getZoneList();
+  }
+
+  onLoadMainCategoryInfo(zoneCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.zoneCode = zoneCode;
+
+    this.zoneService.getZoneByZoneCode(this.searchParamModel).subscribe((resp: any) => {
+      
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        this.updateZoneForm.controls['zoneCode'].setValue(dataList.data[0].code);
+        this.updateZoneForm.controls['reCode'].setValue(dataList.data[0].reCode);
+      }
+    })
+  }
+
+  onSubmitUpdateZoneForm() {
+
   }
 
   getZoneList() {
@@ -106,6 +130,14 @@ export class ManageZonesComponent implements OnInit {
 
   initAddZoneDetailsForm() {
     this.addZoneDetailsForm = this.formBuilder.group({
+      zoneCode: ['', Validators.required],
+      chairPersonCode: ['', Validators.required],
+      reCode: ['', Validators.required]
+    })
+  }
+
+  initUpdateZoneForm() {
+    this.updateZoneForm = this.formBuilder.group({
       zoneCode: ['', Validators.required],
       chairPersonCode: ['', Validators.required],
       reCode: ['', Validators.required]

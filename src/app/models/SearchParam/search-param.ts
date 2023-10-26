@@ -13,4 +13,5 @@ export class SearchParam {
     zonalChairpersonCode!: string;
     evaluvatorCode!: string;
     clubUserCode!: string;
+    zoneCode!: string;
 }

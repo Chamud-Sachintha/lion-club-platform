@@ -26,4 +26,14 @@ export class RegionService {
     const path = environment.apiRoot + "get-region-list-by-usercode";
     return this.http.post(path, requestModel);
   }
+
+  getRegionInfoByReCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-region-info-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
+  updateRegionVyCode(regionModel: Region) {
+    const path = environment.apiRoot + "update-region-by-code";
+    return this.http.post(path, regionModel);
+  }
 }

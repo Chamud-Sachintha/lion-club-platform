@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { Zone } from 'src/app/models/Zone/zone';
 import { environment } from 'src/environments/environment.development';
 
@@ -24,5 +25,10 @@ export class ZoneService {
   getZoneListByReCode(zoneModel: Zone) {
     const path = environment.apiRoot + "get-zone-list-by-re-code";
     return this.http.post(path, zoneModel);
+  }
+
+  getZoneByZoneCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-zone-info-by-code";
+    return this.http.post(path, searchParamModel);
   }
 }

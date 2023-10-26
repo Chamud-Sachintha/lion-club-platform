@@ -71,7 +71,16 @@
                                         <td>{{ this.eachZone.zoneCode }}</td>
                                         <td>{{ this.eachZone.regionCode }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Update</button>
+                                            <button
+                                                class="btn btn-primary btn-sm"
+                                                (click)="
+                                                onLoadMainCategoryInfo(eachZone.zoneCode)
+                                                "
+                                                data-toggle="modal"
+                                                data-target="#exampleModal"
+                                            >
+                                                Update
+                                            </button>
                                             <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
                                         </td>
                                     </tr>
@@ -91,4 +100,66 @@
             </div>
         </div>
     </div>
+
+
+    <!-- model starts here -->
+  <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="updateZoneForm"
+          (ngSubmit)="onSubmitUpdateZoneForm()"
+        >
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="inputText3" class="col-form-label">Code :</label>
+                <input
+                  id="inputText3"
+                  type="text"
+                  class="form-control"
+                  formControlName="zoneCode"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="input-select" class="col-form-label">Select Region</label>
+                    <select class="form-control" id="input-select" formControlName="reCode">
+                        <option value="{{ eachRegion.regionCode }}" *ngFor="let eachRegion of this.regionList">{{ eachRegion.regionCode }}</option>
+                    </select>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer mt-3">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal"
+              >Close</a
+            >
+            <input
+              type="submit"
+              class="btn btn-primary"
+              value="Save Changes"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- models ends here -->
+
 </div>

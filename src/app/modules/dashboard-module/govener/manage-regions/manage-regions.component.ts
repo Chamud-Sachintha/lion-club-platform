@@ -5,6 +5,7 @@ import { ChairPerson } from 'src/app/models/ChairPerson/chair-person';
 import { ContextUser } from 'src/app/models/ContextUser/context-user';
 import { Region } from 'src/app/models/Region/region';
 import { Request } from 'src/app/models/Request/request';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { RegionService } from 'src/app/shared/services/region/region.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
@@ -20,15 +21,57 @@ export class ManageRegionsComponent implements OnInit {
   regionList: Region[] = [];
   regionModel = new Region();
   requestModel = new Request();
+  searchParamModel = new SearchParam();
   addRegionDetailsForm!: FormGroup;
+  updateRegionsForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private regionService: RegionService
             , private userServcie: UsersService) {}
 
   ngOnInit(): void {
     this.initCreateNewRegionForm();
+    this.initUpdateRegionsForm();
     this.loadContextUserList();
     this.getRegionList();
+  }
+
+  onLoadRegionInfo(regionCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.regionCode = regionCode;
+
+    this.regionService.getRegionInfoByReCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        this.updateRegionsForm.controls['reCode'].setValue(dataList.data[0].code);
+        this.updateRegionsForm.controls['contextUserCode'].setValue(dataList.data[0].contextUserCode);
+      }
+    })
+  }
+
+  onSubmitUpdateRegionsForm() {
+    const reCode = this.updateRegionsForm.controls['reCode'].value;
+    const contextUserCode = this.updateRegionsForm.controls['contectUserCode'].value;
+
+    if (reCode == "") {
+
+    } else if (contextUserCode == "") {
+
+    } else {
+      this.regionModel.regionCode = reCode;
+      this.regionModel.contextUserCode = contextUserCode;
+      this.regionModel.token = sessionStorage.getItem("authToken");
+      this.regionModel.flag = sessionStorage.getItem("role");
+
+      this.regionService.updateRegionVyCode(this.regionModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp)
+        }
+      })
+    }
   }
 
   getRegionList() {
@@ -85,6 +128,13 @@ export class ManageRegionsComponent implements OnInit {
 
   initCreateNewRegionForm() {
     this.addRegionDetailsForm = this.formBuilder.group({
+      reCode: ['', Validators.required],
+      contextUserCode: ['', Validators.required]
+    })
+  }
+
+  initUpdateRegionsForm() {
+    this.updateRegionsForm = this.formBuilder.group({
       reCode: ['', Validators.required],
       contextUserCode: ['', Validators.required]
     })
