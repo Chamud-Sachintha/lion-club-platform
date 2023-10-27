@@ -9,6 +9,7 @@ import { RegionService } from 'src/app/shared/services/region/region.service';
 import { Zone } from 'src/app/models/Zone/zone';
 import { ZoneService } from 'src/app/shared/services/zone/zone.service';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-chairpersons',
@@ -31,7 +32,7 @@ export class ChairpersonsComponent implements OnInit {
   zoneList: Zone[] = [];
 
   constructor(private router: Router, private userService: UsersService, private formBuilder: FormBuilder, private regionService: RegionService
-            , private zoneService: ZoneService) { }
+            , private zoneService: ZoneService, private tostr: ToastrService) { }
 
   ngOnInit(): void {
     this.initCreateRegionChairPersonForm();
@@ -87,7 +88,7 @@ export class ChairpersonsComponent implements OnInit {
       this.userService.updateZonalChairPersonByCode(this.chairPersonModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp);
+          this.tostr.success("Update Zone", "Zone Update Successfully");
         }
       })
     }
@@ -130,7 +131,7 @@ export class ChairpersonsComponent implements OnInit {
       this.userService.updateRegionChairPersonByCode(this.chairPersonModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Update Region", "Region Update Successfully");
         }
       })
     }
@@ -223,7 +224,7 @@ export class ChairpersonsComponent implements OnInit {
 
       this.userService.createZonalChairPerson(this.chairPersonModel).subscribe((resp: any) => {
         if (resp.code === 1) {
-          console.log(resp);
+          this.tostr.success("Create Zonal Chairperson", "Zone Chairperson Created Successfully");
         }
       }, (err) => {
 
@@ -264,7 +265,7 @@ export class ChairpersonsComponent implements OnInit {
 
       this.userService.createRegionChairPerson(this.chairPersonModel).subscribe((resp: any) => {
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Create Region Chairperson", "Region Chairperson Created Successfully");
         }
       }, (err) => {
 

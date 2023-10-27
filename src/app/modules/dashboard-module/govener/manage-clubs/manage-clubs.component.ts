@@ -8,6 +8,7 @@ import { Zone } from 'src/app/models/Zone/zone';
 import { ClubService } from 'src/app/shared/services/club/club.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 import { ZoneService } from 'src/app/shared/services/zone/zone.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-clubs',
@@ -25,7 +26,7 @@ export class ManageClubsComponent implements OnInit {
   updateClubForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private usersService: UsersService
-            , private zoneService: ZoneService, private clubService: ClubService) {}
+            , private zoneService: ZoneService, private clubService: ClubService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initAddClubForm();
@@ -67,7 +68,7 @@ export class ManageClubsComponent implements OnInit {
       this.clubService.updateClubByCode(this.clubModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Update Club", "Club Update Successfully");
         }
       })
     }
@@ -103,7 +104,7 @@ export class ManageClubsComponent implements OnInit {
 
       this.clubService.addNewClub(this.clubModel).subscribe((resp: any) => {
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Create Club", "Club Create Successfully");
         }
       }, (err) => {})
     }

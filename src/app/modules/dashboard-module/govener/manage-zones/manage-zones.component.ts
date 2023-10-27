@@ -9,6 +9,7 @@ import { Zone } from 'src/app/models/Zone/zone';
 import { RegionService } from 'src/app/shared/services/region/region.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 import { ZoneService } from 'src/app/shared/services/zone/zone.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-zones',
@@ -27,7 +28,7 @@ export class ManageZonesComponent implements OnInit {
   updateZoneForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private usersService: UsersService
-            , private regionService: RegionService, private zoneService: ZoneService) {}
+            , private regionService: RegionService, private zoneService: ZoneService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initAddZoneDetailsForm();
@@ -69,7 +70,7 @@ export class ManageZonesComponent implements OnInit {
       this.zoneService.updateZoneByCode(this.zonalInfoModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp);
+          this.tostr.success("Update Zone", "Zone Update Successfully");
         }
       })
     }
@@ -109,7 +110,7 @@ export class ManageZonesComponent implements OnInit {
       this.zoneService.createNewZone(this.zonalInfoModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Create Zone", "Zone Created Successfully");
         }
       }, (err) => {
 

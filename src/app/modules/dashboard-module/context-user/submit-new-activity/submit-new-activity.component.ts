@@ -14,6 +14,7 @@ import { ClubService } from 'src/app/shared/services/club/club.service';
 import { FirstSubCategoryService } from 'src/app/shared/services/first-sub-category/first-sub-category.service';
 import { MainCategoryService } from 'src/app/shared/services/main-category/main-category.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-submit-new-activity',
@@ -47,7 +48,8 @@ export class SubmitNewActivityComponent implements OnInit {
     private firstCategoryService: FirstSubCategoryService,
     private mainCategoryService: MainCategoryService,
     private secondCategoryService: SecondSubCategoryService,
-    private clubService: ClubService
+    private clubService: ClubService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -194,7 +196,7 @@ export class SubmitNewActivityComponent implements OnInit {
       this.clubActivityService.submitNewClubActivity(formData).subscribe(
         (resp: any) => {
           if (resp.code === 1) {
-            console.log(resp);
+            this.toastr.success("")
           }
         },
         (err) => {}

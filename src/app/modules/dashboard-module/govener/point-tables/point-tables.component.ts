@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { PointTemplate } from 'src/app/models/PointTemplate/point-template';
 import { ValueList } from 'src/app/models/ValueList/value-list';
 import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-point-tables',
@@ -15,7 +16,7 @@ export class PointTablesComponent implements OnInit {
   templateInfo = new PointTemplate();
   valueList!: FormArray;
 
-  constructor(private formBuilder: FormBuilder, private pointTemplateService: PointTemplateService) {}
+  constructor(private formBuilder: FormBuilder, private pointTemplateService: PointTemplateService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initAddPointTableValueRowForm();
@@ -36,7 +37,7 @@ export class PointTablesComponent implements OnInit {
       });
 
       this.pointTemplateService.addNewPointTemplate(this.templateInfo).subscribe((resp: any) => {
-        console.log(resp)
+        this.tostr.success("Create Point Template", "Point Template Created Successfully");
       }, (err) => {})
     }
   }

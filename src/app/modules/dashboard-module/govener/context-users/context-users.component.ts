@@ -5,6 +5,7 @@ import { ContextUser } from 'src/app/models/ContextUser/context-user';
 import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { UsersService } from 'src/app/shared/services/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-context-users',
@@ -20,7 +21,7 @@ export class ContextUsersComponent implements OnInit {
   registerContextUserForm!: FormGroup;
   updateContextUserForm!: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {}
+  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initCreateContextUserForm();
@@ -66,7 +67,7 @@ export class ContextUsersComponent implements OnInit {
       this.userService.updateContextUserByCode(this.contextUserModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Update Context User", "Context User Update Successfully");
         }
       })
     }
@@ -110,7 +111,7 @@ export class ContextUsersComponent implements OnInit {
       this.userService.createContextUser(this.contextUserModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Create Context User", "Context User Created Successfully");
         }
       }, (err) => {
 

@@ -5,6 +5,7 @@ import { Evaluvator } from 'src/app/models/Evaluvator/evaluvator';
 import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { UsersService } from 'src/app/shared/services/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-evaluators',
@@ -20,7 +21,8 @@ export class EvaluatorsComponent implements OnInit {
   registerEvaluatorForm!: FormGroup;
   updateEvaluvatorForm!: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {}
+  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService
+            , private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initCreateEvaluatorForm();
@@ -64,7 +66,7 @@ export class EvaluatorsComponent implements OnInit {
       this.userService.updateEvaluvatorByCode(this.evaluvatorModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp);
+          this.tostr.success("Update Evaluvator", "Evaluvator Update Successfully");
         }
       })
     } 
@@ -108,7 +110,7 @@ export class EvaluatorsComponent implements OnInit {
       this.userService.createEvaluator(this.evaluvatorModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Create Evaluvator", "Evaluvator Create Successfully");
         }
       }, (err) => {
 

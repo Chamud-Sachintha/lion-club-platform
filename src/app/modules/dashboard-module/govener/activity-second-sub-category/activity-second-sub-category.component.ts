@@ -7,6 +7,7 @@ import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { SecondSubCategory } from 'src/app/models/SecondSubCategory/second-sub-category';
 import { FirstSubCategoryService } from 'src/app/shared/services/first-sub-category/first-sub-category.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-activity-second-sub-category',
@@ -24,7 +25,8 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
   updateSecondCategoryForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private firstSubCategoryService: FirstSubCategoryService
-            , private secondSubCategoryService: SecondSubCategoryService) {}
+            , private secondSubCategoryService: SecondSubCategoryService
+            , private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.initCreateSecondSubCategoryForm();
@@ -54,7 +56,7 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
       this.secondSubCategoryService.updateSecondCategoryByCode(this.secondSubCategoryModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.toastr.success("Update Second Category", "Category Updated Successfully");
         }
       })
     }
@@ -127,7 +129,7 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
       this.secondSubCategoryService.addNewSecondSubCategory(this.secondSubCategoryModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.toastr.success("Add Second Sub Category", "Category Added successfully");
         }
       })
     }

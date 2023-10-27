@@ -4,6 +4,7 @@ import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
 import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { ProofDocumentsService } from 'src/app/shared/services/proof-documents/proof-documents.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-proof-documents',
@@ -19,7 +20,7 @@ export class ProofDocumentsComponent implements OnInit {
   updateProofDocumntForm!: FormGroup;
   searchParamModel = new SearchParam();
 
-  constructor(private formBuilder: FormBuilder, private documentService: ProofDocumentsService) {}
+  constructor(private formBuilder: FormBuilder, private documentService: ProofDocumentsService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initCreateProofDocumentForm();
@@ -60,7 +61,7 @@ export class ProofDocumentsComponent implements OnInit {
       this.documentService.updateDocument(this.documentModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Update Document", "Document Update Successfully");
         }
       })
     }
@@ -99,7 +100,7 @@ export class ProofDocumentsComponent implements OnInit {
       this.documentService.addNewProofDocument(this.documentModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Create Document", "Document Created Successfully");
         }
       }, (err) => {})
     }

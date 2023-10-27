@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } 
 import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
 import { Activity } from 'src/app/models/Activity/activity';
 import { environment } from 'src/environments/environment';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-manage-club-activities',
   templateUrl: './manage-club-activities.component.html',
@@ -32,7 +32,8 @@ export class ManageClubActivitiesComponent implements OnInit {
 
   constructor (private regionService: RegionService, private zoneService: ZoneService
               , private clubActivityService: ClubActivityServiceService
-              , private formBuilder: FormBuilder) {}
+              , private formBuilder: FormBuilder
+              , private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadAvailableRegionList();
@@ -56,7 +57,7 @@ export class ManageClubActivitiesComponent implements OnInit {
       this.clubActivityService.updateClubActivityStatusByEvaluvator(this.requestModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.toastr.success("Update Club Activity", "Update Successfully");
         }
       })
     }

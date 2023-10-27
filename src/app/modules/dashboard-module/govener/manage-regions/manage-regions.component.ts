@@ -8,6 +8,7 @@ import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { RegionService } from 'src/app/shared/services/region/region.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-regions',
@@ -26,7 +27,7 @@ export class ManageRegionsComponent implements OnInit {
   updateRegionsForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private regionService: RegionService
-            , private userServcie: UsersService) {}
+            , private userServcie: UsersService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initCreateNewRegionForm();
@@ -68,7 +69,7 @@ export class ManageRegionsComponent implements OnInit {
       this.regionService.updateRegionVyCode(this.regionModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Update Region", "Region Update Successfully");
         }
       })
     }
@@ -119,7 +120,7 @@ export class ManageRegionsComponent implements OnInit {
       this.regionModel.contextUserCode = contextUserCode;
 
       this.regionService.createNewRegion(this.regionModel).subscribe((resp) => {
-        console.log(resp)
+        this.tostr.success("Create Region", "Region Create Successfully");
       }, (err) => {
 
       })

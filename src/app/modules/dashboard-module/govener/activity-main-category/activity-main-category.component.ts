@@ -5,6 +5,7 @@ import { MainCategory } from 'src/app/models/MainCategory/main-category';
 import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { MainCategoryService } from 'src/app/shared/services/main-category/main-category.service';
+import { ToastrService } from 'ngx-toastr'; 
 
 @Component({ 
   selector: 'app-activity-main-category',
@@ -20,7 +21,8 @@ export class ActivityMainCategoryComponent implements OnInit {
   addMainCategoryForm!: FormGroup;
   updateMainCategoryForm!: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private mainCategoryService: MainCategoryService) {}
+  constructor(private router: Router, private formBuilder: FormBuilder, private mainCategoryService: MainCategoryService
+            , private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.initCraetMainCategoryForm();
@@ -47,7 +49,7 @@ export class ActivityMainCategoryComponent implements OnInit {
       this.mainCategoryService.updateMainCategoryByCode(this.mainCategoryModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.toastr.success("Update Main Category", "Category Updated Successfully");
         }
       })
     }
@@ -102,7 +104,7 @@ export class ActivityMainCategoryComponent implements OnInit {
       this.mainCategoryService.addNewMainCategory(this.mainCategoryModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp);
+          this.toastr.success("Add Main Category", "Category Added Successfully.");
         }
       }, (err) => {})
     }

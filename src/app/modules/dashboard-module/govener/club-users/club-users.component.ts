@@ -7,6 +7,7 @@ import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { ClubService } from 'src/app/shared/services/club/club.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-club-users',
@@ -26,7 +27,7 @@ export class ClubUsersComponent implements OnInit {
   clubList: Club[] = [];
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userServcie: UsersService
-            , private clubService: ClubService) {}
+            , private clubService: ClubService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.initCreateClubUsersForm();
@@ -78,7 +79,7 @@ export class ClubUsersComponent implements OnInit {
       this.userServcie.updateClubUserByCode(this.clubUserModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Update Club", "Club Update Successfully");
         }
       })
     }
@@ -141,7 +142,7 @@ export class ClubUsersComponent implements OnInit {
       this.userServcie.createClubUser(this.clubUserModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
-          console.log(resp)
+          this.tostr.success("Create Club User", "Club User Create Successfully");
         }
       }, (err) => {
 

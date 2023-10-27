@@ -10,6 +10,7 @@ import { WebLayoutComponent } from './layouts/web-layout/web-layout.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { DashboardHeaderComponent } from './shared/dashboard-header/dashboard-header.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

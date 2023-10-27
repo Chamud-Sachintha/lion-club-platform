@@ -14,6 +14,7 @@ import { MainCategoryService } from 'src/app/shared/services/main-category/main-
 import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
 import { ProofDocumentsService } from 'src/app/shared/services/proof-documents/proof-documents.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-activity',
@@ -40,7 +41,8 @@ export class ActivityComponent implements OnInit {
     , private secondSubCategoryservice: SecondSubCategoryService
     , private docService: ProofDocumentsService
     , private activityService: ActivityService
-    , private formBuilder: FormBuilder) { }
+    , private formBuilder: FormBuilder
+    , private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.initCreatenewActivityForm();
@@ -133,7 +135,7 @@ export class ActivityComponent implements OnInit {
       this.activityInfo.flag = sessionStorage.getItem("role");
 
       this.activityService.addNewActivity(this.activityInfo).subscribe((resp: any) => {
-        console.log(resp)
+        this.toastr.success("Add Activity", "Activity Added Successfully");
       }, (err) => {})
     }
   }
