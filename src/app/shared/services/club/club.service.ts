@@ -25,4 +25,14 @@ export class ClubService {
     const path = environment.apiRoot + "club-list-by-context-user";
     return this.http.post(path, searchParamModel);
   }
+
+  getClubInfoByCode(searchjParamMode: SearchParam) {
+    const path = environment.apiRoot + "get-club-info-by-code";
+    return this.http.post(path, searchjParamMode);
+  }
+
+  updateClubByCode(clubModel: Club) {
+    const path = environment.apiRoot + "update-club-by-code";
+    return this.http.post(path, clubModel);
+  }
 }

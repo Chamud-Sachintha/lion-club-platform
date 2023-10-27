@@ -53,7 +53,26 @@ export class ManageZonesComponent implements OnInit {
   }
 
   onSubmitUpdateZoneForm() {
+    const code = this.updateZoneForm.controls['zoneCode'].value;
+    const reCode = this.updateZoneForm.controls['reCode'].value;
 
+    if (code == "") {
+
+    } else if (reCode == "") {
+
+    } else {
+      this.zonalInfoModel.zoneCode = code;
+      this.zonalInfoModel.regionCode = reCode;
+      this.zonalInfoModel.token = sessionStorage.getItem("authToken");
+      this.zonalInfoModel.flag = sessionStorage.getItem("role");
+
+      this.zoneService.updateZoneByCode(this.zonalInfoModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp);
+        }
+      })
+    }
   }
 
   getZoneList() {
