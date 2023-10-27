@@ -10,6 +10,7 @@ import { ZoneService } from 'src/app/shared/services/zone/zone.service';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
 import { Activity } from 'src/app/models/Activity/activity';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-manage-club-activities',
@@ -39,15 +40,37 @@ export class ManageClubActivitiesComponent implements OnInit {
     this.initCheckActivityForm();
   }
 
+  onUpdateCheckClubActivityForm() {
+
+    const activityCode = this.checkClubActivityForm.controls['activityCode'].value;
+    const status = this.checkClubActivityForm.controls['status'].value;
+
+    if (status == 0) {
+
+    } else {
+      this.requestModel.token = sessionStorage.getItem("authToken");
+      this.requestModel.flag = sessionStorage.getItem("role");
+      this.requestModel.activityCode = activityCode;
+      this.requestModel.status = status;
+
+      this.clubActivityService.updateClubActivityStatusByEvaluvator(this.requestModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          console.log(resp)
+        }
+      })
+    }
+  }
+
   onClickViewImage(imageName: string) {
-    const fileServer = "https://api.dpuremaths.lk/modo/images/" + imageName;
+    const fileServer = environment.fileServer + "modo/images/" + imageName;
     window.open(fileServer);
 
     return false;
   }
 
   onClickViewDocument(documentName: string) {
-    const fileServer = "https://api.dpuremaths.lk/modo/docs/" + documentName;
+    const fileServer = environment.fileServer + "modo/docs/" + documentName;
     window.open(fileServer);
 
     return false;
@@ -63,6 +86,8 @@ export class ManageClubActivitiesComponent implements OnInit {
 
       this.checkClubActivityForm.controls['activityName'].setValue(dataList.data[0].activityName);
       this.checkClubActivityForm.controls['clubCode'].setValue(dataList.data[0].clubCode);
+      this.checkClubActivityForm.controls['status'].setValue(dataList.data[0].status)
+      this.checkClubActivityForm.controls['activityCode'].setValue(dataList.data[0].clubActivityId);
     })
 
     this.clubActivityService.getClubActivityDocByCode(this.searchParamModel).subscribe((resp: any) => {
@@ -77,7 +102,7 @@ export class ManageClubActivitiesComponent implements OnInit {
     })
 
     this.clubActivityService.getClubActivityImagesByCode(this.searchParamModel).subscribe((resp: any) => {
-
+      this.clubActiviyImageList = [];
       const dataList = JSON.parse(JSON.stringify(resp))
 
       if (resp.code === 1) {
@@ -91,7 +116,9 @@ export class ManageClubActivitiesComponent implements OnInit {
   initCheckActivityForm() {
     this.checkClubActivityForm = this.formBuilder.group({
       activityName: ['', Validators.required],
-      clubCode: ['', Validators.required]
+      clubCode: ['', Validators.required],
+      status: ['', Validators.required],
+      activityCode: ['', Validators.required]
     })
   }
 

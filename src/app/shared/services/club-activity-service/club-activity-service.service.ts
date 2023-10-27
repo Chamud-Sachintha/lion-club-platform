@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClubActivity } from 'src/app/models/ClubActivity/club-activity';
+import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { environment } from 'src/environments/environment.development';
 
@@ -39,5 +40,10 @@ export class ClubActivityServiceService {
   getClubSctivityInfoByCode(searchParam: SearchParam) {
     const path = environment.apiRoot + "get-activity-info-by-code";
     return this.http.post(path, searchParam);
+  }
+
+  updateClubActivityStatusByEvaluvator(requestModel: Request) {
+    const path = environment.apiRoot + "check-club-activity-by-code";
+    return this.http.post(path, requestModel);
   }
 }

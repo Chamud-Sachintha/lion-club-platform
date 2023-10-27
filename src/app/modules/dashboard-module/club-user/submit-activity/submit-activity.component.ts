@@ -198,6 +198,7 @@ export class SubmitActivityComponent implements OnInit {
       // formData.append("value", value);
       formData.append("token", this.token);
       formData.append("flag", this.clubActivityModel.flag);
+      formData.append("type", conditionType);
 
       this.selectedFiles.forEach((el, index) => {
         formData.append("file" + index, el)
