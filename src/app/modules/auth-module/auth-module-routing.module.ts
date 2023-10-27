@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './signin/signin.component';
+import { ChangePwComponent } from './change-pw/change-pw.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,12 @@ const routes: Routes = [
       }
     ]
   },
+
+  {
+    path: 'change-pw',
+    component: ChangePwComponent,
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

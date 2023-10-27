@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Auth } from 'src/app/models/Auth/auth';
+import { ChangePw } from 'src/app/models/ChangePw/change-pw';
 import { Perm } from 'src/app/models/Perm/perm';
 import { environment } from 'src/environments/environment.development';
 
@@ -19,5 +20,10 @@ export class AuthService {
   checkMenuPerm(permModel: Perm) {
     const path = environment.apiRoot + "menu-perm";
     return this.http.post(path, permModel);
+  }
+
+  changePassword(changePwModel: ChangePw) {
+    const path = environment.apiRoot + "update-pw";
+    return this.http.post(path, changePwModel);
   }
 }

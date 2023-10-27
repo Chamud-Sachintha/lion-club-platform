@@ -35,6 +35,11 @@ export class SigninComponent implements OnInit {
         sessionStorage.setItem("role", dataList.data[0].userRole);
 
         this.router.navigate(['app']);
+      } else if (resp.code === 2) {
+        sessionStorage.setItem("email", dataList.data[0].email);
+        sessionStorage.setItem("secret", dataList.data[0].secret);
+        
+        this.router.navigate(['/auth/change-pw'])
       } else {
         // have to implement ngx tast msg for invalid resp
       }
