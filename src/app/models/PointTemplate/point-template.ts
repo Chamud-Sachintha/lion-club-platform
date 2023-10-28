@@ -5,4 +5,5 @@ export class PointTemplate {
     flag!: any;
     templateName!: string;
     valueList: ValueList[] = [];
+    valueListJsonEncode!: any;
 }

@@ -33,8 +33,10 @@ export class DashboardHeaderComponent implements OnInit {
   onClickSignOut() {
     sessionStorage.removeItem("authToken");
     sessionStorage.removeItem("role");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("clubCode");
 
-    location.reload();
+    this.router.navigate(['/auth']);
   }
 
   checkMenuPermissionForUser() {

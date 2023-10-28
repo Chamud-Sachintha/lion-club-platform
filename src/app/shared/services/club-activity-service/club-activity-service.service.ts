@@ -37,6 +37,11 @@ export class ClubActivityServiceService {
     return this.http.post(path, searchParam);
   }
 
+  getClubActivityListByClubCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-club-activity-list-by-club-code";
+    return this.http.post(path, searchParamModel);
+  }
+
   getClubSctivityInfoByCode(searchParam: SearchParam) {
     const path = environment.apiRoot + "get-activity-info-by-code";
     return this.http.post(path, searchParam);

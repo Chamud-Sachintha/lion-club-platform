@@ -15,6 +15,7 @@ import { PointTemplateService } from 'src/app/shared/services/point-template/poi
 import { ProofDocumentsService } from 'src/app/shared/services/proof-documents/proof-documents.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
 import { ToastrService } from 'ngx-toastr';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
 
 @Component({
   selector: 'app-activity',
@@ -30,6 +31,7 @@ export class ActivityComponent implements OnInit {
   activityList: Activity[] = [];
   proofDocList: ProofDoc[] = [];
   doccCodeList: any[] = [];
+  searchParamModel = new SearchParam();
   requestModel = new Request();
   activityInfo = new Activity();
 
@@ -53,6 +55,20 @@ export class ActivityComponent implements OnInit {
     this.getProofDocList();
     this.getAllTemplateList();
     this.loadAllActivityList();
+  }
+
+  onClickDeleteActivity(activityCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.activityCode = activityCode;
+
+    this.activityService.deleteActivityByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.toastr.success("Delete Activity", "Activity Deletion Successfuly");
+        location.reload();
+      }
+    })
   }
 
   onSubmitUpdateActivityForm() {
@@ -136,6 +152,7 @@ export class ActivityComponent implements OnInit {
 
       this.activityService.addNewActivity(this.activityInfo).subscribe((resp: any) => {
         this.toastr.success("Add Activity", "Activity Added Successfully");
+        location.reload();
       }, (err) => {})
     }
   }

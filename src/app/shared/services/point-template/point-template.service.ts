@@ -26,4 +26,14 @@ export class PointTemplateService {
     const path = environment.apiRoot + "get-template-obj-by-code";
     return this.http.post(path, searchParam);
   }
+
+  getTemplateObjByName(searchParam: SearchParam) {
+    const path = environment.apiRoot + "get-point-template-info-by-template-code";
+    return this.http.post(path, searchParam);
+  }
+
+  updatePointTemplateByCode(templateInfo: PointTemplate) {
+    const path = environment.apiRoot + "update-point-template-by-code";
+    return this.http.post(path, templateInfo);
+  }
 }

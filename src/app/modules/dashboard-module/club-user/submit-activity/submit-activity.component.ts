@@ -39,6 +39,7 @@ export class SubmitActivityComponent implements OnInit {
   selectedFiles: File[] = [];
   selectedImageFiles: File[] = [];
   templateValueList: ValueList[] = [];
+  clubActivityList: ClubActivity[] = [];
   clubCode!: any;
   token!: any;
   firstCatgoryCode!: string;
@@ -54,7 +55,25 @@ export class SubmitActivityComponent implements OnInit {
   ngOnInit(): void {
     this.initSubmitActivityForm();
     this.getMainActivityCategoryList();
+    this.getClubActivityList();
     // this.getActivityList();
+  }
+
+  getClubActivityList() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.clubCode = sessionStorage.getItem("clubCode");
+
+    this.clubActivityService.getClubActivityListByClubCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachActivity: ClubActivity) => {
+          this.clubActivityList.push(eachActivity)
+        })
+      }
+    })
   }
 
   onChangeActivity(activityCode: any) {
