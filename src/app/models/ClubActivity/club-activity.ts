@@ -11,4 +11,5 @@ export class ClubActivity {
     beneficiaries!: string;
     value!: string;
     documentList!: FormData;
+    status!: number;
 }

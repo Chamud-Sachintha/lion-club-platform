@@ -106,6 +106,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Activity Code</th>
+                                        <th>Activity Name</th>
                                         <th>Main Category Code</th>
                                         <th>First Category Code</th>
                                         <th>Second Category Code</th>
@@ -117,6 +118,7 @@
                                     <tr *ngFor="let eachActivity of this.activityList; index as i">
                                         <td>{{ i }}</td>
                                         <td>{{ eachActivity.activityCode }}</td>
+                                        <td>{{ eachActivity.activityName }}</td>
                                         <td>{{ eachActivity.mainCatCode }}</td>
                                         <td>{{ eachActivity.firstCatCode }}</td>
                                         <td>{{ eachActivity.secondCatCode }}</td>
@@ -132,6 +134,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Activity Code</th>
+                                        <th>Activity Name</th>
                                         <th>Main Category Code</th>
                                         <th>First Category Code</th>
                                         <th>Second Category Code</th>

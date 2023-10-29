@@ -91,6 +91,7 @@
                   <tr>
                     <th>Activity Code</th>
                     <th>Club Code</th>
+                    <th>status</th>
                     <th>Create Date</th>
                     <th>Actions</th>
                   </tr>
@@ -99,6 +100,9 @@
                   <tr *ngFor="let eachActivity of this.clubActivityList">
                     <td>{{ eachActivity.activityCode }}</td>
                     <td>{{ eachActivity.clubCode }}</td>
+                    <td *ngIf="this.eachActivity.status == 1">Approve</td>
+                    <td *ngIf="this.eachActivity.status == 0">Pending</td>
+                    <td *ngIf="this.eachActivity.status == 2">Reject</td>
                     <td>{{ eachActivity.createTime | date }}</td>
                     <td>
                       <div class="row">
@@ -123,6 +127,7 @@
                   <tr>
                     <th>Activity Code</th>
                     <th>Club Code</th>
+                    <th>status</th>
                     <th>Create Date</th>
                     <th>Actions</th>
                   </tr>
