@@ -29,6 +29,21 @@ export class ContextUsersComponent implements OnInit {
     this.loadContextUserList();
   }
 
+  deleteContextUser(contextUserCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.contextUserCode = contextUserCode;
+
+    this.userService.deleteContextUserByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delete Context User", "Context User Delete Successsfully.");
+      } else {
+        this.tostr.error("Delete Context User", resp.message);
+      }
+    })
+  }
+
   onLoadContextUserInfo(contextUserCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");

@@ -12,4 +12,5 @@ export class ClubActivity {
     value!: string;
     documentList!: FormData;
     status!: number;
+    creator!: number;
 }

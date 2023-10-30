@@ -37,6 +37,21 @@ export class ManageZonesComponent implements OnInit {
     this.getZoneList();
   }
 
+  deleteZoneByCode(zoneCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.zoneCode = zoneCode;
+
+    this.zoneService.deleteZoneService(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delete zone", "Zone Delete successfully");
+      } else {
+        this.tostr.error("Delete Zonbe", resp.message);
+      }
+    })
+  }
+
   onLoadMainCategoryInfo(zoneCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");

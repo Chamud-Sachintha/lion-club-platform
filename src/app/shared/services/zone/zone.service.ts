@@ -36,4 +36,9 @@ export class ZoneService {
     const path = environment.apiRoot + "update-zone-by-code";
     return this.http.post(path, zoneMode);
   }
+
+  deleteZoneService(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete_zone_by-code";
+    return this.http.post(path, searchParamModel);
+  }
 }

@@ -29,7 +29,18 @@ export class HomeComponent implements OnInit {
   }
 
   loadContextUserCounts() {
-    
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.dashboardService.getContextUserDashboardData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.dashboardModel.totalRegionCount = dataList.data[0].regionCount;
+        this.dashboardModel.zoneCount = dataList.data[0].zoneCount;
+      }
+    })
   }
 
   loadClubUserCounts() {

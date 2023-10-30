@@ -120,4 +120,9 @@ export class UsersService {
     const path = environment.apiRoot + "update-club-user-by-code";
     return this.http.post(path, clubUserModel);
   }
+
+  deleteContextUserByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-context-user-by-code";
+    return this.http.post(path, searchParamModel);
+  }
 }

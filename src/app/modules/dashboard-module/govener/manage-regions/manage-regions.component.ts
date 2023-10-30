@@ -36,6 +36,21 @@ export class ManageRegionsComponent implements OnInit {
     this.getRegionList();
   }
 
+  deleteRegionByCode(reCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.regionCode = reCode;
+
+    this.regionService.deleteRegionByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Del;ete Region", "Region deletre Successfully.");
+      } else {
+        this.tostr.error("Delete Region", resp.message);
+      }
+    })
+  }
+
   onLoadRegionInfo(regionCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");

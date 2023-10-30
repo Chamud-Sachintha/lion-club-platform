@@ -51,4 +51,9 @@ export class ClubActivityServiceService {
     const path = environment.apiRoot + "check-club-activity-by-code";
     return this.http.post(path, requestModel);
   }
+
+  getClubActivityListByContextUserCode(searchParam: SearchParam) {
+    const path = environment.apiRoot + "get-club-activity-list-by-context-user-code";
+    return this.http.post(path, searchParam);
+  }
 }

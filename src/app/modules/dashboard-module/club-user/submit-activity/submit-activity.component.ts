@@ -44,6 +44,7 @@ export class SubmitActivityComponent implements OnInit {
   token!: any;
   firstCatgoryCode!: string;
   mainCategoryCode!: string;
+  userCode!: any;
 
   constructor(private formBuilder: FormBuilder, private activityService: ActivityService, private clubActivityService: ClubActivityServiceService
             , private firstCategoryService: FirstSubCategoryService
@@ -231,7 +232,9 @@ export class SubmitActivityComponent implements OnInit {
 
       this.clubActivityModel.documentList = formData;
 
-      console.log(this.clubActivityModel)
+      this.userCode = sessionStorage.getItem("userCode");
+
+      formData.append("creator", this.userCode);
 
       this.clubActivityService.submitNewClubActivity(formData).subscribe((resp: any) => {
 

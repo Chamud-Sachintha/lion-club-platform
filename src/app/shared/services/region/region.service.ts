@@ -36,4 +36,9 @@ export class RegionService {
     const path = environment.apiRoot + "update-region-by-code";
     return this.http.post(path, regionModel);
   }
+
+  deleteRegionByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-region-by-code";
+    return this.http.post(path, searchParamModel);
+  }
 }

@@ -35,4 +35,9 @@ export class ClubService {
     const path = environment.apiRoot + "update-club-by-code";
     return this.http.post(path, clubModel);
   }
+
+  deleteClubByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-club-by-code";
+    return this.http.post(path, searchParamModel);
+  }
 }

@@ -35,6 +35,21 @@ export class ManageClubsComponent implements OnInit {
     this.loadClubList();
   }
 
+  deleteClubByCode(clubCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.clubCode = clubCode;
+
+    this.clubService.deleteClubByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delelete Club", "Club Delete Successfully");
+      } else {
+        this.tostr.error("Delete Club", resp.message);
+      }
+    })
+  }
+
   onLoadClubInfo(clubCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");

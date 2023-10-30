@@ -15,6 +15,8 @@ import { FirstSubCategoryService } from 'src/app/shared/services/first-sub-categ
 import { MainCategoryService } from 'src/app/shared/services/main-category/main-category.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
 import { ToastrService } from 'ngx-toastr';
+import { ValueList } from 'src/app/models/ValueList/value-list';
+import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
 
 @Component({
   selector: 'app-submit-new-activity',
@@ -40,21 +42,24 @@ export class SubmitNewActivityComponent implements OnInit {
   token!: any;
   firstCatgoryCode!: string;
   mainCategoryCode!: string;
+  templateValueList: ValueList[] = [];
+  clubActivityList: ClubActivity[] = [];
+  pointTemplateObjModel = new SearchParam();
+  selectedImageFiles: File[] = [];
+  userCode!: any;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private activityService: ActivityService,
-    private clubActivityService: ClubActivityServiceService,
-    private firstCategoryService: FirstSubCategoryService,
-    private mainCategoryService: MainCategoryService,
-    private secondCategoryService: SecondSubCategoryService,
-    private clubService: ClubService,
-    private toastr: ToastrService
-  ) {}
+  constructor(private formBuilder: FormBuilder, private activityService: ActivityService, private clubActivityService: ClubActivityServiceService
+            , private firstCategoryService: FirstSubCategoryService
+            , private mainCategoryService: MainCategoryService
+            , private secondCategoryService: SecondSubCategoryService
+            , private pointTemplateService: PointTemplateService
+            , private toastr: ToastrService
+            , private clubService: ClubService) {}
 
   ngOnInit(): void {
     this.initSubmitActivityForm();
     this.getMainActivityCategoryList();
+    this.getClubActivityList();
     this.loadClubListByContextUserCode();
   }
 
@@ -74,133 +79,190 @@ export class SubmitNewActivityComponent implements OnInit {
     })
   }
 
+  getClubActivityList() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.clubActivityService.getClubActivityListByContextUserCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachActivity: ClubActivity) => {
+          this.clubActivityList.push(eachActivity)
+        })
+      }
+    })
+  }
+
+  onChangeActivity(activityCode: any) {
+    this.activityInfo.token = sessionStorage.getItem("authToken");
+    this.activityInfo.flag = sessionStorage.getItem("role");
+    this.activityInfo.activityCode = activityCode;
+
+    this.activityService.getActivityInfoByCode(this.activityInfo).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        const pointTemplateCode = dataList.data[0].pointTemplateCode;
+
+        this.pointTemplateObjModel.token = sessionStorage.getItem("authToken");
+        this.pointTemplateObjModel.flag = sessionStorage.getItem("role");
+        this.pointTemplateObjModel.pointTemplateCode = pointTemplateCode;
+
+        this.pointTemplateService.getTemplateObjByCode(this.pointTemplateObjModel).subscribe((info: any) => {
+
+          const valueList = JSON.parse(JSON.stringify(info));
+
+          if (info.code === 1) {
+            valueList.data[0].forEach((eachValue: ValueList) => {
+              this.templateValueList.push(eachValue)
+            })
+          }
+        })
+      }
+    }, (err) => {})
+  }
+
   onChangeSecoondSubCategory(secondCategoryValue: any) {
     this.activityList = [];
-    this.searchParamModel.token = sessionStorage.getItem('authToken');
-    this.searchParamModel.flag = sessionStorage.getItem('role');
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
     this.searchParamModel.mainCategoryCode = this.mainCategoryCode;
     this.searchParamModel.firstCategoryCode = this.firstCatgoryCode;
     this.searchParamModel.secondCategoryCode = secondCategoryValue;
 
-    this.activityService
-      .getActivityInfoByCodes(this.searchParamModel)
-      .subscribe((resp: any) => {
-        const dataList = JSON.parse(JSON.stringify(resp));
+    this.activityService.getActivityInfoByCodes(this.searchParamModel).subscribe((resp: any) => {
 
-        if (resp.code === 1) {
-          dataList.data[0].forEach((eachActivity: Activity) => {
-            this.activityList.push(eachActivity);
-          });
-        }
-      });
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachActivity: Activity) => {
+          this.activityList.push(eachActivity);
+        })
+      }
+    })
   }
 
   onChangeFirstCategory(firstCategoryCode: any) {
     this.secondCategoryList = [];
-    this.searchParamModel.token = sessionStorage.getItem('authToken');
-    this.searchParamModel.flag = sessionStorage.getItem('role');
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
     this.searchParamModel.firstCategoryCode = firstCategoryCode;
 
     this.firstCatgoryCode = firstCategoryCode;
 
-    this.secondCategoryService
-      .getSecondCategoryListByFirstCategoryCode(this.searchParamModel)
-      .subscribe((resp: any) => {
-        const dataList = JSON.parse(JSON.stringify(resp));
+    this.secondCategoryService.getSecondCategoryListByFirstCategoryCode(this.searchParamModel).subscribe((resp: any) => {
 
-        if (resp.code === 1) {
-          dataList.data[0].forEach((secondCategory: SecondSubCategory) => {
-            this.secondCategoryList.push(secondCategory);
-          });
-        }
-      });
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((secondCategory: SecondSubCategory) => {
+          this.secondCategoryList.push(secondCategory);
+        })
+      }
+    })
   }
 
   getMainActivityCategoryList() {
-    this.requestModel.token = sessionStorage.getItem('authToken');
-    this.requestModel.flag = sessionStorage.getItem('role');
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
 
-    this.mainCategoryService
-      .getMainCategoryList(this.requestModel)
-      .subscribe((resp: any) => {
-        const dataList = JSON.parse(JSON.stringify(resp));
+    this.mainCategoryService.getMainCategoryList(this.requestModel).subscribe((resp: any) => {
 
-        if (resp.code === 1) {
-          dataList.data[0].forEach((mainCategory: MainCategory) => {
-            this.mainCategoryList.push(mainCategory);
-          });
-        }
-      });
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((mainCategory: MainCategory) => {
+          this.mainCategoryList.push(mainCategory)
+        })
+      }
+    })
   }
 
   onChangeMainActivityCode(mainActivityCode: any) {
     this.firstCategoryList = [];
-    this.searchParamModel.token = sessionStorage.getItem('authToken');
-    this.searchParamModel.flag = sessionStorage.getItem('role');
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
     this.searchParamModel.mainCategoryCode = mainActivityCode;
 
     this.mainCategoryCode = mainActivityCode;
 
-    this.firstCategoryService
-      .getFirstCategoryListByMainCategory(this.searchParamModel)
-      .subscribe((resp: any) => {
-        const dataList = JSON.parse(JSON.stringify(resp));
+    this.firstCategoryService.getFirstCategoryListByMainCategory(this.searchParamModel).subscribe((resp: any) => {
 
-        if (resp.code === 1) {
-          dataList.data[0].forEach((eachCategory: FirstSubCategory) => {
-            this.firstCategoryList.push(eachCategory);
-          });
-        }
-      });
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachCategory: FirstSubCategory) => {
+          this.firstCategoryList.push(eachCategory);
+        })
+      }
+    })
   }
 
   onFileSelected($event: any) {
     this.selectedFiles = Array.from($event.target.files);
-    console.log(this.selectedFiles);
+    console.log(this.selectedFiles)
+  }
+
+  onImageFileSelected($event: any) {
+    this.selectedImageFiles = Array.from($event.target.files);
   }
 
   onSubmitAddClubActivityForm() {
     const activityCode = this.submitActivityForm.controls['activityCode'].value;
-    const value = this.submitActivityForm.controls['value'].value;
-    const conditionType =
-      this.submitActivityForm.controls['conditionType'].value;
+    const value = this.selectedImageFiles;
+    const conditionType = this.submitActivityForm.controls['conditionType'].value;
+    const clubCode = this.submitActivityForm.controls['clubCode'].value;
     const documentValueList = this.selectedFiles;
 
-    if (activityCode == '') {
-    } else if (value == '') {
-    } else if (conditionType == '') {
+    if (activityCode == "") {
+
+    } else if (value.length == 0) {
+
+    } else if (conditionType == "") {
+      
     } else if (documentValueList.length == 0) {
+
+    } else if (clubCode == "") {
+
     } else {
       const formData = new FormData();
 
       this.clubActivityModel.activityCode = activityCode;
-      this.clubCode = sessionStorage.getItem('clubCode');
-      this.clubActivityModel.value = value;
-      this.token = sessionStorage.getItem('authToken');
-      this.clubActivityModel.flag = sessionStorage.getItem('role');
+      // this.clubCode = sessionStorage.getItem("clubCode");
+      // this.clubActivityModel.value = value;
+      this.token = sessionStorage.getItem("authToken");
+      this.clubActivityModel.flag = sessionStorage.getItem("role");
 
-      formData.append('activityCode', activityCode);
-      formData.append('clubCode', this.clubCode);
-      formData.append('value', value);
-      formData.append('token', this.token);
-      formData.append('flag', this.clubActivityModel.flag);
+      formData.append("activityCode", activityCode);
+      formData.append("clubCode", clubCode);
+      // formData.append("value", value);
+      formData.append("token", this.token);
+      formData.append("flag", this.clubActivityModel.flag);
+      formData.append("type", conditionType);
 
       this.selectedFiles.forEach((el, index) => {
-        formData.append('file' + index, el);
-      });
+        formData.append("file" + index, el)
+      })
+
+      this.selectedImageFiles.forEach((el, index) => {
+        formData.append("image" + index, el);
+      })
+
+      this.userCode = sessionStorage.getItem("userCode");
+
+      formData.append("creator", this.userCode);
 
       this.clubActivityModel.documentList = formData;
 
-      console.log(this.clubActivityModel);
+      this.clubActivityService.submitNewClubActivity(formData).subscribe((resp: any) => {
 
-      this.clubActivityService.submitNewClubActivity(formData).subscribe(
-        (resp: any) => {
-          if (resp.code === 1) {
-            this.toastr.success("")
-          }
-        },
-        (err) => {}
-      );
+        if (resp.code === 1) {
+          this.toastr.success("New Club Activity", "New Club Activity Added Successfully");
+        }
+      }, (err) => {})
     }
   }
 
@@ -230,21 +292,18 @@ export class SubmitNewActivityComponent implements OnInit {
   }
 
   getActivityList() {
-    this.requestModel.token = sessionStorage.getItem('authToken');
-    this.requestModel.flag = sessionStorage.getItem('role');
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
 
-    this.activityService.getActivityList(this.requestModel).subscribe(
-      (resp: any) => {
-        const dataList = JSON.parse(JSON.stringify(resp));
+    this.activityService.getActivityList(this.requestModel).subscribe((resp: any) => {
+      const dataList = JSON.parse(JSON.stringify(resp));
 
-        if (resp.code === 1) {
-          dataList.data[0].forEach((eachActivity: Activity) => {
-            this.activityList.push(eachActivity);
-          });
-        }
-      },
-      (err) => {}
-    );
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachActivity: Activity) => {
+          this.activityList.push(eachActivity);
+        })
+      }
+    }, (err) => {})
   }
 
   removeFormControl(index: number) {
@@ -256,14 +315,14 @@ export class SubmitNewActivityComponent implements OnInit {
     this.submitActivityForm = this.formBuilder.group({
       activityCode: ['', Validators.required],
       conditionType: ['', Validators.required],
-      value: ['', Validators.required],
-      valueList: this.formBuilder.array([]),
-    });
+      clubCode: ['', Validators.required],
+      valueList: this.formBuilder.array([])
+    })
   }
 
   createValueArrayForm() {
     return this.formBuilder.group({
-      fileValue: ['', Validators.required],
-    });
+      'fileValue': ['', Validators.required]
+    })
   }
 }

@@ -19,4 +19,9 @@ export class DashboardService {
     const path = environment.apiRoot + "get-club-user-dashboard-data";
     return this.http.post(path, searchParamModel);
   }
+
+  getContextUserDashboardData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-context-user-dashboard-data";
+    return this.http.post(path, searchParamModel);
+  }
 }
