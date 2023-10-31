@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
       if (resp.code === 1) {
         this.dashboardModel.totalRegionCount = dataList.data[0].regionCount;
         this.dashboardModel.zoneCount = dataList.data[0].zoneCount;
+        this.dashboardModel.activityCount = dataList.data[0].activityCount;
       }
     })
   }

@@ -40,4 +40,9 @@ export class ClubService {
     const path = environment.apiRoot + "delete-club-by-code";
     return this.http.post(path, searchParamModel);
   }
+
+  getRankOfClub(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "find-rank";
+    return this.http.post(path, searchParamModel);
+  }
 }

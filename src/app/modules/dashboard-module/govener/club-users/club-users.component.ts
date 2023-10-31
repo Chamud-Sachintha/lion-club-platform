@@ -36,6 +36,19 @@ export class ClubUsersComponent implements OnInit {
     this.loadClubUsersList();
   }
 
+  deleteClubUserByCode(clubUserCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.clubUserCode = clubUserCode;
+
+    this.userServcie.deleteClubUserByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delete Club User", "Club User Delete ")
+      }
+    })
+  }
+
   onLoadClubUserInfo(clubUserCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");

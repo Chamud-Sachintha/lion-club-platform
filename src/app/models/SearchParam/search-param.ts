@@ -1,4 +1,5 @@
 export class SearchParam {
+    id!: string;
     token!: any;
     flag!: any;
     regionCode!: string;

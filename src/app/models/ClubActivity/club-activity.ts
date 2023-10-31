@@ -1,6 +1,7 @@
 import { Document } from "../Document/document";
 
 export class ClubActivity {
+    id!: string;
     token!: any;
     flag!: any;
     activityCode!: string;

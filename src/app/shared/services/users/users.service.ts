@@ -125,4 +125,14 @@ export class UsersService {
     const path = environment.apiRoot + "delete-context-user-by-code";
     return this.http.post(path, searchParamModel);
   }
+
+  deleteClubUserByCode(searchParamMode: SearchParam) {
+    const path = environment.apiRoot + "delete-club-user-by-code";
+    return this.http.post(path, searchParamMode);
+  }
+
+  getViewDataListContextUser(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-view-data-list-context-user";
+    return this.http.post(path, searchParamModel);
+  }
 }
