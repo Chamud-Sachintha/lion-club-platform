@@ -5,6 +5,7 @@ export class ClubActivity {
     token!: any;
     flag!: any;
     activityCode!: string;
+    activityName!: string;
     clubCode!: any;
     activityCost!: number;
     conditionType!: number;
@@ -14,4 +15,5 @@ export class ClubActivity {
     documentList!: FormData;
     status!: number;
     creator!: number;
+    type!: string;
 }

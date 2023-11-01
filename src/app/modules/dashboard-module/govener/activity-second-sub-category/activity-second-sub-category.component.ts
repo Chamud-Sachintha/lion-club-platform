@@ -35,6 +35,21 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
     this.loadSecondSubCategoryList();
   }
 
+  deleteSecondCategoryByCode(categoryCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.secondCategoryCode = categoryCode;
+
+    this.secondSubCategoryService.deleteSecondCategoryByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.toastr.success("Delete Second Cateory", "Second Category Delete Successfully");
+      } else {
+        this.toastr.error("Delete Category", resp.message);
+      }
+    })
+  }
+
   onSubmitUpdateSecondCategoryForm() {
     const code = this.updateSecondCategoryForm.controls['code'].value;
     const categoryName = this.updateSecondCategoryForm.controls['categoryName'].value;

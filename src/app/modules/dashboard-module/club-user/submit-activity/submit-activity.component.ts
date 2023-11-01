@@ -45,6 +45,7 @@ export class SubmitActivityComponent implements OnInit {
   firstCatgoryCode!: string;
   mainCategoryCode!: string;
   userCode!: any;
+  date!: any;
 
   constructor(private formBuilder: FormBuilder, private activityService: ActivityService, private clubActivityService: ClubActivityServiceService
             , private firstCategoryService: FirstSubCategoryService
@@ -71,6 +72,8 @@ export class SubmitActivityComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachActivity: ClubActivity) => {
+          this.date = parseInt(eachActivity.createTime) * 1000;
+          eachActivity.createTime = this.date;
           this.clubActivityList.push(eachActivity)
         })
       }

@@ -31,4 +31,9 @@ export class MainCategoryService {
     const path = environment.apiRoot + "update-main-category-by-code";
     return this.http.post(path, mainCategoryModel);
   }
+
+  deleteMainCategosyByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-main-cet-by-code";
+    return this.http.post(path, searchParamModel);
+  }
 }

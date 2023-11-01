@@ -101,27 +101,37 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Activity Code</th>
+                                        <th>Activity Name</th>
+                                        <th>Type</th>
+                                        <th>Activity Status</th>
                                         <th>Create Time</th>
-                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let eachActivity of this.clubActivityList; index as i">
                                         <td>{{ i }}</td>
                                         <td>{{ eachActivity.activityCode }}</td>
-                                        <td>{{ eachActivity.createTime }}</td>
-                                        <td>
+                                        <td>{{ eachActivity.activityName }}</td>
+                                        <td>{{ eachActivity.type }}</td>
+                                        <td *ngIf="eachActivity.status == 1">Approve</td>
+                                        <td *ngIf="eachActivity.status == 2">Reject</td>
+                                        <td *ngIf="eachActivity.status == 0">N/A</td>
+                                        <td>{{ eachActivity.createTime | date }}</td>
+                                        <!-- <td>
                                             <button class="btn btn-primary btn-sm">Update</button>
                                             <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
-                                        </td>
+                                        </td> -->
+
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>#</th>
                                         <th>Activity Code</th>
+                                        <th>Activity Name</th>
+                                        <th>Type</th>
+                                        <th>Activity Status</th>
                                         <th>Create Time</th>
-                                        <th>Actions</th>
                                     </tr>
                                 </tfoot>
                             </table>

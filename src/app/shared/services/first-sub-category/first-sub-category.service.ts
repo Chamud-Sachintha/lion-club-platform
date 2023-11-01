@@ -36,4 +36,9 @@ export class FirstSubCategoryService {
     const path = environment.apiRoot + "update-first-category-by-code";
     return this.http.post(path, firstCategoryModel);
   }
+
+  deleteFirstCateoryByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-first-cat-by-code";
+    return this.http.post(path, searchParamModel)
+  }
 }

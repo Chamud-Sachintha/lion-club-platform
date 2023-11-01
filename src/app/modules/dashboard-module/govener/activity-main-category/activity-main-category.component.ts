@@ -32,6 +32,21 @@ export class ActivityMainCategoryComponent implements OnInit {
     this.updateMainCategoryForm.controls['code'].disable();
   }
 
+  deleteMainCategoryByCode(mainCategoryCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.mainCategoryCode = mainCategoryCode;
+
+    this.mainCategoryService.deleteMainCategosyByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.toastr.success("Delete Main Category", "Main Category Code is Deleted.");
+      } else {
+        this.toastr.error("Delete Main Cateory", resp.message);
+      }
+    })
+  }
+
   onSubmitUpdateMainCategoryForm() {
     const mainCategoryCode = this.updateMainCategoryForm.controls['code'].value;
     const mainCategoryName = this.updateMainCategoryForm.controls['name'].value;

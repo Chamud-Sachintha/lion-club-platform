@@ -35,6 +35,21 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
     this.loadFirstSubCategoryList();
   }
 
+  deleteFirstCategoryByCode(categoryCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.firstCategoryCode = categoryCode;
+
+    this.firstSubCategoryService.deleteFirstCateoryByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.toastr.success("Delete Ceteory" , "Category Delete Successfully.");
+      } else {
+        this.toastr.error("Category Delete", resp.message);
+      }
+    })
+  }
+
   onLoadFirstCategoryInfo(firstCategoryCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");
