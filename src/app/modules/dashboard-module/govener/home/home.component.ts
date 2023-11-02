@@ -25,7 +25,55 @@ export class HomeComponent implements OnInit {
       this.loadClubUserCounts();
     } else if (this.role == "CNTU") {
       this.loadContextUserCounts();
+    } else if (this.role == "E") {
+      this.loadEvaluvatorCounts();
     }
+
+    this.loadUserInfo();
+  }
+
+  loadUserInfo() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.dashboardService.getUserInfo(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        if (this.role == "G") {
+          this.dashboardModel.userName = dataList.data[0].first_name + " " + dataList.data[0].last_name;
+        } else if (this.role == "CU") {
+          this.dashboardModel.userName = dataList.data[0].name;
+        } else if (this.role == "CNTU") {
+          this.dashboardModel.userName = dataList.data[0].name;
+        } else if (this.role == "E") {
+          this.dashboardModel.userName = dataList.data[0].name;
+        } else if (this.role == "RC") {
+          this.dashboardModel.userName = dataList.data[0].name;
+        } else if (this.role == "ZC") {
+          this.dashboardModel.userName = dataList.data[0].name;
+        } else {
+          this.dashboardModel.userName = "";
+        }
+      }
+    })
+  }
+
+  loadEvaluvatorCounts() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.dashboardService.getEvaluvatorDashboardData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        this.dashboardModel.activityCount = dataList.data[0].totalActivities;
+        this.dashboardModel.approvedCount = dataList.data[0].approvedCount;
+        this.dashboardModel.pendingCount = dataList.data[0].pendingCount;
+      }
+    })
   }
 
   loadContextUserCounts() {
@@ -88,6 +136,8 @@ export class HomeComponent implements OnInit {
       this.role = "CNTU"
     } else if (perm == "CU") {
       this.role = "CU"
+    } else if (perm == "E") {
+      this.role = "E";
     } else {
 
     }

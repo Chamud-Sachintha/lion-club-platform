@@ -4,4 +4,8 @@ export class Dashboard {
     ponitsTotal!: number;
     totalRegionCount!: number
     zoneCount!: number;
+    approvedCount!: number;
+    rejectedCount!: number;
+    pendingCount!: number;
+    userName!: string;
 }

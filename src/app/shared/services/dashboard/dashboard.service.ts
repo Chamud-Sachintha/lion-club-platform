@@ -24,4 +24,14 @@ export class DashboardService {
     const path = environment.apiRoot + "get-context-user-dashboard-data";
     return this.http.post(path, searchParamModel);
   }
+
+  getEvaluvatorDashboardData(searchParam: SearchParam) {
+    const path = environment.apiRoot + "get-evaluvator-dashboard-data";
+    return this.http.post(path, searchParam);
+  }
+
+  getUserInfo(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-user-info-dashboard";
+    return this.http.post(path, searchParamModel);
+  }
 }
