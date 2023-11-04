@@ -41,6 +41,7 @@ export class ActivityMainCategoryComponent implements OnInit {
 
       if (resp.code === 1) {
         this.toastr.success("Delete Main Category", "Main Category Code is Deleted.");
+        location.reload();
       } else {
         this.toastr.error("Delete Main Cateory", resp.message);
       }
@@ -65,6 +66,7 @@ export class ActivityMainCategoryComponent implements OnInit {
 
         if (resp.code === 1) {
           this.toastr.success("Update Main Category", "Category Updated Successfully");
+          location.reload();
         }
       })
     }
@@ -120,6 +122,7 @@ export class ActivityMainCategoryComponent implements OnInit {
 
         if (resp.code === 1) {
           this.toastr.success("Add Main Category", "Category Added Successfully.");
+          location.reload();
         }
       }, (err) => {})
     }

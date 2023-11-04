@@ -44,7 +44,8 @@ export class ManageRegionsComponent implements OnInit {
     this.regionService.deleteRegionByCode(this.searchParamModel).subscribe((resp: any) => {
 
       if (resp.code === 1) {
-        this.tostr.success("Del;ete Region", "Region deletre Successfully.");
+        this.tostr.success("Delete Region", "Region deletre Successfully.");
+        location.reload();
       } else {
         this.tostr.error("Delete Region", resp.message);
       }
@@ -85,6 +86,7 @@ export class ManageRegionsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Region", "Region Update Successfully");
+          location.reload();
         }
       })
     }
@@ -136,6 +138,7 @@ export class ManageRegionsComponent implements OnInit {
 
       this.regionService.createNewRegion(this.regionModel).subscribe((resp) => {
         this.tostr.success("Create Region", "Region Create Successfully");
+        location.reload();
       }, (err) => {
 
       })

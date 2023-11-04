@@ -89,6 +89,7 @@ export class ChairpersonsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Zone", "Zone Update Successfully");
+          location.reload();
         }
       })
     }
@@ -132,6 +133,7 @@ export class ChairpersonsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Region", "Region Update Successfully");
+          location.reload();
         }
       })
     }
@@ -225,6 +227,7 @@ export class ChairpersonsComponent implements OnInit {
       this.userService.createZonalChairPerson(this.chairPersonModel).subscribe((resp: any) => {
         if (resp.code === 1) {
           this.tostr.success("Create Zonal Chairperson", "Zone Chairperson Created Successfully");
+          location.reload();
         }
       }, (err) => {
 
@@ -266,6 +269,7 @@ export class ChairpersonsComponent implements OnInit {
       this.userService.createRegionChairPerson(this.chairPersonModel).subscribe((resp: any) => {
         if (resp.code === 1) {
           this.tostr.success("Create Region Chairperson", "Region Chairperson Created Successfully");
+          location.reload();
         }
       }, (err) => {
 

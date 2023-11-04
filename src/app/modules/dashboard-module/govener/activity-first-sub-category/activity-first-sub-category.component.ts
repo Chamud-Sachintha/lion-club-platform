@@ -44,6 +44,7 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
 
       if (resp.code === 1) {
         this.toastr.success("Delete Ceteory" , "Category Delete Successfully.");
+        location.reload();
       } else {
         this.toastr.error("Category Delete", resp.message);
       }
@@ -87,6 +88,7 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
 
         if (resp.code === 1) {
           this.toastr.success("Update First Sub Category", "Category Updated Successfully");
+          location.reload();
         }
       })
     }
@@ -141,6 +143,7 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
 
         if (resp.code === 1) {
           this.toastr.success("Add First Sub Category", "Category Added Successfully");
+          location.reload();
         }
       }, (err) => {})
     }

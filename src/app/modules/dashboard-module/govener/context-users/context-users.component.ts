@@ -38,6 +38,7 @@ export class ContextUsersComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Delete Context User", "Context User Delete Successsfully.");
+        location.reload();
       } else {
         this.tostr.error("Delete Context User", resp.message);
       }
@@ -83,6 +84,7 @@ export class ContextUsersComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Context User", "Context User Update Successfully");
+          location.reload();
         }
       })
     }
@@ -127,6 +129,7 @@ export class ContextUsersComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Create Context User", "Context User Created Successfully");
+          location.reload();
         }
       }, (err) => {
 

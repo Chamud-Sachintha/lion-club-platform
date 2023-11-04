@@ -45,6 +45,7 @@ export class ClubUsersComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Delete Club User", "Club User Delete ")
+        location.reload();
       }
     })
   }
@@ -93,6 +94,7 @@ export class ClubUsersComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Club", "Club Update Successfully");
+          location.reload();
         }
       })
     }
@@ -156,6 +158,7 @@ export class ClubUsersComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Create Club User", "Club User Create Successfully");
+          location.reload();
         }
       }, (err) => {
 

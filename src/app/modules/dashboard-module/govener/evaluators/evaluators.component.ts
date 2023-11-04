@@ -67,6 +67,7 @@ export class EvaluatorsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Evaluvator", "Evaluvator Update Successfully");
+          location.reload();
         }
       })
     } 
@@ -111,6 +112,7 @@ export class EvaluatorsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Create Evaluvator", "Evaluvator Create Successfully");
+          location.reload();
         }
       }, (err) => {
 

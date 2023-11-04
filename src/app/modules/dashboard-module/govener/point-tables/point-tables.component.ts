@@ -70,6 +70,7 @@ export class PointTablesComponent implements OnInit {
 
       this.pointTemplateService.updatePointTemplateByCode(this.templateInfo).subscribe((resp: any) => {
         this.tostr.success("Update Point Template", "Point Template Updated Successfully");
+        location.reload();
       }, (err) => {})
     }
   }
@@ -109,6 +110,7 @@ export class PointTablesComponent implements OnInit {
 
       this.pointTemplateService.addNewPointTemplate(this.templateInfo).subscribe((resp: any) => {
         this.tostr.success("Create Point Template", "Point Template Created Successfully");
+        location.reload();
       }, (err) => {})
     }
   }

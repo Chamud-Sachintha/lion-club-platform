@@ -44,6 +44,7 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
 
       if (resp.code === 1) {
         this.toastr.success("Delete Second Cateory", "Second Category Delete Successfully");
+        location.reload();
       } else {
         this.toastr.error("Delete Category", resp.message);
       }
@@ -72,6 +73,7 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
 
         if (resp.code === 1) {
           this.toastr.success("Update Second Category", "Category Updated Successfully");
+          location.reload();
         }
       })
     }
@@ -145,6 +147,7 @@ export class ActivitySecondSubCategoryComponent implements OnInit {
 
         if (resp.code === 1) {
           this.toastr.success("Add Second Sub Category", "Category Added successfully");
+          location.reload();
         }
       })
     }

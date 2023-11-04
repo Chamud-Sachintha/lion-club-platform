@@ -62,6 +62,7 @@ export class ProofDocumentsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Document", "Document Update Successfully");
+          location.reload();
         }
       })
     }
@@ -101,6 +102,7 @@ export class ProofDocumentsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Create Document", "Document Created Successfully");
+          location.reload();
         }
       }, (err) => {})
     }

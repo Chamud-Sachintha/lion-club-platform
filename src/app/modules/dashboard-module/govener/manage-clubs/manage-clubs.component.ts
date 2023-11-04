@@ -44,6 +44,7 @@ export class ManageClubsComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Delelete Club", "Club Delete Successfully");
+        location.reload();
       } else {
         this.tostr.error("Delete Club", resp.message);
       }
@@ -84,6 +85,7 @@ export class ManageClubsComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Club", "Club Update Successfully");
+          location.reload();
         }
       })
     }
@@ -120,6 +122,7 @@ export class ManageClubsComponent implements OnInit {
       this.clubService.addNewClub(this.clubModel).subscribe((resp: any) => {
         if (resp.code === 1) {
           this.tostr.success("Create Club", "Club Create Successfully");
+          location.reload();
         }
       }, (err) => {})
     }

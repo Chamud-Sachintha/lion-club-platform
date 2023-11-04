@@ -46,6 +46,7 @@ export class ManageZonesComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Delete zone", "Zone Delete successfully");
+        location.reload();
       } else {
         this.tostr.error("Delete Zonbe", resp.message);
       }
@@ -86,6 +87,7 @@ export class ManageZonesComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Update Zone", "Zone Update Successfully");
+          location.reload();
         }
       })
     }
@@ -126,6 +128,7 @@ export class ManageZonesComponent implements OnInit {
 
         if (resp.code === 1) {
           this.tostr.success("Create Zone", "Zone Created Successfully");
+          location.reload();
         }
       }, (err) => {
 
