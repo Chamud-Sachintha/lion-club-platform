@@ -34,4 +34,9 @@ export class DashboardService {
     const path = environment.apiRoot + "get-user-info-dashboard";
     return this.http.post(path, searchParamModel);
   }
+
+  getGovnerDashboardTableData(searchParam: SearchParam) {
+    const path = environment.apiRoot + "get-gov-dashboard-table";
+    return this.http.post(path, searchParam);
+  }
 }

@@ -28,7 +28,7 @@
     <div class="card">
       <h5 class="card-header">Manage Club Activities Here</h5>
       <div class="card-body">
-        <form action="">
+        <form [formGroup]="filterClubActivityListForm" (ngSubmit)="onSubmitFilterClubListForm()">
           <div class="row">
             <div class="col-md-6 col-lg-6 col-sm-12">
               <div class="form-group">
@@ -40,6 +40,7 @@
                   id="input-select"
                   #region
                   (change)="onChangeRegion(region.value)"
+                  formControlName="reCode"
                 >
                   <option value="">-- Select Region --</option>
                   <option
@@ -59,7 +60,7 @@
                 <select
                   class="form-control"
                   id="input-select"
-                  formControlName="mainCategoryCode"
+                  formControlName="zoneCode"
                 >
                   <option value="">-- Select Zone --</option>
                   <option
@@ -215,14 +216,14 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="input-select" class="col-form-label"
-                    >Select Zone</label
+                    >Select Status</label
                   >
                   <select
                     class="form-control"
                     id="input-select"
                     formControlName="status"
                   >
-                    <option value="0">-- Select Zone --</option>
+                    <option value="0">-- Select Status --</option>
                     <option
                       value="2"
                     >

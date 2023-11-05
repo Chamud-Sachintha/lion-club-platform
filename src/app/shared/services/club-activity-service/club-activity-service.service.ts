@@ -56,4 +56,9 @@ export class ClubActivityServiceService {
     const path = environment.apiRoot + "get-club-activity-list-by-context-user-code";
     return this.http.post(path, searchParam);
   }
+
+  filterClubActivityList(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "filter-list-evaluvator";
+    return this.http.post(path, searchParamModel);
+  }
 }

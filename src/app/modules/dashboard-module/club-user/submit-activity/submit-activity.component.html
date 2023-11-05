@@ -115,7 +115,7 @@
                                         <td>{{ eachActivity.type }}</td>
                                         <td *ngIf="eachActivity.status == 1">Approve</td>
                                         <td *ngIf="eachActivity.status == 2">Reject</td>
-                                        <td *ngIf="eachActivity.status == 0">N/A</td>
+                                        <td *ngIf="eachActivity.status == 0">Pending</td>
                                         <td>{{ eachActivity.createTime | date }}</td>
                                         <!-- <td>
                                             <button class="btn btn-primary btn-sm">Update</button>

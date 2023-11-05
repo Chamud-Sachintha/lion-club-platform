@@ -30,7 +30,10 @@ export class PointTablesComponent implements OnInit {
     this.loadPointTemplateList();
   }
 
-  onLoadPointTemplateInfo(templateName: string) { 
+  onLoadPointTemplateInfo(templateName: string) {
+    if (this.valueList) {
+      this.valueList.clear()
+    }
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");
     this.searchParamModel.pointTemplateCode = templateName;

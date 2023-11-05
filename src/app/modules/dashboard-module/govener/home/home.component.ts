@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dashboard } from 'src/app/models/Dashboard/dashboard';
+import { DashboardTable } from 'src/app/models/DashboardTable/dashboard-table';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
 
@@ -12,6 +13,8 @@ export class HomeComponent implements OnInit {
 
   dashboardModel = new Dashboard();
   searchParamModel = new SearchParam();
+  dashboardTable = new DashboardTable();
+  dashboardTableList: DashboardTable[] = [];
   role!: string;
 
   constructor(private dashboardService: DashboardService) {}
@@ -72,6 +75,7 @@ export class HomeComponent implements OnInit {
         this.dashboardModel.activityCount = dataList.data[0].totalActivities;
         this.dashboardModel.approvedCount = dataList.data[0].approvedCount;
         this.dashboardModel.pendingCount = dataList.data[0].pendingCount;
+        this.dashboardModel.rejectedCount = dataList.data[0].rejectedCount;
       }
     })
   }
@@ -119,6 +123,17 @@ export class HomeComponent implements OnInit {
       if (resp.code === 1) {
         this.dashboardModel.activityCount = dataList.data[0].activityCount;
         this.dashboardModel.clubCount = dataList.data[0].clubCount;
+      }
+    })
+
+    this.dashboardService.getGovnerDashboardTableData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachClub: DashboardTable) => {
+          this.dashboardTableList.push(eachClub);
+        })
       }
     })
   }

@@ -81,6 +81,7 @@ export class SubmitActivityComponent implements OnInit {
   }
 
   onChangeActivity(activityCode: any) {
+    this.templateValueList = [];
     this.activityInfo.token = sessionStorage.getItem("authToken");
     this.activityInfo.flag = sessionStorage.getItem("role");
     this.activityInfo.activityCode = activityCode;

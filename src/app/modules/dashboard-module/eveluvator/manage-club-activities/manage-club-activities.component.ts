@@ -28,6 +28,7 @@ export class ManageClubActivitiesComponent implements OnInit {
   clubActivityDocList: ProofDoc[] = [];
   clubActiviyImageList: any[] = [];
   checkClubActivityForm!: FormGroup;
+  filterClubActivityListForm!: FormGroup;
   zoneModel = new Zone();
 
   constructor (private regionService: RegionService, private zoneService: ZoneService
@@ -39,6 +40,36 @@ export class ManageClubActivitiesComponent implements OnInit {
     this.loadAvailableRegionList();
     this.loadClubActivityList();
     this.initCheckActivityForm();
+    this.initFilterClubActivityListForm();
+  }
+
+  initFilterClubActivityListForm() {
+    this.filterClubActivityListForm = this.formBuilder.group({
+      reCode: ['', Validators.required],
+      zoneCode: ['', Validators.required]
+    })
+  }
+
+  onSubmitFilterClubListForm() {
+    this.clubActivityList = [];
+    const reCode = this.filterClubActivityListForm.controls['reCode'].value;
+    const zoneCode = this.filterClubActivityListForm.controls['zoneCode'].value;
+
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.regionCode = reCode;
+    this.searchParamModel.zoneCode = zoneCode;
+
+    this.clubActivityService.filterClubActivityList(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachActivity: ClubActivity) => {
+          this.clubActivityList.push(eachActivity)
+        })
+      }
+    })
   }
 
   onUpdateCheckClubActivityForm() {
@@ -133,6 +164,8 @@ export class ManageClubActivitiesComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachClubActivity: ClubActivity) => {
+          const date = parseInt(eachClubActivity.createTime) * 1000;
+          eachClubActivity.createTime = date.toString();
           this.clubActivityList.push(eachClubActivity);
         })
       }
@@ -140,6 +173,7 @@ export class ManageClubActivitiesComponent implements OnInit {
   }
 
   onChangeRegion(reCode: any) {
+    this.zoneList = [];
     this.zoneModel.token = sessionStorage.getItem("authToken");
     this.zoneModel.flag = sessionStorage.getItem("role");
     this.zoneModel.regionCode = reCode;
