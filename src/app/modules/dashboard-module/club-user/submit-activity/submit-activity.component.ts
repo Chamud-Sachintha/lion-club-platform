@@ -244,6 +244,7 @@ export class SubmitActivityComponent implements OnInit {
 
         if (resp.code === 1) {
           this.toastr.success("New Club Activity", "New Club Activity Added Successfully");
+          location.reload();
         }
       }, (err) => {})
     }
