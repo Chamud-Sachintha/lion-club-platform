@@ -201,6 +201,7 @@ export class SubmitActivityComponent implements OnInit {
     const value = this.selectedImageFiles;
     const conditionType = this.submitActivityForm.controls['conditionType'].value;
     const documentValueList = this.selectedFiles;
+    const extValue = this.submitActivityForm.controls['extValue'].value;
 
     if (activityCode == "") {
 
@@ -214,6 +215,7 @@ export class SubmitActivityComponent implements OnInit {
       const formData = new FormData();
 
       this.clubActivityModel.activityCode = activityCode;
+      this.clubActivityModel.extValue = extValue;
       this.clubCode = sessionStorage.getItem("clubCode");
       // this.clubActivityModel.value = value;
       this.token = sessionStorage.getItem("authToken");
@@ -299,7 +301,8 @@ export class SubmitActivityComponent implements OnInit {
     this.submitActivityForm = this.formBuilder.group({
       activityCode: ['', Validators.required],
       conditionType: ['', Validators.required],
-      valueList: this.formBuilder.array([])
+      valueList: this.formBuilder.array([]),
+      extValue: ['', Validators.required]
     })
   }
 

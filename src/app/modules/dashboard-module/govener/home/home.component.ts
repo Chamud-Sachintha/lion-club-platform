@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Dashboard } from 'src/app/models/Dashboard/dashboard';
 import { DashboardTable } from 'src/app/models/DashboardTable/dashboard-table';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
+import { ClubService } from 'src/app/shared/services/club/club.service';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
 
 @Component({
@@ -16,9 +17,10 @@ export class HomeComponent implements OnInit {
   dashboardTable = new DashboardTable();
   dashboardTableList: DashboardTable[] = [];
   cntuDashboardTableList: DashboardTable[] = [];
+  cbUserDashboardTableDataList: DashboardTable[] = [];
   role!: string;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService, private clubService: ClubService) {}
 
   ngOnInit(): void {
     this.checkPermisions()
@@ -121,6 +123,29 @@ export class HomeComponent implements OnInit {
       if (resp.code === 1) {
         this.dashboardModel.ponitsTotal = dataList.data[0].pointsTotal;
         this.dashboardModel.activityCount = dataList.data[0].activityCount;
+      }
+    })
+
+    this.dashboardService.getClubUserDashboardTableData(this.searchParamModel).subscribe((resp: any) => {
+
+      const tableData = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        tableData.data[0].forEach((eachActivity: DashboardTable) => {
+          const date = parseInt(eachActivity.createTime) * 1000;
+          eachActivity.createTime = date.toString();
+
+          this.cbUserDashboardTableDataList.push(eachActivity)
+        })
+      }
+    })
+
+    this.clubService.getRankOfClub(this.searchParamModel).subscribe((resp: any) => {
+
+      const rankInfo = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        this.dashboardTable.clubRank = rankInfo.data[0].rank;
       }
     })
   }

@@ -30,6 +30,11 @@ export class DashboardService {
     return this.http.post(path, searchParamModel);
   }
 
+  getClubUserDashboardTableData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-club-user-dashboard-table-data";
+    return this.http.post(path, searchParamModel);
+  }
+
   getEvaluvatorDashboardData(searchParam: SearchParam) {
     const path = environment.apiRoot + "get-evaluvator-dashboard-data";
     return this.http.post(path, searchParam);

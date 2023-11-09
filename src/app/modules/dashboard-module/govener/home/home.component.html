@@ -153,9 +153,16 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="page-header">
-        <h2 class="pageheader-title">
-          Hello. Welcome back, {{ this.dashboardModel.userName }}
-        </h2>
+        <div class="row">
+          <div class="col-8">
+            <h2 class="pageheader-title">
+              Hello. Welcome back, {{ this.dashboardModel.userName }}
+            </h2>
+          </div>
+          <div class="col-4">
+            <h5>Club Rank : {{ this.dashboardTable.clubRank }}</h5>
+          </div>
+        </div>
         <p class="pageheader-text">
           Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
           facilisis faucibus at enim quis massa lobortis rutrum.
@@ -246,6 +253,53 @@
             </div>
           </div>
           <div id="sparkline-revenue"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <h5 class="card-header">See Club Activity Details</h5>
+          <div class="card-body border-top">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered first">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Activity</th>
+                    <th>Date</th>
+                    <th>Exact Value</th>
+                    <th>Status</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let eachClub of this.cbUserDashboardTableDataList; index as i"
+                  >
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ eachClub.activityName }}</td>
+                    <td>{{ eachClub.createTime | date }}</td>
+                    <td>{{ eachClub.extValue }}</td>
+                    <td *ngIf="eachClub.status == '1'">Approved</td>
+                    <td *ngIf="eachClub.status == '2'">Rejected</td>
+                    <td *ngIf="eachClub.status == '0'">Pending</td>
+                    <td>{{ eachClub.points }}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>#</th>
+                    <th>Activity</th>
+                    <th>Date</th>
+                    <th>Exact Value</th>
+                    <th>Status</th>
+                    <th>Points</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

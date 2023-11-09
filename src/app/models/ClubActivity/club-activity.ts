@@ -18,4 +18,5 @@ export class ClubActivity {
     type!: string;
     reCode!: string;
     zoneCode!: string;
+    extValue!: string;
 }

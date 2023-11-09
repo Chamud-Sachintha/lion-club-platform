@@ -83,6 +83,10 @@
                             <label for="formFile" class="form-label">Add Required Proof Documents</label>
                             <input class="form-control" type="file" (change)="onFileSelected($event)" id="formFile" multiple>
                         </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="formFile" class="form-label">Type Exact Value</label>
+                            <input class="form-control" type="text" placeholder="Enter Value" formControlName="extValue">
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -103,16 +107,18 @@
                                         <th>Activity Code</th>
                                         <th>Activity Name</th>
                                         <th>Type</th>
+                                        <th>Exact Value</th>
                                         <th>Activity Status</th>
                                         <th>Create Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let eachActivity of this.clubActivityList; index as i">
-                                        <td>{{ i }}</td>
+                                        <td>{{ i + 1 }}</td>
                                         <td>{{ eachActivity.activityCode }}</td>
                                         <td>{{ eachActivity.activityName }}</td>
                                         <td>{{ eachActivity.type }}</td>
+                                        <td>{{ eachActivity.extValue }}</td>
                                         <td *ngIf="eachActivity.status == 1">Approve</td>
                                         <td *ngIf="eachActivity.status == 2">Reject</td>
                                         <td *ngIf="eachActivity.status == 0">Pending</td>
@@ -130,6 +136,7 @@
                                         <th>Activity Code</th>
                                         <th>Activity Name</th>
                                         <th>Type</th>
+                                        <th>Exact Value</th>
                                         <th>Activity Status</th>
                                         <th>Create Time</th>
                                     </tr>
