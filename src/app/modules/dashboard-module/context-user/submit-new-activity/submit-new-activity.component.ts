@@ -33,7 +33,7 @@ export class SubmitNewActivityComponent implements OnInit {
   firstCategoryList: FirstSubCategory[] = [];
   mainCategoryList: MainCategory[] = [];
   secondCategoryList: SecondSubCategory[] = [];
-  clubList: Club[] = [];
+  clubList: ClubActivity[] = [];
   valueList!: FormArray;
   isDocListHave = false;
   documentAddState = 0;
@@ -72,7 +72,7 @@ export class SubmitNewActivityComponent implements OnInit {
       const dataList = JSON.parse(JSON.stringify(resp));
 
       if (resp.code === 1) {
-        dataList.data[0].forEach((eachClub: Club) => {
+        dataList.data[0].forEach((eachClub: ClubActivity) => {
           this.clubList.push(eachClub);
         })
       }
@@ -89,6 +89,9 @@ export class SubmitNewActivityComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachActivity: ClubActivity) => {
+          const date = parseInt(eachActivity.createTime) * 1000;
+          eachActivity.createTime = date.toString();
+
           this.clubActivityList.push(eachActivity)
         })
       }

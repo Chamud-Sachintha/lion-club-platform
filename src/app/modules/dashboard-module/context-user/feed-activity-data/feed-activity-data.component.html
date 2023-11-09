@@ -55,7 +55,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Club Code</th>
+                                        <th>Activity Name</th>
                                         <th>Points</th>
+                                        <th>Created User</th>
                                         <th>Rank</th>
                                     </tr>
                                 </thead>
@@ -63,7 +65,10 @@
                                     <tr *ngFor="let eachClub of this.rankList; index as i">
                                         <td>{{ i }}</td>
                                         <td>{{ eachClub.clubCode }}</td>
+                                        <td>{{ eachClub.activityName }}</td>
                                         <td>{{ eachClub.points }}</td>
+                                        <td *ngIf="this.eachClub.creator == 'CU'">Club User</td>
+                                        <td *ngIf="this.eachClub.creator == 'CNTU'">Context User</td>
                                         <td>{{ eachClub.rank }}</td>
                                     </tr>
                                 </tbody>
@@ -71,7 +76,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Club Code</th>
+                                        <th>Activity Name</th>
                                         <th>Points</th>
+                                        <th>Created User</th>
                                         <th>Rank</th>
                                     </tr>
                                 </tfoot>

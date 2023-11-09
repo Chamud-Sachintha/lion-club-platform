@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   searchParamModel = new SearchParam();
   dashboardTable = new DashboardTable();
   dashboardTableList: DashboardTable[] = [];
+  cntuDashboardTableList: DashboardTable[] = [];
   role!: string;
 
   constructor(private dashboardService: DashboardService) {}
@@ -92,6 +93,18 @@ export class HomeComponent implements OnInit {
         this.dashboardModel.totalRegionCount = dataList.data[0].regionCount;
         this.dashboardModel.zoneCount = dataList.data[0].zoneCount;
         this.dashboardModel.activityCount = dataList.data[0].activityCount;
+        this.dashboardModel.clubCount = dataList.data[0].clubsCount;
+      }
+    })
+
+    this.dashboardService.getContextUserDashboardTableData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachRow: DashboardTable) => {
+          this.cntuDashboardTableList.push(eachRow);
+        })
       }
     })
   }

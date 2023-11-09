@@ -25,6 +25,11 @@ export class DashboardService {
     return this.http.post(path, searchParamModel);
   }
 
+  getContextUserDashboardTableData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-context-user-dashboard-table";
+    return this.http.post(path, searchParamModel);
+  }
+
   getEvaluvatorDashboardData(searchParam: SearchParam) {
     const path = environment.apiRoot + "get-evaluvator-dashboard-data";
     return this.http.post(path, searchParam);

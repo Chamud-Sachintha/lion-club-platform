@@ -16,4 +16,6 @@ export class ClubActivity {
     status!: number;
     creator!: number;
     type!: string;
+    reCode!: string;
+    zoneCode!: string;
 }
