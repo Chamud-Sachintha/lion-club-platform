@@ -30,6 +30,22 @@ export class PointTablesComponent implements OnInit {
     this.loadPointTemplateList();
   }
 
+  deleteTemplateByCode(templateCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.pointTemplateCode = templateCode;
+
+    this.pointTemplateService.deletePointTemplateByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delete Point Template", "Point Template Delete Successfully.");
+        location.reload();
+      } else {
+        this.tostr.error("Delete Point Template", resp.message);
+      }
+    })
+  }
+
   onLoadPointTemplateInfo(templateName: string) {
     if (this.valueList) {
       this.valueList.clear()

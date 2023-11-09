@@ -84,7 +84,7 @@
                                             >
                                                 Update
                                             </button>
-                                            <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
+                                            <button class="btn btn-danger btn-sm" style="margin-left: 10px;" (click)="deleteUserByCode(eachUser.evaluatorCode)">Delete</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -152,7 +152,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                  <label for="inputText3" class="col-form-label">Name :</label>
+                  <label for="inputText3" class="col-form-label">Email :</label>
                   <input
                     id="inputText3"
                     type="text"

@@ -64,14 +64,16 @@
                                         <th>#</th>
                                         <th>Club Code</th>
                                         <th>Zone Code</th>
+                                        <th>Region</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let eachClub of this.clubList; index as i">
-                                        <td>{{ i }}</td>
+                                        <td>{{ i + 1 }}</td>
                                         <td>{{ eachClub.clubCode }}</td>
                                         <td>{{ eachClub.zoneCode }}</td>
+                                        <td>{{ eachClub.reCode }}</td>
                                         <td>
                                             <button
                                                 class="btn btn-primary btn-sm"
@@ -92,6 +94,7 @@
                                         <th>#</th>
                                         <th>Club Code</th>
                                         <th>Zone Code</th>
+                                        <th>Region</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

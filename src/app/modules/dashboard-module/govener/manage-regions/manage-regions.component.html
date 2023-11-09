@@ -61,6 +61,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Region Code</th>
+                                        <th>Context User Code</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -68,6 +69,7 @@
                                    <tr *ngFor="let eachRegion of this.regionList; index as i">
                                         <td>{{ i }}</td>
                                         <td>{{ this.eachRegion.regionCode }}</td>
+                                        <td>{{ this.eachRegion.contextUserCode }}</td>
                                         <td>
                                             <button
                                                 class="btn btn-primary btn-sm"
@@ -87,6 +89,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Region Code</th>
+                                        <th>Context User Code</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

@@ -30,6 +30,22 @@ export class EvaluatorsComponent implements OnInit {
     this.loadEvaluvatorsList();
   }
 
+  deleteUserByCode(eveluvatorCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.evaluvatorCode = eveluvatorCode;
+
+    this.userService.deleteEveluvatorByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delete Eveluvator", "Eveluvator Delete Successfully.");
+        location.reload();
+      } else {
+        this.tostr.error("Delete Eveluvator", resp.message);
+      }
+    })
+  }
+
   onLoadEvaluvatorInfo(userCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");
@@ -52,11 +68,14 @@ export class EvaluatorsComponent implements OnInit {
     const name = this.updateEvaluvatorForm.controls['name'].value;
     const email = this.updateEvaluvatorForm.controls['email'].value;
 
+    console.log(this.updateEvaluvatorForm.value)
     if (code == "") {
 
     } else if (name == "") {
 
     } else if (email == "") {
+      
+    } else {
       this.evaluvatorModel.evaluatorCode = code;
       this.evaluvatorModel.fullName = name;
       this.evaluvatorModel.email = email;
@@ -70,7 +89,7 @@ export class EvaluatorsComponent implements OnInit {
           location.reload();
         }
       })
-    } 
+    }
   }
 
   loadEvaluvatorsList() {

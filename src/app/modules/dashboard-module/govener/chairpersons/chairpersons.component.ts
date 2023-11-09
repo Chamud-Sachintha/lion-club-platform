@@ -45,6 +45,38 @@ export class ChairpersonsComponent implements OnInit {
     this.loadZonalChairpersonList();
   }
 
+  deleteZoneUserByCode(zoneUserCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.zonalChairpersonCode = zoneUserCode;
+
+    this.userService.deleteZoneUserByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delete Zonal User", "Zonal User Delete Successfully.");
+        location.reload();
+      } else {
+        this.tostr.error("Delete Zonal User", resp.message);
+      }
+    })
+  }
+
+  deleteRegionUserByCode(reUserCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.reChairPersonCode = reUserCode;
+
+    this.userService.deleteRegionUserByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Delete Region User", "Region User Delete Successfully.");
+        location.reload();
+      } else {
+        this.tostr.error("Delete Region User", resp.message)
+      }
+    })
+  }
+
   onLoadZonalChairPersonInfo(zonalChairpersonCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");
@@ -128,6 +160,8 @@ export class ChairpersonsComponent implements OnInit {
       this.chairPersonModel.fullName = name;
       this.chairPersonModel.email = email;
       this.chairPersonModel.regionCode = reCode;
+      this.chairPersonModel.token = sessionStorage.getItem("authToken");
+      this.chairPersonModel.flag = sessionStorage.getItem("role");
 
       this.userService.updateRegionChairPersonByCode(this.chairPersonModel).subscribe((resp: any) => {
 

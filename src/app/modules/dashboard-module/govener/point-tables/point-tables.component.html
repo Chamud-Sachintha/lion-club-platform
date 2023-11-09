@@ -132,7 +132,7 @@
                   <tr>
                     <th>#</th>
                     <th>Template Name</th>
-                    <th>Value</th>
+                    <!-- <th>Value</th> -->
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -145,7 +145,7 @@
                   >
                     <td>{{ i }}</td>
                     <td>{{ eachTemplate.templateName }}</td>
-                    <td>{{ eachTemplate.valueListJsonEncode }}</td>
+                    <!-- <td>{{ eachTemplate.valueListJsonEncode }}</td> -->
                     <td>
                       <button
                         class="btn btn-primary btn-sm"
@@ -155,11 +155,12 @@
                         data-toggle="modal"
                         data-target="#exampleModal"
                       >
-                        Update
+                        View & Update
                       </button>
                       <button
                         class="btn btn-danger btn-sm"
                         style="margin-left: 10px"
+                        (click)="deleteTemplateByCode(eachTemplate.templateName)"
                       >
                         Delete
                       </button>
@@ -170,7 +171,7 @@
                   <tr>
                     <th>#</th>
                     <th>Template Name</th>
-                    <th>Value</th>
+                    <!-- <th>Value</th> -->
                     <th>Actions</th>
                   </tr>
                 </tfoot>

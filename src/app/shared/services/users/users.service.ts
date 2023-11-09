@@ -131,6 +131,21 @@ export class UsersService {
     return this.http.post(path, searchParamMode);
   }
 
+  deleteRegionUserByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-re-user-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
+  deleteZoneUserByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-zone-user-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
+  deleteEveluvatorByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-evaluvator-user-by-code";
+    return this.http.post(path, searchParamModel);
+  }
+
   getViewDataListContextUser(searchParamModel: SearchParam) {
     const path = environment.apiRoot + "get-view-data-list-context-user";
     return this.http.post(path, searchParamModel);

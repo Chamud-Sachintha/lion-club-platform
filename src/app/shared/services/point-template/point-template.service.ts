@@ -36,4 +36,9 @@ export class PointTemplateService {
     const path = environment.apiRoot + "update-point-template-by-code";
     return this.http.post(path, templateInfo);
   }
+
+  deletePointTemplateByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "delete-tenplate-by-code";
+    return this.http.post(path, searchParamModel);
+  }
 }
