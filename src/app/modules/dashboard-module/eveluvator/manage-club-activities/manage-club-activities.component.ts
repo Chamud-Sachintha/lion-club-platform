@@ -12,6 +12,9 @@ import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
 import { Activity } from 'src/app/models/Activity/activity';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { ValueList } from 'src/app/models/ValueList/value-list';
+import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
+import { ActivityService } from 'src/app/shared/services/activity/activity.service';
 @Component({
   selector: 'app-manage-club-activities',
   templateUrl: './manage-club-activities.component.html',
@@ -29,11 +32,16 @@ export class ManageClubActivitiesComponent implements OnInit {
   clubActiviyImageList: any[] = [];
   checkClubActivityForm!: FormGroup;
   filterClubActivityListForm!: FormGroup;
+  templateValueList: ValueList[] = [];
+  activityInfo = new Activity();
+  pointTemplateObjModel = new SearchParam();
   zoneModel = new Zone();
 
   constructor (private regionService: RegionService, private zoneService: ZoneService
               , private clubActivityService: ClubActivityServiceService
               , private formBuilder: FormBuilder
+              , private pointTemplateService: PointTemplateService
+              , private activityService: ActivityService
               , private toastr: ToastrService) {}
 
   ngOnInit(): void {
@@ -122,7 +130,10 @@ export class ManageClubActivitiesComponent implements OnInit {
       this.checkClubActivityForm.controls['clubCode'].setValue(dataList.data[0].clubCode);
       this.checkClubActivityForm.controls['status'].setValue(dataList.data[0].status)
       this.checkClubActivityForm.controls['activityCode'].setValue(dataList.data[0].clubActivityId);
+      this.checkClubActivityForm.controls['conditionType'].setValue(dataList.data[0].type);
     })
+
+    this.loadTemplateCodesByActivityCode(activityCode);
 
     this.clubActivityService.getClubActivityDocByCode(this.searchParamModel).subscribe((resp: any) => {
       this.clubActivityDocList = [];
@@ -147,12 +158,38 @@ export class ManageClubActivitiesComponent implements OnInit {
     })
   }
 
+  loadTemplateCodesByActivityCode(activityCode: string) {
+
+    this.templateValueList = []
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.activityCode = activityCode;
+
+    this.clubActivityService.getClubSctivityInfoByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      const cbActivityInfo = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        this.searchParamModel.activityCode = cbActivityInfo.data[0].activityCode;
+        this.pointTemplateService.getTemplateObjByActivityCode(this.searchParamModel).subscribe((resp: any) => {
+          const templateInfo = JSON.parse(JSON.stringify(resp))
+
+          templateInfo.data[0].forEach((eachValue: ValueList) => {
+            console.log(eachValue)
+            this.templateValueList.push(eachValue)
+          })
+        })
+      }
+    })
+  }
+
   initCheckActivityForm() {
     this.checkClubActivityForm = this.formBuilder.group({
       activityName: ['', Validators.required],
       clubCode: ['', Validators.required],
       status: ['', Validators.required],
-      activityCode: ['', Validators.required]
+      activityCode: ['', Validators.required],
+      conditionType: ['', Validators.required]
     })
   }
 
@@ -168,6 +205,7 @@ export class ManageClubActivitiesComponent implements OnInit {
         dataList.data[0].forEach((eachClubActivity: ClubActivity) => {
           const date = parseInt(eachClubActivity.createTime) * 1000;
           eachClubActivity.createTime = date.toString();
+
           this.clubActivityList.push(eachClubActivity);
         })
       }

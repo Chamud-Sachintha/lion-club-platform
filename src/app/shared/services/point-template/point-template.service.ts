@@ -37,6 +37,11 @@ export class PointTemplateService {
     return this.http.post(path, templateInfo);
   }
 
+  getTemplateObjByActivityCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-template-obj-by-activity-code";
+    return this.http.post(path, searchParamModel);
+  }
+
   deletePointTemplateByCode(searchParamModel: SearchParam) {
     const path = environment.apiRoot + "delete-tenplate-by-code";
     return this.http.post(path, searchParamModel);

@@ -94,6 +94,7 @@
                     <th>Club Code</th>
                     <th>status</th>
                     <th>Create Date</th>
+                    <th>Creator</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -107,6 +108,19 @@
                     <td>{{ eachActivity.createTime | date }}</td>
                     <td>
                       <div class="row">
+                        <div class="col-6" *ngIf="this.eachActivity.createUser.designation == 'CU'">
+                          Club User
+                        </div>
+                        <div class="col-6" *ngIf="this.eachActivity.createUser.designation == 'CNTU'">
+                          Context User
+                        </div>
+                        <div class="col-6">
+                          {{ this.eachActivity.createUser.name }}
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="row">
                         <div class="col-md-3 col-lg-3 col-sm-12">
                           <button
                             class="btn btn-success btn-sm"
@@ -114,7 +128,7 @@
                             data-target="#exampleModal"
                             (click)="getClubActivityInfo(eachActivity.id)"
                           >
-                            See
+                            View Details
                           </button>
                         </div>
                       </div>
@@ -127,6 +141,7 @@
                     <th>Club Code</th>
                     <th>status</th>
                     <th>Create Date</th>
+                    <th>Creator</th>
                     <th>Actions</th>
                   </tr>
                 </tfoot>
@@ -208,6 +223,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="input-select" class="col-form-label">Select Ranges</label>
+                  <select class="form-control" id="input-select" formControlName="conditionType">
+                      <option value="">-- Select Range --</option>
+                      <option value="{{ this.eachValueRange.name }}" *ngFor="let eachValueRange of this.templateValueList">{{ this.eachValueRange.name }}</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-12">

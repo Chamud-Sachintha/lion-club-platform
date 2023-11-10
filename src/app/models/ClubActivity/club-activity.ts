@@ -1,3 +1,4 @@
+import { CreateUserObj } from "../CreateUserObj/create-user-obj";
 import { Document } from "../Document/document";
 
 export class ClubActivity {
@@ -19,4 +20,5 @@ export class ClubActivity {
     reCode!: string;
     zoneCode!: string;
     extValue!: string;
+    createUser!: CreateUserObj;
 }
