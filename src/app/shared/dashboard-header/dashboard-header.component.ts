@@ -4,6 +4,9 @@ import { AuthService } from '../services/auth/auth.service';
 import { Perm } from 'src/app/models/Perm/perm';
 import { Request } from 'src/app/models/Request/request';
 import { UsersService } from '../services/users/users.service';
+import { DashboardService } from '../services/dashboard/dashboard.service';
+import { SearchParam } from 'src/app/models/SearchParam/search-param';
+import { CreateUserObj } from 'src/app/models/CreateUserObj/create-user-obj';
 declare var $: any;
 
 @Component({
@@ -21,13 +24,48 @@ export class DashboardHeaderComponent implements OnInit {
   zonalChairPersonPerm = false;
   menuPermModel = new Perm();
   requestModel = new Request();
+  searchParamModel = new SearchParam();
+  userObj = new CreateUserObj();
 
-  constructor(private router: Router, private authService: AuthService, private userService: UsersService) {}
+  constructor(private router: Router, private authService: AuthService, private userService: UsersService
+            , private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.checkMenuPermissionForUser();
     }, 600);
+
+    this.loadUserInfo();
+  }
+
+  loadUserInfo() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.dashboardService.getUserInfo(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        const designation = dataList.data[0].flag;
+
+        if (designation === "G") {
+          this.userObj.designation = "Governer"
+        } else if (designation === "RC") {
+          this.userObj.designation = "Regional Chairperson"
+        } else if (designation === "ZC") {
+          this.userObj.designation = "Zonal Chairperson"
+        } else if (designation === "CNTU") {
+          this.userObj.designation = "Context User"
+        } else if (designation === "CU") {
+          this.userObj.designation = "Club User"
+        } else if (designation === "E") {
+          this.userObj.designation = "Eveluvator"
+        } else {
+          this.userObj.designation = "";
+        }
+      }
+    })
   }
 
   onClickSignOut() {
