@@ -50,16 +50,22 @@ export class DashboardHeaderComponent implements OnInit {
         const designation = dataList.data[0].flag;
 
         if (designation === "G") {
+          this.userObj.name = dataList.data[0].first_name + " " + dataList.data[0].last_name;
           this.userObj.designation = "Governer"
         } else if (designation === "RC") {
+          this.userObj.name = dataList.data[0].name;
           this.userObj.designation = "Regional Chairperson"
         } else if (designation === "ZC") {
+          this.userObj.name = dataList.data[0].name;
           this.userObj.designation = "Zonal Chairperson"
         } else if (designation === "CNTU") {
+          this.userObj.name = dataList.data[0].name;
           this.userObj.designation = "Context User"
         } else if (designation === "CU") {
+          this.userObj.name = dataList.data[0].name;
           this.userObj.designation = "Club User"
         } else if (designation === "E") {
+          this.userObj.name = dataList.data[0].name;
           this.userObj.designation = "Eveluvator"
         } else {
           this.userObj.designation = "";
