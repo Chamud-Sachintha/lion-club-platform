@@ -21,6 +21,7 @@ import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activiti
 import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
 import { CheckInformationsComponent as ReCheckInfoComponent } from './region-chairperson/check-informations/check-informations.component';
 import { CheckInformationsComponent as ZonalCheckInfoComponent } from './zonal-chairperson/check-informations/check-informations.component';
+import { EveluvatorRouteGuardGuard } from 'src/app/guards/eveluvator/eveluvator-route-guard.guard';
 
 const routes: Routes = [
   {
@@ -129,7 +130,8 @@ const routes: Routes = [
       //eveluvator routings starts here
       {
         path:'manage-lub-activities',
-        component: ManageClubActivitiesComponent
+        component: ManageClubActivitiesComponent,
+        canActivate: [EveluvatorRouteGuardGuard]
       },
 
       // region chairperson routings starts here
