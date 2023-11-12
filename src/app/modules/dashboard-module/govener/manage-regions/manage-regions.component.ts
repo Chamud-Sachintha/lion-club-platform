@@ -70,7 +70,7 @@ export class ManageRegionsComponent implements OnInit {
 
   onSubmitUpdateRegionsForm() {
     const reCode = this.updateRegionsForm.controls['reCode'].value;
-    const contextUserCode = this.updateRegionsForm.controls['contectUserCode'].value;
+    const contextUserCode = this.updateRegionsForm.controls['contextUserCode'].value;
 
     if (reCode == "") {
 
