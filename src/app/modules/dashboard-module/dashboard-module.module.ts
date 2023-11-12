@@ -26,6 +26,7 @@ import { FeedActivityDataComponent } from './context-user/feed-activity-data/fee
 import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activities/manage-club-activities.component';
 import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
 import { CheckInformationsComponent } from './region-chairperson/check-informations/check-informations.component';
+import { ReportsComponent } from './govener/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { CheckInformationsComponent } from './region-chairperson/check-informati
        ManageClubActivitiesComponent,
        SubmitNewActivityComponent,
        CheckInformationsComponent,
+       ReportsComponent,
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ export class ClubActivity {
     flag!: any;
     activityCode!: string;
     activityName!: string;
+    activityTime!: string;
     clubCode!: any;
     activityCost!: number;
     conditionType!: number;

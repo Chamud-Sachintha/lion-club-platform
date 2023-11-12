@@ -11,4 +11,8 @@ export class DashboardTable {
     status!: string;
     points!: string;
     clubRank!: string;
+    totalCount!: string;
+    pendingCount!: string;
+    approvedCount!: string;
+    rejectedCount!: string;
 }

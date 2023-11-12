@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Activity } from 'src/app/models/Activity/activity';
 import { ClubActivity } from 'src/app/models/ClubActivity/club-activity';
 import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
@@ -60,5 +61,10 @@ export class ClubActivityServiceService {
   filterClubActivityList(searchParamModel: SearchParam) {
     const path = environment.apiRoot + "filter-list-evaluvator";
     return this.http.post(path, searchParamModel);
+  }
+
+  getDocsByActivityCode(activityInfoModel: Activity) {
+    const path = environment.apiRoot + "get-docs-by-activity-code";
+    return this.http.post(path, activityInfoModel);
   }
 }

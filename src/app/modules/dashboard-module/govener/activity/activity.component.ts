@@ -105,6 +105,9 @@ export class ActivityComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachActivity: Activity) => {
+          const formatedActivityName = eachActivity.activityName.substring(0, 50) + " " + "...";
+          eachActivity.activityName = formatedActivityName;
+          
           this.activityList.push(eachActivity);
         })
       }

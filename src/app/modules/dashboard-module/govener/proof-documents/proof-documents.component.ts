@@ -78,6 +78,9 @@ export class ProofDocumentsComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachDoc: ProofDoc) => {
+          const formatedText = eachDoc.documentName.substring(0, 50) + " " + "...";
+          eachDoc.documentName = formatedText;-
+
           this.prroofDocumentsList.push(eachDoc);
         })
       }

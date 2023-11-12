@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   dashboardTableList: DashboardTable[] = [];
   cntuDashboardTableList: DashboardTable[] = [];
   cbUserDashboardTableDataList: DashboardTable[] = [];
+  eveluvatorDashboardTableDataList: DashboardTable[] = [];
   role!: string;
 
   constructor(private dashboardService: DashboardService, private clubService: ClubService) {}
@@ -79,6 +80,17 @@ export class HomeComponent implements OnInit {
         this.dashboardModel.approvedCount = dataList.data[0].approvedCount;
         this.dashboardModel.pendingCount = dataList.data[0].pendingCount;
         this.dashboardModel.rejectedCount = dataList.data[0].rejectedCount;
+      }
+    })
+
+    this.dashboardService.getEveluvatorDashboardTableData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachActivity: DashboardTable) => {
+          this.eveluvatorDashboardTableDataList.push(eachActivity);
+        })
       }
     })
   }

@@ -15,6 +15,7 @@ import { MainCategoryService } from 'src/app/shared/services/main-category/main-
 import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
 
 @Component({
   selector: 'app-submit-activity',
@@ -40,6 +41,7 @@ export class SubmitActivityComponent implements OnInit {
   selectedImageFiles: File[] = [];
   templateValueList: ValueList[] = [];
   clubActivityList: ClubActivity[] = [];
+  requiredDocList: ProofDoc[] = [];
   clubCode!: any;
   token!: any;
   firstCatgoryCode!: string;
@@ -72,8 +74,13 @@ export class SubmitActivityComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachActivity: ClubActivity) => {
+          const formatedActivityName = eachActivity.activityName.substring(0, 50) + " " + "...";
           this.date = parseInt(eachActivity.createTime) * 1000;
+          const activityTimeFormated = parseInt(eachActivity.activityTime) * 1000;
+          eachActivity.activityTime = activityTimeFormated.toString();
           eachActivity.createTime = this.date;
+          eachActivity.activityName = formatedActivityName;
+
           this.clubActivityList.push(eachActivity)
         })
       }
@@ -109,6 +116,19 @@ export class SubmitActivityComponent implements OnInit {
         })
       }
     }, (err) => {})
+
+    // have to call what document codes want
+
+    this.clubActivityService.getDocsByActivityCode(this.activityInfo).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachDocument: ProofDoc) => {
+          this.requiredDocList.push(eachDocument);
+        })        
+      }
+    })
   }
 
   onChangeSecoondSubCategory(secondCategoryValue: any) {

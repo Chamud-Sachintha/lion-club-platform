@@ -73,19 +73,22 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Add Featured Image & 5 other Limitting to 50mb:</label>
-                                <input id="inputText3" type="file" class="form-control" (change)="onImageFileSelected($event)" multiple>
+                                <label for="formFile" class="form-label">Type Exact Value</label>
+                                <input class="form-control" type="text" placeholder="Enter Value" formControlName="extValue">
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <label for="formFile" class="form-label">Add one Mandatory Proof Document & Upto 9 Others</label>
+                            <ul *ngFor="let eachDoc of this.requiredDocList">
+                                <li style="text-align: justify;">{{ eachDoc.documentName }}</li>
+                            </ul>
                             <input class="form-control" type="file" (change)="onFileSelected($event)" id="formFile" multiple>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="formFile" class="form-label">Type Exact Value</label>
-                            <input class="form-control" type="text" placeholder="Enter Value" formControlName="extValue">
+                            <label for="inputText3" class="col-form-label">Add Featured Image & 5 other Limitting to 50mb:</label>
+                            <input id="inputText3" type="file" class="form-control" (change)="onImageFileSelected($event)" multiple>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -115,7 +118,7 @@
                                         <th>Type</th>
                                         <th>Exact Value</th>
                                         <th>Activity Status</th>
-                                        <th>Create Time</th>
+                                        <th>Activity Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,7 +131,7 @@
                                         <td *ngIf="eachActivity.status == 1">Approve</td>
                                         <td *ngIf="eachActivity.status == 2">Reject</td>
                                         <td *ngIf="eachActivity.status == 0">Pending</td>
-                                        <td>{{ eachActivity.createTime | date }}</td>
+                                        <td>{{ eachActivity.activityTime | date }}</td>
                                         <!-- <td>
                                             <button class="btn btn-primary btn-sm">Update</button>
                                             <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>

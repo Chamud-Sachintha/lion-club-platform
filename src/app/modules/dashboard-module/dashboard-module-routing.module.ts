@@ -21,6 +21,7 @@ import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activiti
 import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
 import { CheckInformationsComponent as ReCheckInfoComponent } from './region-chairperson/check-informations/check-informations.component';
 import { CheckInformationsComponent as ZonalCheckInfoComponent } from './zonal-chairperson/check-informations/check-informations.component';
+import { ReportsComponent } from './govener/reports/reports.component';
 
 const routes: Routes = [
   {
@@ -105,6 +106,11 @@ const routes: Routes = [
       {
         path: 'point-tables',
         component: PointTablesComponent
+      },
+
+      {
+        path: 'gov-reports',
+        component: ReportsComponent
       },
 
 
