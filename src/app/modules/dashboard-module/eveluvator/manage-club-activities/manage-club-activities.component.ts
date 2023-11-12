@@ -86,6 +86,7 @@ export class ManageClubActivitiesComponent implements OnInit {
 
     const activityCode = this.checkClubActivityForm.controls['activityCode'].value;
     const status = this.checkClubActivityForm.controls['status'].value;
+    const comment = this.checkClubActivityForm.controls['comment'].value;
 
     if (status == 0) {
 
@@ -94,6 +95,7 @@ export class ManageClubActivitiesComponent implements OnInit {
       this.requestModel.flag = sessionStorage.getItem("role");
       this.requestModel.activityCode = activityCode;
       this.requestModel.status = status;
+      this.requestModel.comment = comment;
 
       this.clubActivityService.updateClubActivityStatusByEvaluvator(this.requestModel).subscribe((resp: any) => {
 
@@ -189,7 +191,8 @@ export class ManageClubActivitiesComponent implements OnInit {
       clubCode: ['', Validators.required],
       status: ['', Validators.required],
       activityCode: ['', Validators.required],
-      conditionType: ['', Validators.required]
+      conditionType: ['', Validators.required],
+      comment: ['', Validators.required]
     })
   }
 

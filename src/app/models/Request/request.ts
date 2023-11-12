@@ -3,4 +3,5 @@ export class Request {
     flag!: any;
     activityCode!: string;
     status!: string;
+    comment!: string;
 }
