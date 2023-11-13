@@ -194,7 +194,7 @@ export class HomeComponent implements OnInit {
     if (perm == "G") {
       this.role = "G";
     } else if (perm == "RC") {
-      
+      this.role = "RC";
     } else if (perm == "ZC") {
 
     } else if (perm == "CNTU") {

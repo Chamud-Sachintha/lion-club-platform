@@ -121,7 +121,7 @@ export class SubmitActivityComponent implements OnInit {
     }, (err) => {})
 
     // have to call what document codes want
-
+    this.requiredDocList = [];
     this.clubActivityService.getDocsByActivityCode(this.activityInfo).subscribe((resp: any) => {
 
       const dataList = JSON.parse(JSON.stringify(resp));

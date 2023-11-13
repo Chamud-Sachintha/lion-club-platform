@@ -94,6 +94,7 @@
                     <th>Club Code</th>
                     <th>status</th>
                     <th>Create Date</th>
+                    <th>Date Of Activity</th>
                     <th>Creator</th>
                     <th>Actions</th>
                   </tr>
@@ -106,6 +107,7 @@
                     <td *ngIf="this.eachActivity.status == 0">Pending</td>
                     <td *ngIf="this.eachActivity.status == 2">Reject</td>
                     <td>{{ eachActivity.createTime | date }}</td>
+                    <td>{{ eachActivity.dateOfActivity | date }}</td>
                     <td>
                       <div class="row">
                         <div class="col-6" *ngIf="this.eachActivity.createUser.designation == 'CU'">
@@ -141,6 +143,7 @@
                     <th>Club Code</th>
                     <th>status</th>
                     <th>Create Date</th>
+                    <th>Date Of Activity</th>
                     <th>Creator</th>
                     <th>Actions</th>
                   </tr>

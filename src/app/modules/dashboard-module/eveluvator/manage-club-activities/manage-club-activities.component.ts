@@ -207,7 +207,9 @@ export class ManageClubActivitiesComponent implements OnInit {
       if (resp.code === 1) {
         dataList.data[0].forEach((eachClubActivity: ClubActivity) => {
           const date = parseInt(eachClubActivity.createTime) * 1000;
+          const formatedDateOfActivity = parseInt(eachClubActivity.dateOfActivity) * 1000;
           eachClubActivity.createTime = date.toString();
+          eachClubActivity.dateOfActivity = formatedDateOfActivity.toString();
 
           this.clubActivityList.push(eachClubActivity);
         })

@@ -17,6 +17,8 @@ import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-cat
 import { ToastrService } from 'ngx-toastr';
 import { ValueList } from 'src/app/models/ValueList/value-list';
 import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
+import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-submit-new-activity',
@@ -46,6 +48,7 @@ export class SubmitNewActivityComponent implements OnInit {
   clubActivityList: ClubActivity[] = [];
   pointTemplateObjModel = new SearchParam();
   selectedImageFiles: File[] = [];
+  requiredDocList: ProofDoc[] = [];
   userCode!: any;
 
   constructor(private formBuilder: FormBuilder, private activityService: ActivityService, private clubActivityService: ClubActivityServiceService
@@ -54,7 +57,8 @@ export class SubmitNewActivityComponent implements OnInit {
             , private secondCategoryService: SecondSubCategoryService
             , private pointTemplateService: PointTemplateService
             , private toastr: ToastrService
-            , private clubService: ClubService) {}
+            , private clubService: ClubService
+            , private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.initSubmitActivityForm();
@@ -89,8 +93,8 @@ export class SubmitNewActivityComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachActivity: ClubActivity) => {
-          const date = parseInt(eachActivity.createTime) * 1000;
-          eachActivity.createTime = date.toString();
+          const formatedDate = parseInt(eachActivity.dateOfActivity) * 1000;
+          eachActivity.dateOfActivity = formatedDate.toString();
 
           this.clubActivityList.push(eachActivity)
         })
@@ -122,6 +126,19 @@ export class SubmitNewActivityComponent implements OnInit {
             valueList.data[0].forEach((eachValue: ValueList) => {
               this.templateValueList.push(eachValue)
             })
+          }
+        })
+
+        // have to call what document codes want
+        this.requiredDocList = [];
+        this.clubActivityService.getDocsByActivityCode(this.activityInfo).subscribe((resp: any) => {
+
+          const dataList = JSON.parse(JSON.stringify(resp));
+
+          if (resp.code === 1) {
+            dataList.data[0].forEach((eachDocument: ProofDoc) => {
+              this.requiredDocList.push(eachDocument);
+            })        
           }
         })
       }
@@ -217,8 +234,9 @@ export class SubmitNewActivityComponent implements OnInit {
     const activityCode = this.submitActivityForm.controls['activityCode'].value;
     const value = this.selectedImageFiles;
     const conditionType = this.submitActivityForm.controls['conditionType'].value;
-    const clubCode = this.submitActivityForm.controls['clubCode'].value;
     const documentValueList = this.selectedFiles;
+    const exactValue = this.submitActivityForm.controls['extValue'].value;
+    const dateOfActivity = this.submitActivityForm.controls['dateOfActivity'].value;
 
     if (activityCode == "") {
 
@@ -227,20 +245,18 @@ export class SubmitNewActivityComponent implements OnInit {
     } else if (conditionType == "") {
       
     } else if (documentValueList.length == 0) {
-
-    } else if (clubCode == "") {
-
+      
     } else {
       const formData = new FormData();
 
       this.clubActivityModel.activityCode = activityCode;
-      // this.clubCode = sessionStorage.getItem("clubCode");
+      this.clubCode = sessionStorage.getItem("clubCode");
       // this.clubActivityModel.value = value;
       this.token = sessionStorage.getItem("authToken");
       this.clubActivityModel.flag = sessionStorage.getItem("role");
 
       formData.append("activityCode", activityCode);
-      formData.append("clubCode", clubCode);
+      formData.append("clubCode", this.clubCode);
       // formData.append("value", value);
       formData.append("token", this.token);
       formData.append("flag", this.clubActivityModel.flag);
@@ -254,18 +270,27 @@ export class SubmitNewActivityComponent implements OnInit {
         formData.append("image" + index, el);
       })
 
+      this.clubActivityModel.documentList = formData;
+
       this.userCode = sessionStorage.getItem("userCode");
 
       formData.append("creator", this.userCode);
+      formData.append("extValue", exactValue);
+      formData.append("dateOfActivity", dateOfActivity);
 
-      this.clubActivityModel.documentList = formData;
-
+      this.spinner.show();
       this.clubActivityService.submitNewClubActivity(formData).subscribe((resp: any) => {
 
         if (resp.code === 1) {
           this.toastr.success("New Club Activity", "New Club Activity Added Successfully");
+          this.spinner.hide();
+
+          this.getClubActivityList();
         }
-      }, (err) => {})
+      }, (err) => {
+        this.spinner.hide();
+        this.toastr.error("New Club Activity", err.message);
+      })
     }
   }
 
@@ -318,8 +343,9 @@ export class SubmitNewActivityComponent implements OnInit {
     this.submitActivityForm = this.formBuilder.group({
       activityCode: ['', Validators.required],
       conditionType: ['', Validators.required],
-      clubCode: ['', Validators.required],
-      valueList: this.formBuilder.array([])
+      valueList: this.formBuilder.array([]),
+      extValue: ['', Validators.required],
+      dateOfActivity: ['', Validators.required]
     })
   }
 

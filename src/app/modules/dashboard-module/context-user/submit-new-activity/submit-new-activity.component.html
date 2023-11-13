@@ -1,7 +1,8 @@
 <div class="row">
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Submit a Activity From Here.</h2>
+            <h2 class="pageheader-title">Report Your Activity</h2>
             <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
             <div class="page-breadcrumb">
                 <nav aria-label="breadcrumb">
@@ -37,7 +38,7 @@
                                     <option value="">-- Select First Category --</option>
                                     <option value="{{ this.eachCategory.firstSubCategoryCode }}" *ngFor="let eachCategory of this.firstCategoryList">{{ this.eachCategory.firstSubCategoryCode }}</option>
                                 </select>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                     <div class="row">
@@ -64,7 +65,7 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Ranges</label>
+                                <label for="input-select" class="col-form-label">Enter Your Results / Values</label>
                                 <select class="form-control" id="input-select" formControlName="conditionType">
                                     <option value="">-- Select Range --</option>
                                     <option value="{{ this.eachValueRange.name }}" *ngFor="let eachValueRange of this.templateValueList">{{ this.eachValueRange.name }}</option>
@@ -73,15 +74,28 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Add Images :</label>
-                                <input id="inputText3" type="file" class="form-control" (change)="onImageFileSelected($event)" multiple>
+                                <label for="formFile" class="form-label">Type Exact Value</label>
+                                <input class="form-control" type="text" placeholder="Enter Value" formControlName="extValue">
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="formFile" class="form-label">Add Required Proof Documents</label>
+                            <label for="formFile" class="form-label">Add one Mandatory Proof Document & Upto 9 Others</label>
+                            <ul *ngFor="let eachDoc of this.requiredDocList">
+                                <li style="text-align: justify;">{{ eachDoc.documentName }}</li>
+                            </ul>
                             <input class="form-control" type="file" (change)="onFileSelected($event)" id="formFile" multiple>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="inputText3" class="col-form-label">Add Featured Image & 5 other Limitting to 50mb:</label>
+                            <input id="inputText3" type="file" class="form-control" (change)="onImageFileSelected($event)" multiple>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="formFile" class="form-label">Date Of the Activity</label>
+                            <input type="date" class="form-control" formControlName="dateOfActivity">
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
@@ -95,13 +109,13 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Submit Activity record">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Once Submited Editing not Permited">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-body border-top">
-                <h3>List of Submited Activities</h3>
+                <h3>List of Activities Reported</h3>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="table-responsive">
@@ -123,7 +137,7 @@
                                         <td>{{ eachActivity.reCode }}</td>
                                         <td>{{ eachActivity.zoneCode }}</td>
                                         <td>{{ eachActivity.clubCode }}</td>
-                                        <td>{{ eachActivity.createTime | date }}</td>
+                                        <td>{{ eachActivity.dateOfActivity | date }}</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

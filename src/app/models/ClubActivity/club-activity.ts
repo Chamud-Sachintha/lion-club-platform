@@ -22,4 +22,5 @@ export class ClubActivity {
     zoneCode!: string;
     extValue!: string;
     createUser!: CreateUserObj;
+    dateOfActivity!: string;
 }
