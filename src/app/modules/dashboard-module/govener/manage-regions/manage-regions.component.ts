@@ -9,6 +9,8 @@ import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { RegionService } from 'src/app/shared/services/region/region.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-manage-regions',
@@ -27,7 +29,7 @@ export class ManageRegionsComponent implements OnInit {
   updateRegionsForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private regionService: RegionService
-            , private userServcie: UsersService, private tostr: ToastrService) {}
+            , private userServcie: UsersService, private tostr: ToastrService, private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.initCreateNewRegionForm();
@@ -45,7 +47,8 @@ export class ManageRegionsComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Delete Region", "Region deletre Successfully.");
-        location.reload();
+        this.initSpinner();
+        this.getRegionList();
       } else {
         this.tostr.error("Delete Region", resp.message);
       }
@@ -93,6 +96,7 @@ export class ManageRegionsComponent implements OnInit {
   }
 
   getRegionList() {
+    this.regionList = [];
     this.requestModel.token = sessionStorage.getItem("authToken");
     this.requestModel.flag = sessionStorage.getItem("role");
 
@@ -138,7 +142,8 @@ export class ManageRegionsComponent implements OnInit {
 
       this.regionService.createNewRegion(this.regionModel).subscribe((resp) => {
         this.tostr.success("Create Region", "Region Create Successfully");
-        location.reload();
+        this.initSpinner();
+        this.getRegionList();
       }, (err) => {
 
       })
@@ -157,6 +162,14 @@ export class ManageRegionsComponent implements OnInit {
       reCode: ['', Validators.required],
       contextUserCode: ['', Validators.required]
     })
+  }
+
+  initSpinner() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
   }
 
 }

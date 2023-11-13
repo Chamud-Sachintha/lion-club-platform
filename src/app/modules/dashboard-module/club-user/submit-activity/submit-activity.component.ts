@@ -16,6 +16,7 @@ import { PointTemplateService } from 'src/app/shared/services/point-template/poi
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProofDoc } from 'src/app/models/ProofDoc/proof-doc';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-submit-activity',
@@ -54,7 +55,8 @@ export class SubmitActivityComponent implements OnInit {
             , private mainCategoryService: MainCategoryService
             , private secondCategoryService: SecondSubCategoryService
             , private pointTemplateService: PointTemplateService
-            , private toastr: ToastrService) {}
+            , private toastr: ToastrService
+            , private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.initSubmitActivityForm();
@@ -64,6 +66,7 @@ export class SubmitActivityComponent implements OnInit {
   }
 
   getClubActivityList() {
+    this.clubActivityList = [];
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");
     this.searchParamModel.clubCode = sessionStorage.getItem("clubCode");
@@ -264,13 +267,19 @@ export class SubmitActivityComponent implements OnInit {
       formData.append("extValue", exactValue);
       formData.append("dateOfActivity", dateOfActivity);
 
+      this.spinner.show();
       this.clubActivityService.submitNewClubActivity(formData).subscribe((resp: any) => {
 
         if (resp.code === 1) {
           this.toastr.success("New Club Activity", "New Club Activity Added Successfully");
-          location.reload();
+          this.spinner.hide();
+
+          this.getClubActivityList();
         }
-      }, (err) => {})
+      }, (err) => {
+        this.spinner.hide();
+        this.toastr.error("New Club Activity", err.message);
+      })
     }
   }
 

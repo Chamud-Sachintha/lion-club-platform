@@ -27,6 +27,7 @@ import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activiti
 import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
 import { CheckInformationsComponent } from './region-chairperson/check-informations/check-informations.component';
 import { ReportsComponent } from './govener/reports/reports.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ReportsComponent } from './govener/reports/reports.component';
     FormsModule,
     ReactiveFormsModule,
     TagInputModule,
+    NgxSpinnerModule
   ]
 })
 export class DashboardModuleModule { }
