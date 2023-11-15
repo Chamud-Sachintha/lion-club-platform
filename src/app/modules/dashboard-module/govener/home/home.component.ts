@@ -89,10 +89,23 @@ export class HomeComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachActivity: DashboardTable) => {
-          this.eveluvatorDashboardTableDataList.push(eachActivity);
+          if (!this.checkArrayValue(eachActivity.clubCode)) {
+            this.eveluvatorDashboardTableDataList.push(eachActivity);
+          }
         })
       }
     })
+  }
+
+  checkArrayValue(clubCode: string) {
+    let isFound = false;
+    this.eveluvatorDashboardTableDataList.forEach((eachRow: DashboardTable) => {
+      if (eachRow.clubCode === clubCode) {
+        isFound = true;
+      }
+    })
+
+    return isFound;
   }
 
   loadContextUserCounts() {
@@ -196,7 +209,7 @@ export class HomeComponent implements OnInit {
     } else if (perm == "RC") {
       this.role = "RC";
     } else if (perm == "ZC") {
-
+      this.role = "ZC"
     } else if (perm == "CNTU") {
       this.role = "CNTU"
     } else if (perm == "CU") {
