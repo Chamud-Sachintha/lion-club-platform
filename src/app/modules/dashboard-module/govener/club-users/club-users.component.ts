@@ -159,6 +159,8 @@ export class ClubUsersComponent implements OnInit {
         if (resp.code === 1) {
           this.tostr.success("Create Club User", "Club User Create Successfully");
           location.reload();
+        } else if (resp.code === 0) {
+          this.tostr.error("Create Club User", resp.message);
         }
       }, (err) => {
 
