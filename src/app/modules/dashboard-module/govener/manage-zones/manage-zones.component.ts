@@ -74,9 +74,9 @@ export class ManageZonesComponent implements OnInit {
     const reCode = this.updateZoneForm.controls['reCode'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Zone Code");
     } else if (reCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Region Code");
     } else {
       this.zonalInfoModel.zoneCode = code;
       this.zonalInfoModel.regionCode = reCode;
@@ -115,9 +115,9 @@ export class ManageZonesComponent implements OnInit {
     const reCode = this.addZoneDetailsForm.controls['reCode'].value;
 
     if (zoneCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Zone Code");
     } else if (reCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Region Code");
     } else {
       this.zonalInfoModel.zoneCode = zoneCode;
       this.zonalInfoModel.regionCode = reCode;

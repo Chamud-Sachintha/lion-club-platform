@@ -76,9 +76,9 @@ export class ManageRegionsComponent implements OnInit {
     const contextUserCode = this.updateRegionsForm.controls['contextUserCode'].value;
 
     if (reCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Region Code");
     } else if (contextUserCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Context User Code");
     } else {
       this.regionModel.regionCode = reCode;
       this.regionModel.contextUserCode = contextUserCode;
@@ -133,16 +133,20 @@ export class ManageRegionsComponent implements OnInit {
     const contextUserCode = this.addRegionDetailsForm.controls['contextUserCode'].value;
 
     if (reCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Region Code");
+    } else if (contextUserCode == "") {
+      this.tostr.error("Empty Feilds Found", "Please Enter Context User Code");
     } else {
       this.regionModel.token = sessionStorage.getItem("authToken");
       this.regionModel.flag = sessionStorage.getItem("role");
       this.regionModel.regionCode = reCode;
       this.regionModel.contextUserCode = contextUserCode;
 
+      this.spinner.show();
       this.regionService.createNewRegion(this.regionModel).subscribe((resp) => {
         this.tostr.success("Create Region", "Region Create Successfully");
-        this.initSpinner();
+        this.spinner.hide();
+        
         this.getRegionList();
       }, (err) => {
 

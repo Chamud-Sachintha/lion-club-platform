@@ -49,9 +49,9 @@ export class ProofDocumentsComponent implements OnInit {
     const documentName = this.updateProofDocumntForm.controls['name'].value;
 
     if (documentCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Document Code");
     } else if (documentName == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Document Name");
     } else {
       this.documentModel.token = sessionStorage.getItem("authToken");
       this.documentModel.flag = sessionStorage.getItem("role");
@@ -92,9 +92,9 @@ export class ProofDocumentsComponent implements OnInit {
     const name = this.addProofDocumentForm.controls['name'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Document Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Document Name");
     } else {
       this.documentModel.documentCode = code;
       this.documentModel.documentName = name;

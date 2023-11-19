@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Auth } from 'src/app/models/Auth/auth';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
@@ -14,7 +15,8 @@ export class SigninComponent implements OnInit {
   authInfo = new Auth();
   userAuthForm!: FormGroup;
 
-  constructor (private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor (private formBuilder: FormBuilder, private authService: AuthService, private router: Router
+            , private tost: ToastrService) {}
 
   ngOnInit(): void {
     this.initUserAuthForm();
@@ -35,6 +37,7 @@ export class SigninComponent implements OnInit {
         sessionStorage.setItem("role", dataList.data[0].userRole);
         sessionStorage.setItem("userCode", dataList.data[0].userCode);
 
+        this.tost.success("Login to Dashboatd", "Login Success.");
         this.router.navigate(['app']);
       } else if (resp.code === 2) {
         sessionStorage.setItem("email", dataList.data[0].email);
@@ -42,7 +45,7 @@ export class SigninComponent implements OnInit {
         
         this.router.navigate(['/auth/change-pw'])
       } else {
-        // have to implement ngx tast msg for invalid resp
+        this.tost.error("Login to Dashboard", resp.message)
       }
     })
   }

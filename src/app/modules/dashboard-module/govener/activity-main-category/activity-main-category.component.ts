@@ -53,9 +53,9 @@ export class ActivityMainCategoryComponent implements OnInit {
     const mainCategoryName = this.updateMainCategoryForm.controls['name'].value;
 
     if (mainCategoryCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Code");
     } else if (mainCategoryName == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Name");
     } else {
       this.mainCategoryModel.mainCategoryCode = mainCategoryCode;
       this.mainCategoryModel.categoryName = mainCategoryName;
@@ -109,9 +109,9 @@ export class ActivityMainCategoryComponent implements OnInit {
     const name = this.addMainCategoryForm.controls['name'].value;
 
     if (code == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Code");
     } else if (name == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Name");
     } else {
       this.mainCategoryModel.mainCategoryCode = code;
       this.mainCategoryModel.categoryName = name;

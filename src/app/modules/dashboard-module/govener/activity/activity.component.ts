@@ -125,21 +125,21 @@ export class ActivityComponent implements OnInit {
     const documentCode = this.addNewActivityForm.controls['documentCode'].value;
 
     if (activityCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Activity Code");
     } else if (activityName == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Activity Name");
     } else if (mainCategoryCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Main Category Code");
     } else if (firstCategoryCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter First Category Code");
     } else if (secondCategoryCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Second Category Code");
     } else if (authUserCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Authorize User");
     } else if (templateCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Template Code");
     } else if (documentCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Document Code");
     } else {
       this.activityInfo.activityCode = activityCode;
       this.activityInfo.activityName = activityName;

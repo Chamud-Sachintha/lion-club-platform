@@ -74,9 +74,9 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
     const maincategoryCode = this.updateFirstCategoryForm.controls['mainCategoryCode'].value;
 
     if (firstCatCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Code");
     } else if (name == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Name");
     } else {
       this.firstSubCategoryModel.firstSubCategoryCode = firstCatCode;
       this.firstSubCategoryModel.mainCategoryCode = maincategoryCode;
@@ -127,11 +127,11 @@ export class ActivityFirstSubCategoryComponent implements OnInit {
     const code = this.addFirstSubCategoryForm.controls['code'].value;
     const name = this.addFirstSubCategoryForm.controls['name'].value;
     const maincategoryCode = this.addFirstSubCategoryForm.controls['mainCategoryCode'].value;
-    console.log(code, name)
+
     if (code == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Code");
     } else if (name == "") {
-
+      this.toastr.error("Empty Feilds Found", "Please Enter Category Name");
     } else {
       this.firstSubCategoryModel.firstSubCategoryCode = code;
       this.firstSubCategoryModel.categoryName = name;

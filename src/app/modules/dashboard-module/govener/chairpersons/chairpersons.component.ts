@@ -102,13 +102,13 @@ export class ChairpersonsComponent implements OnInit {
     const zoneCode = this.updateZonalChairpersonForm.controls['zoneCode'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Chairperson Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
     } else if (zoneCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Zone Code");
     } else {
       this.chairPersonModel.zonalChairpersonCode = code;
       this.chairPersonModel.fullName = name;
@@ -152,9 +152,13 @@ export class ChairpersonsComponent implements OnInit {
     const email = this.updateRegionChairpersonForm.controls['email'].value;
 
     if (reCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Region Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
+    } else if (email == "") {
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
+    } else if (code == "") {
+      this.tostr.error("Empty Feilds Found", "Please Enter Chairperson Code");
     } else {
       this.chairPersonModel.reChairPersonCode = code;
       this.chairPersonModel.fullName = name;
@@ -244,11 +248,13 @@ export class ChairpersonsComponent implements OnInit {
     const zoneCode = this.zonalChairPersonForm.controls['zoneCode'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Chairperson Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
+    } else if (zoneCode == "") {
+      this.tostr.error("Empty Feilds Found", "Please Enter Zone Code");
     } else {
       this.chairPersonModel.zonalChairpersonCode = code;
       this.chairPersonModel.fullName = name;
@@ -286,11 +292,13 @@ export class ChairpersonsComponent implements OnInit {
     const reCode = this.regionChairPersonForm.controls['reCode'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Chairperson Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
+    } else if (reCode == "") {
+      this.tostr.error("Empty Feilds Found", "Please Enter Region Code");
     } else {
       this.chairPersonModel.reChairPersonCode = code;
       this.chairPersonModel.fullName = name;

@@ -68,13 +68,12 @@ export class EvaluatorsComponent implements OnInit {
     const name = this.updateEvaluvatorForm.controls['name'].value;
     const email = this.updateEvaluvatorForm.controls['email'].value;
 
-    console.log(this.updateEvaluvatorForm.value)
-    if (code == "") {
-
+    if (code == "") { 
+      this.tostr.error("Empty Feilds Found", "Please Enter Evaluvator Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-      
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
     } else {
       this.evaluvatorModel.evaluatorCode = code;
       this.evaluvatorModel.fullName = name;
@@ -114,11 +113,11 @@ export class EvaluatorsComponent implements OnInit {
     const email = this.registerEvaluatorForm.controls['email'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Evaluvator Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
     } else {
       this.evaluvatorModel.evaluatorCode = code;
       this.evaluvatorModel.fullName = name;

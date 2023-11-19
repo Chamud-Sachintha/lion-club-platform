@@ -72,9 +72,9 @@ export class ManageClubsComponent implements OnInit {
     const zoneCode = this.updateClubForm.controls['zoneCode'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Club Code");
     } else if (zoneCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Zone Code");
     } else {
       this.clubModel.clubCode = code;
       this.clubModel.zoneCode = zoneCode;
@@ -110,9 +110,9 @@ export class ManageClubsComponent implements OnInit {
     const zoneCode = this.addClubForm.controls['zoneCode'].value;
 
     if (clubCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Club Code");
     } else if (zoneCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Zone Code");
     } else {
       this.clubModel.clubCode = clubCode;
       this.clubModel.zoneCode = zoneCode;

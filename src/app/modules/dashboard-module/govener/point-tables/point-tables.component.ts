@@ -78,7 +78,7 @@ export class PointTablesComponent implements OnInit {
     const templateName = this.updatePointTemplateForm.controls['templateName'].value;
 
     if (templateName == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Template Name");
     } else {
       this.templateInfo.templateName = templateName;
       this.templateInfo.token = sessionStorage.getItem("authToken");
@@ -118,7 +118,7 @@ export class PointTablesComponent implements OnInit {
     const templateName = this.pointTableValueRowForm.controls['templateName'].value;
 
     if (templateName == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Template Name");
     } else {
       this.templateInfo.templateName = templateName;
       this.templateInfo.token = sessionStorage.getItem("authToken");

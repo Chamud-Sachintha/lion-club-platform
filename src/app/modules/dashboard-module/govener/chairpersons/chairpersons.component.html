@@ -127,7 +127,7 @@
                       index as i
                     "
                   >
-                    <td>{{ i }}</td>
+                    <td>{{ i + 1 }}</td>
                     <td>{{ eachUser.reChairPersonCode }}</td>
                     <td>{{ eachUser.fullName }}</td>
                     <td>{{ eachUser.email }}</td>
@@ -270,7 +270,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let eachUser of this.zonalChairpersonList; index as i">
-              <td>{{ i }}</td>
+              <td>{{ i + 1 }}</td>
               <td>{{ eachUser.zonalChairpersonCode }}</td>
               <td>{{ eachUser.fullName }}</td>
               <td>{{ eachUser.email }}</td>

@@ -75,13 +75,13 @@ export class ClubUsersComponent implements OnInit {
     const clubCode = this.updateClubUserForm.controls['clubCode'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Club User Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
     } else if (clubCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Club Code");
     } else {
       this.clubUserModel.clubUserCode = code;
       this.clubUserModel.fullName = name;
@@ -138,13 +138,13 @@ export class ClubUsersComponent implements OnInit {
     const clubCode = this.registerClubUserForm.controls['clubCode'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Club User Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
     } else if (clubCode == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Club Code");
     } else {
       this.clubUserModel.clubUserCode = code;
       this.clubUserModel.fullName = name;

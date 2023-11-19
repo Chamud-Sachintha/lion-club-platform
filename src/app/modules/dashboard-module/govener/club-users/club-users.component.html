@@ -122,10 +122,11 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let eachUser of this.clubUserList; index as i">
-                    <td>{{ i }}</td>
+                    <td>{{ i + 1 }}</td>
                     <td>{{ eachUser.clubUserCode }}</td>
                     <td>{{ eachUser.fullName }}</td>
                     <td>{{ eachUser.email }}</td>
+                    <td>{{ eachUser.clubCode }}</td>
                     <td>
                       <button
                         class="btn btn-primary btn-sm"

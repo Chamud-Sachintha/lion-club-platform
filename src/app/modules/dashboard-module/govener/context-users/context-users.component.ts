@@ -68,11 +68,11 @@ export class ContextUsersComponent implements OnInit {
     const email = this.updateContextUserForm.controls['email'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Context User Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
     } else {
       this.contextUserModel.contextUserCode = code;
       this.contextUserModel.fullName = name;
@@ -112,11 +112,11 @@ export class ContextUsersComponent implements OnInit {
     const email = this.registerContextUserForm.controls['email'].value;
 
     if (code == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Context User Code");
     } else if (name == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Name");
     } else if (email == "") {
-
+      this.tostr.error("Empty Feilds Found", "Please Enter Email Address");
     } else {
       this.contextUserModel.contextUserCode = code;
       this.contextUserModel.fullName = name;
