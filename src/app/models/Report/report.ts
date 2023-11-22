@@ -7,4 +7,6 @@ export class Report {
     submitDate!: string;
     extValue!: string;
     submitBy!: string;
+    zoneCode!: string;
+    clubCode!: string;
 }

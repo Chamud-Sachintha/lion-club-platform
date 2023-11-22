@@ -2,7 +2,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="page-header">
         <h2 class="pageheader-title">
-          Manage All Main Activity categories Here.
+          Manage Reports
         </h2>
         <p class="pageheader-text">
           Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
@@ -26,7 +26,7 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
-        <h5 class="card-header">Manage All Main Categories</h5>
+        <h5 class="card-header">List Of Activities Reported</h5>
         <div class="card-body">
           <form
            
@@ -60,7 +60,7 @@
                 <input
                   type="submit"
                   class="btn btn-primary btn-sm"
-                  value="Add Category"
+                  value="Filter Informations"
                 />
               </div>
             </div>
@@ -78,6 +78,8 @@
                       <th>Activity Code</th>
                       <th>Activity Name</th>
                       <th>Activity Date</th>
+                      <th>Zone Code</th>
+                      <th>Club Code</th>
                       <th>Submit Date</th>
                       <th>Exact Value</th>
                       <th>Submited By</th>
@@ -89,6 +91,8 @@
                         <td>{{ eachRow.activityCode }}</td>
                         <td>{{ eachRow.activityName }}</td>
                         <td>{{ eachRow.activityDate | date}}</td>
+                        <td>{{ eachRow.zoneCode }}</td>
+                        <td>{{ eachRow.clubCode }}</td>
                         <td>{{ eachRow.submitDate | date }}</td>
                         <td>{{ eachRow.extValue }}</td>
                         <td>{{ eachRow.submitBy }}</td>
@@ -100,6 +104,8 @@
                         <th>Activity Code</th>
                         <th>Activity Name</th>
                         <th>Activity Date</th>
+                        <th>Zone Code</th>
+                        <th>Club Code</th>
                         <th>Submit Date</th>
                         <th>Exact Value</th>
                         <th>Submited By</th>

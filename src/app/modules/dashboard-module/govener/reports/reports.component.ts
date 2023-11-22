@@ -12,9 +12,14 @@ export class ReportsComponent implements OnInit {
   reportDataList: Report[] = [];
   reportDataModel = new Report();
 
+  // dtOptions: DataTables.Settings = {};
+
   constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
+    // this.dtOptions = {
+    //   pagingType: 'full_numbers'
+    // }
     this.onLoadClubActivityReportTable();
   }
 

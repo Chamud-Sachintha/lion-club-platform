@@ -91,6 +91,7 @@ export class ActivityComponent implements OnInit {
         this.updateActivityForm.controls['secondCatCode'].setValue(dataList.data[0].secondCatCode);
         this.updateActivityForm.controls['authUserCode'].setValue(dataList.data[0].authorizedUser);
         this.updateActivityForm.controls['activityName'].setValue(dataList.data[0].activityName);
+        this.updateActivityForm.controls['templateCode'].setValue(dataList.data[0].pointTemplateCode);
       }
     })
   }

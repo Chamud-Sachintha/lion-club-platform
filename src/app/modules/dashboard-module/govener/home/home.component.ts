@@ -34,9 +34,25 @@ export class HomeComponent implements OnInit {
       this.loadContextUserCounts();
     } else if (this.role == "E") {
       this.loadEvaluvatorCounts();
+    } else if (this.role == "RC") {
+      this.loadRegionalChairpersonDashboardData();
     }
 
     this.loadUserInfo();
+  }
+
+  loadRegionalChairpersonDashboardData() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.dashboardService.getRegionChairpersonDashboardData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        this.dashboardModel.activityCount = dataList.data[0].otalActivities;
+      }
+    })
   }
 
   loadUserInfo() {

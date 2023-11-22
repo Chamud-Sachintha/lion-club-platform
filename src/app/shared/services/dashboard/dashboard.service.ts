@@ -54,4 +54,9 @@ export class DashboardService {
     const path = environment.apiRoot + "get-eveluvator-dashboard-table-data";
     return this.http.post(path, searchParamModel);
   }
+
+  getRegionChairpersonDashboardData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-region-chairperson-dashboard-data";
+    return this.http.post(path, searchParamModel);
+  }
 }

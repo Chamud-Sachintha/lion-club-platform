@@ -60,7 +60,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     FormsModule,
     ReactiveFormsModule,
     TagInputModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ]
 })
 export class DashboardModuleModule { }
