@@ -154,6 +154,7 @@ export class ActivityComponent implements OnInit {
       this.activityInfo.token = sessionStorage.getItem("authToken");
       this.activityInfo.flag = sessionStorage.getItem("role");
 
+      
       this.activityService.addNewActivity(this.activityInfo).subscribe((resp: any) => {
         this.toastr.success("Add Activity", "Activity Added Successfully");
         location.reload();

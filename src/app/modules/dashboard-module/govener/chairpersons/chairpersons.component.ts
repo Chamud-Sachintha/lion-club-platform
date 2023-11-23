@@ -335,6 +335,9 @@ export class ChairpersonsComponent implements OnInit {
       email: ['', Validators.required],
       reCode: ['' ,Validators.required]
     })
+
+    this.updateRegionChairpersonForm.controls['code'].disable();
+    this.updateRegionChairpersonForm.controls['reCode'].disable();
   }
 
   initUpdateZonalChairpersonForm() {
@@ -344,6 +347,9 @@ export class ChairpersonsComponent implements OnInit {
       email: ['', Validators.required],
       zoneCode: ['' ,Validators.required]
     })
+
+    this.updateZonalChairpersonForm.controls['code'].disable();
+    this.updateZonalChairpersonForm.controls['zoneCode'].disable();
   }
 
 }

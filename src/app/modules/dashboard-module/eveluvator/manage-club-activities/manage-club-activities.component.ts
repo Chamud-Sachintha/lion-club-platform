@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ValueList } from 'src/app/models/ValueList/value-list';
 import { PointTemplateService } from 'src/app/shared/services/point-template/point-template.service';
 import { ActivityService } from 'src/app/shared/services/activity/activity.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-manage-club-activities',
   templateUrl: './manage-club-activities.component.html',
@@ -42,7 +43,8 @@ export class ManageClubActivitiesComponent implements OnInit {
               , private formBuilder: FormBuilder
               , private pointTemplateService: PointTemplateService
               , private activityService: ActivityService
-              , private toastr: ToastrService) {}
+              , private toastr: ToastrService
+              , private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.loadAvailableRegionList();
@@ -97,10 +99,14 @@ export class ManageClubActivitiesComponent implements OnInit {
       this.requestModel.status = status;
       this.requestModel.comment = comment;
 
+      this.spinner.show();
       this.clubActivityService.updateClubActivityStatusByEvaluvator(this.requestModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
+          this.spinner.hide();
           this.toastr.success("Update Club Activity", "Update Successfully");
+        } else {
+          this.toastr.success("Update Club Activity", resp.message);
         }
       })
     }

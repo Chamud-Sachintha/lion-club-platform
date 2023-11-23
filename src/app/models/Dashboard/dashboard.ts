@@ -8,4 +8,6 @@ export class Dashboard {
     rejectedCount!: number;
     pendingCount!: number;
     userName!: string;
+    totalFunds!: string;
+    totalPeopleServed!: string;
 }

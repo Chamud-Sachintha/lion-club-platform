@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Dashboard } from 'src/app/models/Dashboard/dashboard';
 import { DashboardTable } from 'src/app/models/DashboardTable/dashboard-table';
+import { RCCheckInfoModel } from 'src/app/models/RCChekInfoModel/rccheck-info-model';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { ClubService } from 'src/app/shared/services/club/club.service';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
+import { UsersService } from 'src/app/shared/services/users/users.service';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +21,10 @@ export class HomeComponent implements OnInit {
   cntuDashboardTableList: DashboardTable[] = [];
   cbUserDashboardTableDataList: DashboardTable[] = [];
   eveluvatorDashboardTableDataList: DashboardTable[] = [];
+  checkInfoPageData: RCCheckInfoModel[] = [];
   role!: string;
 
-  constructor(private dashboardService: DashboardService, private clubService: ClubService) {}
+  constructor(private dashboardService: DashboardService, private clubService: ClubService, private reChairPersonService: UsersService) {}
 
   ngOnInit(): void {
     this.checkPermisions()
@@ -50,7 +53,21 @@ export class HomeComponent implements OnInit {
       const dataList = JSON.parse(JSON.stringify(resp))
 
       if (resp.code === 1) {
-        this.dashboardModel.activityCount = dataList.data[0].otalActivities;
+        this.dashboardModel.activityCount = dataList.data[0].totalActivities;
+        this.dashboardModel.rejectedCount = dataList.data[0].rejectedActivities;
+        this.dashboardModel.pendingCount = dataList.data[0].pendingActivities;
+        this.dashboardModel.approvedCount = dataList.data[0].approvedActivities;
+      }
+    })
+
+    this.reChairPersonService.getRCUserCheckInfoPageData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachData: RCCheckInfoModel) => {
+          this.checkInfoPageData.push(eachData);
+        })
       }
     })
   }
@@ -202,6 +219,8 @@ export class HomeComponent implements OnInit {
       if (resp.code === 1) {
         this.dashboardModel.activityCount = dataList.data[0].activityCount;
         this.dashboardModel.clubCount = dataList.data[0].clubCount;
+        this.dashboardModel.totalFunds = dataList.data[0].totalFunds;
+        this.dashboardModel.totalPeopleServed = dataList.data[0].totalPeopleServed;
       }
     })
 

@@ -150,4 +150,14 @@ export class UsersService {
     const path = environment.apiRoot + "get-view-data-list-context-user";
     return this.http.post(path, searchParamModel);
   }
+
+  getRCUserCheckInfoPageData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-rc-user-check-info-page-data";
+    return this.http.post(path, searchParamModel);
+  }
+
+  getZCUserCheckInfoPageData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-zc-user-check-info-page-data";
+    return this.http.post(path, searchParamModel);
+  }
 }
