@@ -16,4 +16,5 @@ export class SearchParam {
     clubUserCode!: string;
     zoneCode!: string;
     clubCode!: any;
+    authCode!: string;
 }

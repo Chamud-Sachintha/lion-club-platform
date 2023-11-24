@@ -141,6 +141,7 @@ export class SubmitActivityComponent implements OnInit {
     this.searchParamModel.mainCategoryCode = this.mainCategoryCode;
     this.searchParamModel.firstCategoryCode = this.firstCatgoryCode;
     this.searchParamModel.secondCategoryCode = secondCategoryValue;
+    this.searchParamModel.authCode = "98";
 
     this.activityService.getActivityInfoByCodes(this.searchParamModel).subscribe((resp: any) => {
 
