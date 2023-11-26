@@ -238,6 +238,7 @@ export class SubmitNewActivityComponent implements OnInit {
     const documentValueList = this.selectedFiles;
     const exactValue = this.submitActivityForm.controls['extValue'].value;
     const dateOfActivity = this.submitActivityForm.controls['dateOfActivity'].value;
+    const clubCode = this.submitActivityForm.controls['clubCode'].value;
 
     if (activityCode == "") {
 
@@ -257,7 +258,7 @@ export class SubmitNewActivityComponent implements OnInit {
       this.clubActivityModel.flag = sessionStorage.getItem("role");
 
       formData.append("activityCode", activityCode);
-      formData.append("clubCode", this.clubCode);
+      formData.append("clubCode", clubCode);
       // formData.append("value", value);
       formData.append("token", this.token);
       formData.append("flag", this.clubActivityModel.flag);
@@ -287,6 +288,9 @@ export class SubmitNewActivityComponent implements OnInit {
           this.spinner.hide();
 
           this.getClubActivityList();
+        } else {
+          this.spinner.hide();
+          this.toastr.error("New Club Activity", resp.message);
         }
       }, (err) => {
         this.spinner.hide();
@@ -346,7 +350,8 @@ export class SubmitNewActivityComponent implements OnInit {
       conditionType: ['', Validators.required],
       valueList: this.formBuilder.array([]),
       extValue: ['', Validators.required],
-      dateOfActivity: ['', Validators.required]
+      dateOfActivity: ['', Validators.required],
+      clubCode: ['', Validators.required]
     })
   }
 
