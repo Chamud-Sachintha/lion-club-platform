@@ -72,7 +72,48 @@ export class ActivityComponent implements OnInit {
   }
 
   onSubmitUpdateActivityForm() {
+    const activityCode = this.updateActivityForm.controls['code'].value;
+    const activityName = this.updateActivityForm.controls['activityName'].value;
+    const mainCategoryCode = this.updateActivityForm.controls['mainCatCode'].value;
+    const firstCategoryCode = this.updateActivityForm.controls['firstCatCode'].value;
+    const secondCategoryCode = this.updateActivityForm.controls['secondCatCode'].value;
+    const authUserCode = this.updateActivityForm.controls['authUserCode'].value;
+    const templateCode = this.updateActivityForm.controls['templateCode'].value;
+    // const documentCode = this.addNewActivityForm.controls['documentCode'].value;
 
+    if (activityCode == "") {
+      this.toastr.error("Empty Feilds Found", "Please Enter Activity Code");
+    } else if (activityName == "") {
+      this.toastr.error("Empty Feilds Found", "Please Enter Activity Name");
+    } else if (mainCategoryCode == "") {
+      this.toastr.error("Empty Feilds Found", "Please Enter Main Category Code");
+    } else if (firstCategoryCode == "") {
+      this.toastr.error("Empty Feilds Found", "Please Enter First Category Code");
+    } else if (secondCategoryCode == "") {
+      this.toastr.error("Empty Feilds Found", "Please Enter Second Category Code");
+    } else if (authUserCode == "") {
+      this.toastr.error("Empty Feilds Found", "Please Enter Authorize User");
+    } else if (templateCode == "") {
+      this.toastr.error("Empty Feilds Found", "Please Enter Template Code");
+    } else {
+      this.activityInfo.activityCode = activityCode;
+      this.activityInfo.activityName = activityName;
+      this.activityInfo.mainCatCode = mainCategoryCode;
+      this.activityInfo.firstCatCode = firstCategoryCode;
+      this.activityInfo.secondCatCode = secondCategoryCode;
+      this.activityInfo.authUserCode = authUserCode;
+      this.activityInfo.templateCode = templateCode;
+      // this.activityInfo.documentCode = documentCode;
+
+      this.activityInfo.token = sessionStorage.getItem("authToken");
+      this.activityInfo.flag = sessionStorage.getItem("role");
+
+      
+      this.activityService.updateActivityByCode(this.activityInfo).subscribe((resp: any) => {
+        this.toastr.success("Update Activity", "Activity Updated Successfully");
+        location.reload();
+      }, (err) => {})
+    }
   }
 
   onLoadActivityInfo(activityCode: string) {

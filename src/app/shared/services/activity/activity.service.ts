@@ -32,6 +32,11 @@ export class ActivityService {
     return this.http.post(path, searchParamModel);
   }
 
+  updateActivityByCode(activityInfo: Activity) {
+    const path = environment.apiRoot + "update-activity-by-activity-code";
+    return this.http.post(path, activityInfo);
+  }
+
   deleteActivityByCode(searchParamModel: SearchParam) {
     const path = environment.apiRoot + "delete-activity-by-code";
     return this.http.post(path, searchParamModel);

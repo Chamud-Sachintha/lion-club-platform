@@ -125,8 +125,8 @@
                                         <td>{{ eachActivity.firstCatCode }}</td>
                                         <td>{{ eachActivity.secondCatCode }}</td>
                                         <td>{{ eachActivity.templateCode }}</td>
-                                        <td *ngIf="eachActivity.authUserCode == '1'">Club User</td>
-                                        <td *ngIf="eachActivity.authUserCode == '2'">Context User</td>
+                                        <td *ngIf="eachActivity.authUserCode == '1'">Context User</td>
+                                        <td *ngIf="eachActivity.authUserCode == '2'">Club User</td>
                                         <td *ngIf="eachActivity.authUserCode == '3'">Both Users</td>
                                         <td>
                                             <button class="btn btn-primary btn-sm" data-toggle="modal"
@@ -220,6 +220,7 @@
                     <select class="form-control" id="input-select" formControlName="authUserCode">
                         <option value="1">Context Users</option>
                         <option value="2">Club Users</option>
+                        <option value="3">Both Users</option>
                     </select>
                 </div>
             </div>
