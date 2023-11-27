@@ -16,6 +16,7 @@ import { ProofDocumentsService } from 'src/app/shared/services/proof-documents/p
 import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-category/second-sub-category.service';
 import { ToastrService } from 'ngx-toastr';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-activity',
@@ -44,7 +45,8 @@ export class ActivityComponent implements OnInit {
     , private docService: ProofDocumentsService
     , private activityService: ActivityService
     , private formBuilder: FormBuilder
-    , private toastr: ToastrService) { }
+    , private toastr: ToastrService
+    , private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.initCreatenewActivityForm();
@@ -108,10 +110,18 @@ export class ActivityComponent implements OnInit {
       this.activityInfo.token = sessionStorage.getItem("authToken");
       this.activityInfo.flag = sessionStorage.getItem("role");
 
-      
+      this.spinner.show();
       this.activityService.updateActivityByCode(this.activityInfo).subscribe((resp: any) => {
-        this.toastr.success("Update Activity", "Activity Updated Successfully");
-        location.reload();
+
+        if (resp.code === 1) {
+          this.toastr.success("Update Activity", "Activity Updated Successfully");
+        } else {
+          this.toastr.error("Update Activity", resp.message);
+        }
+
+        this.spinner.hide();
+        this.loadAllActivityList();
+
       }, (err) => {})
     }
   }
@@ -133,6 +143,7 @@ export class ActivityComponent implements OnInit {
         this.updateActivityForm.controls['authUserCode'].setValue(dataList.data[0].authorizedUser);
         this.updateActivityForm.controls['activityName'].setValue(dataList.data[0].activityName);
         this.updateActivityForm.controls['templateCode'].setValue(dataList.data[0].pointTemplateCode);
+        this.updateActivityForm.controls['documentCode'].setValue(dataList.data[0].documents);
       }
     })
   }
@@ -195,10 +206,16 @@ export class ActivityComponent implements OnInit {
       this.activityInfo.token = sessionStorage.getItem("authToken");
       this.activityInfo.flag = sessionStorage.getItem("role");
 
-      
+      this.spinner.show();
       this.activityService.addNewActivity(this.activityInfo).subscribe((resp: any) => {
-        this.toastr.success("Add Activity", "Activity Added Successfully");
-        location.reload();
+
+        if (resp.code === 1) {
+          this.toastr.success("Add Activity", "Activity Added Successfully");
+        } else {
+          this.toastr.error("Add Activity", resp.message);
+        }
+        
+        this.loadAllActivityList();
       }, (err) => {})
     }
   }

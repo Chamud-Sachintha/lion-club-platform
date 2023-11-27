@@ -243,6 +243,14 @@
                 />
               </div>
             </div>
+            <div class="col-12">
+                <tag-input [onlyFromAutocomplete]="true" formControlName="documentCode">
+                    <tag-input-dropdown
+                            [showDropdownIfEmpty]="true"
+                            [autocompleteObservable]="requestAutocompleteItemsFake">
+                    </tag-input-dropdown>
+                </tag-input>
+            </div>
           </div>
           <div class="modal-footer mt-3">
             <a href="#" class="btn btn-secondary" data-dismiss="modal"
