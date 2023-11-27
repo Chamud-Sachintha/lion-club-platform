@@ -17,6 +17,7 @@ import { SecondSubCategoryService } from 'src/app/shared/services/second-sub-cat
 import { ToastrService } from 'ngx-toastr';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { NgxSpinnerService } from 'ngx-spinner';
+declare var $: any; 
 
 @Component({
   selector: 'app-activity',
@@ -35,6 +36,10 @@ export class ActivityComponent implements OnInit {
   searchParamModel = new SearchParam();
   requestModel = new Request();
   activityInfo = new Activity();
+  allMainCategoryList: MainCategory[] = [];
+  allFirstCategoryList: FirstSubCategory[] = [];
+  allSecondCategoryList: SecondSubCategory[] = [];
+  documentForm!: FormGroup;
 
   addNewActivityForm!: FormGroup;
   updateActivityForm!: FormGroup;
@@ -49,14 +54,34 @@ export class ActivityComponent implements OnInit {
     , private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.initUpdateDocumentForm();
     this.initCreatenewActivityForm();
     this.initUpdateActivcityForm();
     this.getMainActivityCategoryList();
-    this.getFirstActivityCategoryList();
-    this.getSecondActivityCategoryList();
     this.getProofDocList();
     this.getAllTemplateList();
     this.loadAllActivityList();
+  }
+
+  initUpdateDocumentForm() {
+    this.documentForm = this.formBuilder.group({
+      documentCodes: ['', Validators.required]
+    })
+  }
+
+  onSubmitSaveDocumentCodesForm() {
+    const selectedDocCodes = this.documentForm.controls['documentCodes'].value;
+
+    console.log(this.documentForm.value);
+  }
+
+  onClickChangeDocuments() {
+    $('#exampleModal').modal('hide');
+    $('#exampleModalDoc').modal('show');
+
+    $('#keep-order').multiSelect({ keepOrder: true });
+
+    return false;
   }
 
   onClickDeleteActivity(activityCode: string) {
@@ -122,7 +147,7 @@ export class ActivityComponent implements OnInit {
         this.spinner.hide();
         this.loadAllActivityList();
 
-      }, (err) => {})
+      }, (err: any) => {})
     }
   }
 
@@ -144,6 +169,60 @@ export class ActivityComponent implements OnInit {
         this.updateActivityForm.controls['activityName'].setValue(dataList.data[0].activityName);
         this.updateActivityForm.controls['templateCode'].setValue(dataList.data[0].pointTemplateCode);
         this.updateActivityForm.controls['documentCode'].setValue(dataList.data[0].documents);
+
+        this.updateActivityForm.controls['documentCode'].disable();
+      }
+    })
+
+    this.getAllMainCategoryList();
+    this.getAllFirstCategoryList();
+    this.getAllSecondCategoryList();
+  }
+
+  getAllSecondCategoryList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.secondSubCategoryservice.getSecondCategoryList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachCategory: SecondSubCategory) => {
+          this.allSecondCategoryList.push(eachCategory)
+        })
+      }
+    })
+  }
+
+  getAllFirstCategoryList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.firstCategoryService.getFirstSubcategoryList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachCategory: FirstSubCategory) => {
+          this.allFirstCategoryList.push(eachCategory);
+        })
+      }
+    })
+  }
+
+  getAllMainCategoryList() {
+    this.requestModel.token = sessionStorage.getItem("authToken");
+    this.requestModel.flag = sessionStorage.getItem("role");
+
+    this.mainCategoryService.getMainCategoryList(this.requestModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp))
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachCategory: MainCategory) => {
+          this.allMainCategoryList.push(eachCategory)
+        })
       }
     })
   }
@@ -264,11 +343,12 @@ export class ActivityComponent implements OnInit {
     }, (err) => { })
   }
 
-  getSecondActivityCategoryList() {
-    this.requestModel.token = sessionStorage.getItem("authToken");
-    this.requestModel.flag = sessionStorage.getItem("role");
+  getSecondActivityCategoryList(firstCategoryCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.firstCategoryCode = firstCategoryCode;
 
-    this.secondSubCategoryservice.getSecondCategoryList(this.requestModel).subscribe((resp: any) => {
+    this.secondSubCategoryservice.getSecondCategoryListByFirstCategoryCode(this.searchParamModel).subscribe((resp: any) => {
       const dataList = JSON.parse(JSON.stringify(resp));
 
       if (resp.code === 1) {
@@ -279,11 +359,14 @@ export class ActivityComponent implements OnInit {
     }, (err) => { })
   }
 
-  getFirstActivityCategoryList() {
-    this.requestModel.token = sessionStorage.getItem("authToken");
-    this.requestModel.flag = sessionStorage.getItem("role");
+  getFirstActivityCategoryList(mainCategoryCode: string) {
+    // this.requestModel.token = sessionStorage.getItem("authToken");
+    // this.requestModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.mainCategoryCode = mainCategoryCode;
 
-    this.firstCategoryService.getFirstSubcategoryList(this.requestModel).subscribe((resp: any) => {
+    this.firstCategoryService.getFirstCategoryListByMainCategory(this.searchParamModel).subscribe((resp: any) => {
       const dataList = JSON.parse(JSON.stringify(resp));
 
       dataList.data[0].forEach((firstCategory: FirstSubCategory) => {
