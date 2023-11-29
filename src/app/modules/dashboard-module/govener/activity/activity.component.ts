@@ -39,7 +39,7 @@ export class ActivityComponent implements OnInit {
   allMainCategoryList: MainCategory[] = [];
   allFirstCategoryList: FirstSubCategory[] = [];
   allSecondCategoryList: SecondSubCategory[] = [];
-  documentForm!: FormGroup;
+  selectedDocList: string[] = [];
 
   addNewActivityForm!: FormGroup;
   updateActivityForm!: FormGroup;
@@ -54,7 +54,6 @@ export class ActivityComponent implements OnInit {
     , private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.initUpdateDocumentForm();
     this.initCreatenewActivityForm();
     this.initUpdateActivcityForm();
     this.getMainActivityCategoryList();
@@ -63,16 +62,40 @@ export class ActivityComponent implements OnInit {
     this.loadAllActivityList();
   }
 
-  initUpdateDocumentForm() {
-    this.documentForm = this.formBuilder.group({
-      documentCodes: ['', Validators.required]
-    })
+  onClickDocCode(docCode: string) {
+    const index = this.doccCodeList.indexOf(docCode);
+    if (index > -1) { // only splice array when item is found
+      this.doccCodeList.splice(index, 1); // 2nd parameter means remove one item only
+    }
+
+    this.selectedDocList.push(docCode)
   }
 
-  onSubmitSaveDocumentCodesForm() {
-    const selectedDocCodes = this.documentForm.controls['documentCodes'].value;
+  onClickDocCodeRev(docCode: string) {
+    const index = this.selectedDocList.indexOf(docCode);
+    if (index > -1) { // only splice array when item is found
+      this.selectedDocList.splice(index, 1); // 2nd parameter means remove one item only
+    }
 
-    console.log(this.documentForm.value);
+    this.doccCodeList.push(docCode)
+  }
+
+  onClickSaveDocs() {
+
+    $('#exampleModalDoc').modal('hide');
+    $('#exampleModal').modal('show');
+    
+    this.updateActivityForm.controls['documentCode'].setValue(this.selectedDocList);
+  }
+
+  onClickMainModelClose() {
+    $('#exampleModal').modal('hide');
+    location.reload();
+  }
+
+  onClickDocModalClose() {
+    $('#exampleModalDoc').modal('hide');
+    location.reload();
   }
 
   onClickChangeDocuments() {
