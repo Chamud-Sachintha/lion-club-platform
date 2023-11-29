@@ -4,4 +4,5 @@ export class Request {
     activityCode!: string;
     status!: string;
     comment!: string;
+    conditionType!: string;
 }

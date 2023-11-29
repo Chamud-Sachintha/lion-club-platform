@@ -6,6 +6,7 @@ import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-evaluators',
@@ -22,7 +23,8 @@ export class EvaluatorsComponent implements OnInit {
   updateEvaluvatorForm!: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService
-            , private tostr: ToastrService) {}
+            , private tostr: ToastrService
+            , private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.initCreateEvaluatorForm();
@@ -126,11 +128,17 @@ export class EvaluatorsComponent implements OnInit {
       this.evaluvatorModel.token = sessionStorage.getItem("authToken");
       this.evaluvatorModel.flag = sessionStorage.getItem("role");
 
+      this.spinner.show();
       this.userService.createEvaluator(this.evaluvatorModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
           this.tostr.success("Create Evaluvator", "Evaluvator Create Successfully");
-          location.reload();
+          this.spinner.hide();
+          
+          this.loadEvaluvatorsList();
+        } else {
+          this.tostr.error("Create Evaluvator", resp.message);
+          this.spinner.hide();
         }
       }, (err) => {
 

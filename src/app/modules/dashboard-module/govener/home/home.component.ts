@@ -3,9 +3,11 @@ import { Dashboard } from 'src/app/models/Dashboard/dashboard';
 import { DashboardTable } from 'src/app/models/DashboardTable/dashboard-table';
 import { RCCheckInfoModel } from 'src/app/models/RCChekInfoModel/rccheck-info-model';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
+import { ZCCheckInfoModel } from 'src/app/models/ZCChekInfoModel/zccheck-info-model';
 import { ClubService } from 'src/app/shared/services/club/club.service';
 import { DashboardService } from 'src/app/shared/services/dashboard/dashboard.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
+import { ZoneService } from 'src/app/shared/services/zone/zone.service';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +25,10 @@ export class HomeComponent implements OnInit {
   eveluvatorDashboardTableDataList: DashboardTable[] = [];
   checkInfoPageData: RCCheckInfoModel[] = [];
   role!: string;
+  zcUserCheckInfoData: ZCCheckInfoModel[] = [];
 
-  constructor(private dashboardService: DashboardService, private clubService: ClubService, private reChairPersonService: UsersService) {}
+  constructor(private dashboardService: DashboardService, private clubService: ClubService, private reChairPersonService: UsersService
+            , private zcPersonService: UsersService) {}
 
   ngOnInit(): void {
     this.checkPermisions()
@@ -39,9 +43,29 @@ export class HomeComponent implements OnInit {
       this.loadEvaluvatorCounts();
     } else if (this.role == "RC") {
       this.loadRegionalChairpersonDashboardData();
+    } else if (this.role == "ZC") {
+      this.loadZonaChairpersonDashboardData();
     }
 
     this.loadUserInfo();
+  }
+
+  loadZonaChairpersonDashboardData() {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+
+    this.zcPersonService.getZCUserCheckInfoPageData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachData: ZCCheckInfoModel) => {
+          this.zcUserCheckInfoData.push(eachData);
+        })
+      }
+    })
+
+    
   }
 
   loadRegionalChairpersonDashboardData() {

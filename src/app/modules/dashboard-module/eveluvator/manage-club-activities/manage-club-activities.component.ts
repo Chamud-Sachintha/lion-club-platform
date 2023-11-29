@@ -88,15 +88,19 @@ export class ManageClubActivitiesComponent implements OnInit {
 
     const activityCode = this.checkClubActivityForm.controls['activityCode'].value;
     const status = this.checkClubActivityForm.controls['status'].value;
+    const conditionType = this.checkClubActivityForm.controls['conditionType'].value;
     const comment = this.checkClubActivityForm.controls['comment'].value;
 
     if (status == 0) {
-
+      this.toastr.error("Empty Feilds Found", "Status is required.");
+    } else if (conditionType == "") {
+      this.toastr.error("Empty Feilds Found", "Range is required.");
     } else {
       this.requestModel.token = sessionStorage.getItem("authToken");
       this.requestModel.flag = sessionStorage.getItem("role");
       this.requestModel.activityCode = activityCode;
       this.requestModel.status = status;
+      this.requestModel.conditionType = conditionType;
       this.requestModel.comment = comment;
 
       this.spinner.show();

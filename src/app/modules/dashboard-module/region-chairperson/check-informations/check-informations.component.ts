@@ -50,7 +50,6 @@ export class CheckInformationsComponent implements OnInit {
   loadZoneByRegionCode() {
     this.zoneModel.token = sessionStorage.getItem("authToken");
     this.zoneModel.flag = sessionStorage.getItem("role");
-    this.zoneModel.regionCode = sessionStorage.getItem("reCode");
 
     this.zoneService.getZoneListByReCode(this.zoneModel).subscribe((resp: any) => {
 

@@ -6,6 +6,7 @@ import { Request } from 'src/app/models/Request/request';
 import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-context-users',
@@ -21,7 +22,8 @@ export class ContextUsersComponent implements OnInit {
   registerContextUserForm!: FormGroup;
   updateContextUserForm!: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService, private tostr: ToastrService) {}
+  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UsersService, private tostr: ToastrService
+            , private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.initCreateContextUserForm();
@@ -127,9 +129,15 @@ export class ContextUsersComponent implements OnInit {
 
       this.userService.createContextUser(this.contextUserModel).subscribe((resp: any) => {
 
+        this.spinner.show();
         if (resp.code === 1) {
           this.tostr.success("Create Context User", "Context User Created Successfully");
-          location.reload();
+          this.spinner.hide();
+
+          this.loadContextUserList();
+        } else {
+          this.tostr.error("Create Context User", resp.message);
+          this.spinner.hide();
         }
       }, (err) => {
 

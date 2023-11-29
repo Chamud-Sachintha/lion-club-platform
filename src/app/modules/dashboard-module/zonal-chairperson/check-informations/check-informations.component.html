@@ -20,15 +20,16 @@
             <h5 class="card-header">Manage Club Activities Here</h5>
             <div class="card-body">
                 <form action="">
-                    <div class="col-md-6 col-lg-6 col-sm-12">
-                        <label for="input-select" class="col-form-label">Select Zone</label>
+                    <div class="col-md-6 col-lg-6 colg-sm-12">
+                        <label for="input-select" class="col-form-label">Select Club</label>
                     </div>
                     <div class="col-md-6 col-lg-6 col-sm-12"></div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <select class="form-control" id="input-select" formControlName="mainCategoryCode">
-                                    <!-- <option value="{{ this.eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option> -->
+                                    <option value="">-- Select Club --</option>
+                                    <option value="{{ this.eachClub.clubCode }}" *ngFor="let eachClub of this.clubList">{{ this.eachClub.clubCode }}</option>
                                 </select>
                             </div>
                         </div>
@@ -57,7 +58,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let eachData of this.zcUserCheckInfoData; index as i" >
+                                    <tr *ngFor="let eachData of this.zcUserCheckInfoData; index as i">
                                         <td>{{ i + 1 }}</td>
                                         <td>{{ eachData.clubRank }}</td>
                                         <td>{{ eachData.clubCode }}</td>

@@ -45,4 +45,9 @@ export class ClubService {
     const path = environment.apiRoot + "find-rank";
     return this.http.post(path, searchParamModel);
   }
+
+  getClubListByZoneCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-clubs-by-zone";
+    return this.http.post(path, searchParamModel);
+  }
 }
