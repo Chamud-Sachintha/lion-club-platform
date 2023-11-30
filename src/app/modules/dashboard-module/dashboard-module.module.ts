@@ -28,10 +28,11 @@ import { SubmitNewActivityComponent } from './context-user/submit-new-activity/s
 import { CheckInformationsComponent } from './region-chairperson/check-informations/check-informations.component';
 import { ReportsComponent } from './govener/reports/reports.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { FilterDataPipe } from 'src/app/shared/pipes/filter-data.pipe';
 
 @NgModule({
   declarations: [
-  
+    FilterDataPipe,
     HomeComponent,
        UserManagementComponent,
        ChairpersonsComponent,

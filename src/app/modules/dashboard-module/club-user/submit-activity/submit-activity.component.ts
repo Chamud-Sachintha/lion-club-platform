@@ -227,6 +227,7 @@ export class SubmitActivityComponent implements OnInit {
     const documentValueList = this.selectedFiles;
     const exactValue = this.submitActivityForm.controls['extValue'].value;
     const dateOfActivity = this.submitActivityForm.controls['dateOfActivity'].value;
+    const aditionalInfo = this.submitActivityForm.controls['aditionalInfo'].value;
 
     if (activityCode == "") {
 
@@ -267,6 +268,7 @@ export class SubmitActivityComponent implements OnInit {
       formData.append("creator", this.userCode);
       formData.append("extValue", exactValue);
       formData.append("dateOfActivity", dateOfActivity);
+      formData.append("aditionalInfo", aditionalInfo);
 
       this.spinner.show();
       this.clubActivityService.submitNewClubActivity(formData).subscribe((resp: any) => {
@@ -335,7 +337,8 @@ export class SubmitActivityComponent implements OnInit {
       conditionType: ['', Validators.required],
       valueList: this.formBuilder.array([]),
       extValue: ['', Validators.required],
-      dateOfActivity: ['', Validators.required]
+      dateOfActivity: ['', Validators.required],
+      aditionalInfo: ''
     })
   }
 

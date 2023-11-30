@@ -11,6 +11,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { DashboardHeaderComponent } from './shared/dashboard-header/dashboard-header.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { FilterDataPipe } from './shared/pipes/filter-data.pipe';
 
 @NgModule({
   declarations: [

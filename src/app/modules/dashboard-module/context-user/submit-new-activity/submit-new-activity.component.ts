@@ -239,6 +239,7 @@ export class SubmitNewActivityComponent implements OnInit {
     const exactValue = this.submitActivityForm.controls['extValue'].value;
     const dateOfActivity = this.submitActivityForm.controls['dateOfActivity'].value;
     const clubCode = this.submitActivityForm.controls['clubCode'].value;
+    const aditionalInfo = this.submitActivityForm.controls['aditionalInfo'].value;
 
     if (activityCode == "") {
       this.toastr.error("Empty Feilds Founded", "Activity Code is required.");
@@ -279,6 +280,7 @@ export class SubmitNewActivityComponent implements OnInit {
       formData.append("creator", this.userCode);
       formData.append("extValue", exactValue);
       formData.append("dateOfActivity", dateOfActivity);
+      formData.append('aditionalInfo', aditionalInfo);
 
       this.spinner.show();
       this.clubActivityService.submitNewClubActivity(formData).subscribe((resp: any) => {
@@ -351,7 +353,8 @@ export class SubmitNewActivityComponent implements OnInit {
       valueList: this.formBuilder.array([]),
       extValue: ['', Validators.required],
       dateOfActivity: ['', Validators.required],
-      clubCode: ['', Validators.required]
+      clubCode: ['', Validators.required],
+      aditionalInfo: ''
     })
   }
 

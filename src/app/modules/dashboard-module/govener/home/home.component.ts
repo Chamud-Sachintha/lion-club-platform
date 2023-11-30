@@ -256,6 +256,8 @@ export class HomeComponent implements OnInit {
         dataList.data[0].forEach((eachClub: DashboardTable) => {
           this.dashboardTableList.push(eachClub);
         })
+
+        this.dashboardTableList.sort((a,b) => a.rank - b.rank);
       }
     })
   }

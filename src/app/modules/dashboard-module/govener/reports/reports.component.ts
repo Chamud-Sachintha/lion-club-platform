@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Report } from 'src/app/models/Report/report';
 import { ReportService } from 'src/app/shared/services/report/report.service';
 
@@ -11,16 +12,33 @@ export class ReportsComponent implements OnInit {
 
   reportDataList: Report[] = [];
   reportDataModel = new Report();
-
+  filterDetailsForm!: FormGroup;
+  searchText = '';
+  name!: any;
   // dtOptions: DataTables.Settings = {};
 
-  constructor(private reportService: ReportService) {}
+  constructor(private reportService: ReportService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     // this.dtOptions = {
     //   pagingType: 'full_numbers'
     // }
     this.onLoadClubActivityReportTable();
+    this.initFilterInfoForm();
+  }
+
+  initFilterInfoForm() {
+    this.filterDetailsForm = this.formBuilder.group({
+      code: ['', Validators.required],
+      activityName: ['', Validators.required]
+    })
+  }
+
+  onSubmitFilterValusForm() {
+    const activityCode = this.filterDetailsForm.controls['code'].value;
+    const activityName = this.filterDetailsForm.controls['activityName'].value;
+
+    
   }
 
   onLoadClubActivityReportTable() {
