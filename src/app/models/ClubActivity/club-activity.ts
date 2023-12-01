@@ -18,6 +18,8 @@ export class ClubActivity {
     status!: number;
     creator!: number;
     type!: string;
+    requestedRangeValue!: string;
+    approvedPoints!: string;
     reCode!: string;
     zoneCode!: string;
     extValue!: string;

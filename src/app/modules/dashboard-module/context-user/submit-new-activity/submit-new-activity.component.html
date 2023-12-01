@@ -130,30 +130,46 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Activity Code</th>
-                                        <th>Region</th>
-                                        <th>Zone</th>
-                                        <th>Club</th>
-                                        <th>Create Time</th>
+                                        <th>Activity Name</th>
+                                        <th>Type</th>
+                                        <th>Exact Value</th>
+                                        <th>Claimed Points</th>
+                                        <th>Approved Points</th>
+                                        <th>Activity Status</th>
+                                        <th>Activity Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let eachActivity of this.clubActivityList; index as i">
-                                        <td>{{ i }}</td>
+                                        <td>{{ i + 1 }}</td>
                                         <td>{{ eachActivity.activityCode }}</td>
-                                        <td>{{ eachActivity.reCode }}</td>
-                                        <td>{{ eachActivity.zoneCode }}</td>
-                                        <td>{{ eachActivity.clubCode }}</td>
-                                        <td>{{ eachActivity.dateOfActivity | date }}</td>
+                                        <td>{{ eachActivity.activityName }}</td>
+                                        <td>{{ eachActivity.type }}</td>
+                                        <td>{{ eachActivity.extValue }}</td>
+                                        <td>{{ eachActivity.requestedRangeValue }}</td>
+                                        <td>{{ eachActivity.approvedPoints }}</td>
+                                        <td *ngIf="eachActivity.status == 1">Approve</td>
+                                        <td *ngIf="eachActivity.status == 2">Reject</td>
+                                        <td *ngIf="eachActivity.status == 0">Pending</td>
+                                        <td>{{ eachActivity.activityTime | date }}</td>
+                                        <!-- <td>
+                                            <button class="btn btn-primary btn-sm">Update</button>
+                                            <button class="btn btn-danger btn-sm" style="margin-left: 10px;">Delete</button>
+                                        </td> -->
+
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>#</th>
                                         <th>Activity Code</th>
-                                        <th>Region</th>
-                                        <th>Zone</th>
-                                        <th>Club</th>
-                                        <th>Create Time</th>
+                                        <th>Activity Name</th>
+                                        <th>Type</th>
+                                        <th>Exact Value</th>
+                                        <th>Claimed Points</th>
+                                        <th>Approved Points</th>
+                                        <th>Activity Status</th>
+                                        <th>Activity Time</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -95,8 +95,8 @@ export class SubmitNewActivityComponent implements OnInit {
 
       if (resp.code === 1) {
         dataList.data[0].forEach((eachActivity: ClubActivity) => {
-          const formatedDate = parseInt(eachActivity.dateOfActivity) * 1000;
-          eachActivity.dateOfActivity = formatedDate.toString();
+          const formatedDate = parseInt(eachActivity.activityTime) * 1000;
+          eachActivity.activityTime = formatedDate.toString();
 
           this.clubActivityList.push(eachActivity)
         })

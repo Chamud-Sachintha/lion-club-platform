@@ -122,6 +122,8 @@
                                         <th>Activity Name</th>
                                         <th>Type</th>
                                         <th>Exact Value</th>
+                                        <th>Claimed Points</th>
+                                        <th>Approved Points</th>
                                         <th>Activity Status</th>
                                         <th>Activity Time</th>
                                     </tr>
@@ -133,6 +135,8 @@
                                         <td>{{ eachActivity.activityName }}</td>
                                         <td>{{ eachActivity.type }}</td>
                                         <td>{{ eachActivity.extValue }}</td>
+                                        <td>{{ eachActivity.requestedRangeValue }}</td>
+                                        <td>{{ eachActivity.approvedPoints }}</td>
                                         <td *ngIf="eachActivity.status == 1">Approve</td>
                                         <td *ngIf="eachActivity.status == 2">Reject</td>
                                         <td *ngIf="eachActivity.status == 0">Pending</td>
@@ -151,6 +155,8 @@
                                         <th>Activity Name</th>
                                         <th>Type</th>
                                         <th>Exact Value</th>
+                                        <th>Claimed Points</th>
+                                        <th>Approved Points</th>
                                         <th>Activity Status</th>
                                         <th>Create Time</th>
                                     </tr>
