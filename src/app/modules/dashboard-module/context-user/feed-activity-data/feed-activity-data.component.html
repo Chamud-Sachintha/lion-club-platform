@@ -19,31 +19,32 @@
         <div class="card">
             <h5 class="card-header">Manage Club Activities Here</h5>
             <div class="card-body">
-                <form action="">
+                <!-- <form action=""> -->
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="input-select" class="col-form-label">Select Region</label>
                                 <select class="form-control" id="input-select" formControlName="mainCategoryCode" #ref (change)="onChangeRegion(ref.value)">
                                     <option value="{{ this.region.regionCode }}" *ngFor="let region of this.regionList">{{ this.region.regionCode }}</option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="input-select" class="col-form-label">Select Zone</label>
-                                <select class="form-control" id="input-select" formControlName="mainCategoryCode">
+                                <label for="input-select" class="col-form-label">Type anything to Search</label>
+                                <!-- <select class="form-control" id="input-select" formControlName="mainCategoryCode">
                                     <option value="{{ this.eachZone.zoneCode }}" *ngFor="let eachZone of this.zoneList">{{ this.eachZone.zoneCode }}</option>
-                                </select>
+                                </select> -->
+                                <input type="text" class="form-control" [(ngModel)]="searchText">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-12">
                             <button class="btn btn-primary btn-sm">Filter Informations</button>
                         </div>
-                    </div>
-                </form>
+                    </div> -->
+                <!-- </form> -->
             </div>
             <div class="card-body border-top">
                 <h3>List of Club Activities Available</h3>
@@ -62,8 +63,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let eachClub of this.rankList; index as i">
-                                        <td>{{ i }}</td>
+                                    <tr *ngFor="let eachClub of this.rankList | filterData: searchText; index as i">
+                                        <td>{{ i + 1 }}</td>
                                         <td>{{ eachClub.clubCode }}</td>
                                         <td>{{ eachClub.activityName }}</td>
                                         <td>{{ eachClub.points }}</td>

@@ -107,6 +107,8 @@
                     <td *ngIf="this.eachActivity.status == 1">Approve</td>
                     <td *ngIf="this.eachActivity.status == 0">Pending</td>
                     <td *ngIf="this.eachActivity.status == 2">Reject</td>
+                    <td *ngIf="this.eachActivity.status == 3">Hold For Further Evaluvation</td>
+                    <td *ngIf="this.eachActivity.status == 4">Appoved with Corrections</td>
                     <td>{{ eachActivity.createTime | date }}</td>
                     <td>{{ eachActivity.dateOfActivity | date }}</td>
                     <td>
@@ -174,7 +176,7 @@
           <span aria-hidden="true">&times;</span>
         </a>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="max-height: 500px; overflow-y: scroll;">
         <form [formGroup]="checkClubActivityForm" (ngSubmit)="onUpdateCheckClubActivityForm()">
             <div class="row">
                 <div class="col-12">
@@ -280,6 +282,14 @@
                 <div class="form-group">
                   <label for="input-select" class="col-form-label">Comment</label>
                   <textarea name="" id="" cols="30" rows="5" formControlName="comment" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="input-select" class="col-form-label">Aditional Info</label>
+                  <textarea name="" id="" cols="30" rows="5" formControlName="aditionalInfo" class="form-control"></textarea>
                 </div>
               </div>
             </div>

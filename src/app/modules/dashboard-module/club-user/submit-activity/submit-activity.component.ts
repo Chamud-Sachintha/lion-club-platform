@@ -152,6 +152,8 @@ export class SubmitActivityComponent implements OnInit {
           this.activityList.push(eachActivity);
         })
       }
+
+      this.activityList.sort((a, b) => a.activityCode.localeCompare(b.activityCode));
     })
   }
 
@@ -172,6 +174,8 @@ export class SubmitActivityComponent implements OnInit {
           this.secondCategoryList.push(secondCategory);
         })
       }
+
+      this.secondCategoryList.sort((a, b) => a.secondSubCategoryCode.localeCompare(b.secondSubCategoryCode));
     })
   }
 
@@ -188,6 +192,8 @@ export class SubmitActivityComponent implements OnInit {
           this.mainCategoryList.push(mainCategory)
         })
       }
+
+      this.mainCategoryList.sort((a, b) => a.mainCategoryCode.localeCompare(b.mainCategoryCode));
     })
   }
 
@@ -208,6 +214,8 @@ export class SubmitActivityComponent implements OnInit {
           this.firstCategoryList.push(eachCategory);
         })
       }
+
+      this.firstCategoryList.sort((a, b) => a.firstSubCategoryCode.localeCompare(b.firstSubCategoryCode));
     })
   }
 

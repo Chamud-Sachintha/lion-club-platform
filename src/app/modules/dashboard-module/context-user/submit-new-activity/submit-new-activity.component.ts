@@ -80,6 +80,8 @@ export class SubmitNewActivityComponent implements OnInit {
           this.clubList.push(eachClub);
         })
       }
+
+      this.clubList.sort((a, b) => a.clubCode.localeCompare(b.clubCode));
     })
   }
 
@@ -182,6 +184,8 @@ export class SubmitNewActivityComponent implements OnInit {
         dataList.data[0].forEach((secondCategory: SecondSubCategory) => {
           this.secondCategoryList.push(secondCategory);
         })
+
+        this.secondCategoryList.sort((a,b) => a.secondSubCategoryCode.localeCompare(b.secondSubCategoryCode)); // b - a for reverse sort
       }
     })
   }

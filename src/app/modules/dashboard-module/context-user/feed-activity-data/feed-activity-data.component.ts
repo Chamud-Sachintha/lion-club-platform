@@ -24,6 +24,7 @@ export class FeedActivityDataComponent implements OnInit {
   clubActivityList: ClubActivity[] = [];
   searchParamModel = new SearchParam();
   rankList: ViewData[] = [];
+  searchText = '';
 
   constructor(private regionService: RegionService, private zoneService: ZoneService, private clubActivityService: ClubActivityServiceService, private userService: UsersService
             , private clubService: ClubService) {}
