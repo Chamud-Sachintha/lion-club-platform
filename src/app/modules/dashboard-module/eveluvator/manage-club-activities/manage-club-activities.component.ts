@@ -146,7 +146,7 @@ export class ManageClubActivitiesComponent implements OnInit {
       this.checkClubActivityForm.controls['activityCode'].setValue(dataList.data[0].clubActivityId);
       this.checkClubActivityForm.controls['conditionType'].setValue(dataList.data[0].type);
       this.checkClubActivityForm.controls['comment'].setValue(dataList.data[0].comment);
-      this.checkClubActivityForm.controls['aditionalInfo'].setValue(dataList.data[0].aditionalInfo);
+      this.checkClubActivityForm.controls['aditionalInfo'].setValue(dataList.data[0].aditionInfo);
     })
 
     this.loadTemplateCodesByActivityCode(activityCode);
@@ -229,7 +229,7 @@ export class ManageClubActivitiesComponent implements OnInit {
           this.clubActivityList.push(eachClubActivity);
         })
 
-        this.clubActivityList.sort((a, b) => a.createTime.localeCompare(b.createTime))
+        // this.clubActivityList.sort((a, b) => a.createTime.localeCompare(b.createTime))
       }
     })
   }
