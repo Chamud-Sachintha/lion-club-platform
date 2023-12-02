@@ -104,9 +104,9 @@
                   <tr *ngFor="let eachActivity of this.clubActivityList">
                     <td>{{ eachActivity.activityCode }}</td>
                     <td>{{ eachActivity.clubCode }}</td>
-                    <td *ngIf="this.eachActivity.status == 1">Approve</td>
+                    <td *ngIf="this.eachActivity.status == 1">Approved</td>
                     <td *ngIf="this.eachActivity.status == 0">Pending</td>
-                    <td *ngIf="this.eachActivity.status == 2">Reject</td>
+                    <td *ngIf="this.eachActivity.status == 2">Rejected</td>
                     <td *ngIf="this.eachActivity.status == 3">Hold For Further Evaluvation</td>
                     <td *ngIf="this.eachActivity.status == 4">Appoved with Corrections</td>
                     <td>{{ eachActivity.createTime | date }}</td>
