@@ -29,7 +29,7 @@
     <div class="card">
       <h5 class="card-header">Manage Club Activities Here</h5>
       <div class="card-body">
-        <form [formGroup]="filterClubActivityListForm" (ngSubmit)="onSubmitFilterClubListForm()">
+        <!-- <form [formGroup]="filterClubActivityListForm" (ngSubmit)="onSubmitFilterClubListForm()">
           <div class="row">
             <div class="col-md-6 col-lg-6 col-sm-12">
               <div class="form-group">
@@ -81,7 +81,13 @@
               </button>
             </div>
           </div>
-        </form>
+        </form> -->
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-12">
+            <label for="">Type Anything to Search</label>
+            <input type="text" class="form-control" placeholder="Type Zone code to filter" [(ngModel)]="searchText">
+          </div>
+        </div>
       </div>
       <div class="card-body border-top">
         <h3>List of Club Activities Available</h3>
@@ -101,7 +107,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let eachActivity of this.clubActivityList">
+                  <tr *ngFor="let eachActivity of this.clubActivityList | filterData: searchText">
                     <td>{{ eachActivity.activityCode }}</td>
                     <td>{{ eachActivity.clubCode }}</td>
                     <td *ngIf="this.eachActivity.status == 1">Approved</td>

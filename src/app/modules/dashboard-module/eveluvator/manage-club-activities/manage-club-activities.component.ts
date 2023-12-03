@@ -37,6 +37,7 @@ export class ManageClubActivitiesComponent implements OnInit {
   activityInfo = new Activity();
   pointTemplateObjModel = new SearchParam();
   zoneModel = new Zone();
+  searchText = '';
 
   constructor (private regionService: RegionService, private zoneService: ZoneService
               , private clubActivityService: ClubActivityServiceService

@@ -219,6 +219,8 @@ export class HomeComponent implements OnInit {
       if (resp.code === 1) {
         this.dashboardModel.ponitsTotal = dataList.data[0].pointsTotal;
         this.dashboardModel.activityCount = dataList.data[0].activityCount;
+        this.dashboardModel.totalFunds = dataList.data[0].totalFunds;
+        this.dashboardModel.totalPeopleServed = dataList.data[0].totalPeopleServed;
       }
     })
 
