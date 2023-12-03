@@ -15,4 +15,5 @@ export class DashboardTable {
     pendingCount!: string;
     approvedCount!: string;
     rejectedCount!: string;
+    activitiesToBeEvaluvated!: string;
 }

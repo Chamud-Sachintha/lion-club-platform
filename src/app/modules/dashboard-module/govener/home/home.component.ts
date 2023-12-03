@@ -63,9 +63,21 @@ export class HomeComponent implements OnInit {
           this.zcUserCheckInfoData.push(eachData);
         })
       }
+
+      this.zcUserCheckInfoData.sort((a: any, b: any) => (a.clubRank - b.clubRank))
     })
 
-    
+    this.dashboardService.getZonalUserDashbaordData(this.searchParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code == 1) {
+        this.dashboardModel.activityCount = dataList.data[0].totalActivities;
+        this.dashboardModel.rejectedCount = dataList.data[0].rejectedActivities;
+        this.dashboardModel.approvedCount = dataList.data[0].approvedActivities;
+        this.dashboardModel.pendingCount = dataList.data[0].pendingActivities;
+      }
+    })
   }
 
   loadRegionalChairpersonDashboardData() {
@@ -93,6 +105,8 @@ export class HomeComponent implements OnInit {
           this.checkInfoPageData.push(eachData);
         })
       }
+
+      this.checkInfoPageData.sort((a: any, b: any) => a.clubRank - b.clubRank)
     })
   }
 

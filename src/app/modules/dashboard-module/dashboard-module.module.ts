@@ -26,6 +26,7 @@ import { FeedActivityDataComponent } from './context-user/feed-activity-data/fee
 import { ManageClubActivitiesComponent } from './eveluvator/manage-club-activities/manage-club-activities.component';
 import { SubmitNewActivityComponent } from './context-user/submit-new-activity/submit-new-activity.component';
 import { CheckInformationsComponent } from './region-chairperson/check-informations/check-informations.component';
+import { CheckInformationsComponent as zoneCheckInfoComp } from './zonal-chairperson/check-informations/check-informations.component';
 import { ReportsComponent } from './govener/reports/reports.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FilterDataPipe } from 'src/app/shared/pipes/filter-data.pipe';
@@ -53,6 +54,7 @@ import { FilterDataPipe } from 'src/app/shared/pipes/filter-data.pipe';
        ManageClubActivitiesComponent,
        SubmitNewActivityComponent,
        CheckInformationsComponent,
+       zoneCheckInfoComp,
        ReportsComponent,
   ],
   imports: [

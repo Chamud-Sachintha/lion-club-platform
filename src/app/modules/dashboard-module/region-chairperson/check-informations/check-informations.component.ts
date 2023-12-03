@@ -17,6 +17,7 @@ export class CheckInformationsComponent implements OnInit {
   searchParamModel = new SearchParam();
   zoneList: Zone[] = [];
   checkInfoPageData: RCCheckInfoModel[] = [];
+  searchText = '';
 
   constructor (private zoneService: ZoneService, private reChairPersonService: UsersService) {}
 

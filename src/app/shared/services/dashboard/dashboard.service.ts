@@ -59,4 +59,9 @@ export class DashboardService {
     const path = environment.apiRoot + "get-region-chairperson-dashboard-data";
     return this.http.post(path, searchParamModel);
   }
+
+  getZonalUserDashbaordData(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "get-zonal-chairperson-dashboard-data";
+    return this.http.post(path, searchParamModel);
+  }
 }

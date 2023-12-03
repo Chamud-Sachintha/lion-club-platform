@@ -10,4 +10,5 @@ export class Dashboard {
     userName!: string;
     totalFunds!: string;
     totalPeopleServed!: string;
+    activitiesToBeEvaluvated!: string;
 }

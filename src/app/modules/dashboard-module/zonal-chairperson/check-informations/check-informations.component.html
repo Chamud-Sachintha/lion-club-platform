@@ -19,7 +19,7 @@
         <div class="card">
             <h5 class="card-header">Manage Club Activities Here</h5>
             <div class="card-body">
-                <form action="">
+                <!-- <form action=""> -->
                     <div class="col-md-6 col-lg-6 colg-sm-12">
                         <label for="input-select" class="col-form-label">Select Club</label>
                     </div>
@@ -27,17 +27,18 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <select class="form-control" id="input-select" formControlName="mainCategoryCode">
+                                <!-- <select class="form-control" id="input-select" formControlName="mainCategoryCode">
                                     <option value="">-- Select Club --</option>
                                     <option value="{{ this.eachClub.clubCode }}" *ngFor="let eachClub of this.clubList">{{ this.eachClub.clubCode }}</option>
-                                </select>
+                                </select> -->
+                                <input type="text" class="form-control" placeholder="Type Club Code to Search" [(ngModel)]="this.searchText">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12">
-                            <button class="btn btn-primary btn-sm">Filter Informations</button>
+                            <!-- <button class="btn btn-primary btn-sm">Filter Informations</button> -->
                         </div>
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
             <div class="card-body border-top">
                 <h3>List of Club Activities Available</h3>
@@ -58,7 +59,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let eachData of this.zcUserCheckInfoData; index as i">
+                                    <tr *ngFor="let eachData of this.zcUserCheckInfoData | filterData: searchText; index as i">
                                         <td>{{ i + 1 }}</td>
                                         <td>{{ eachData.clubRank }}</td>
                                         <td>{{ eachData.clubCode }}</td>
