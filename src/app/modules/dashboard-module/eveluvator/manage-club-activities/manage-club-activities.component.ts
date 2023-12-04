@@ -113,6 +113,7 @@ export class ManageClubActivitiesComponent implements OnInit {
 
           this.loadClubActivityList();
         } else {
+          this.spinner.hide();
           this.toastr.success("Update Club Activity", resp.message);
         }
       })

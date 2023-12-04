@@ -238,13 +238,11 @@ export class SubmitActivityComponent implements OnInit {
     const aditionalInfo = this.submitActivityForm.controls['aditionalInfo'].value;
 
     if (activityCode == "") {
-
+      this.toastr.error("Empty Feilds Found", "Activity Code is required.");
     } else if (value.length == 0) {
-
+      this.toastr.error("Empty Feilds Found", "Exact Value is Required.");
     } else if (conditionType == "") {
-      
-    } else if (documentValueList.length == 0) {
-      
+      this.toastr.error("Empty Feilds Found", "Range is Required.");
     } else {
       const formData = new FormData();
 
