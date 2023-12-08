@@ -8,6 +8,7 @@ import { SearchParam } from 'src/app/models/SearchParam/search-param';
 import { ClubService } from 'src/app/shared/services/club/club.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-club-users',
@@ -27,7 +28,7 @@ export class ClubUsersComponent implements OnInit {
   clubList: Club[] = [];
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userServcie: UsersService
-            , private clubService: ClubService, private tostr: ToastrService) {}
+            , private clubService: ClubService, private tostr: ToastrService, private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.initCreateClubUsersForm();
@@ -127,6 +128,8 @@ export class ClubUsersComponent implements OnInit {
         dataList.data[0].forEach((eachClub: Club) => {
           this.clubList.push(eachClub)
         })
+
+        this.clubList.sort((a, b) => a.clubCode.localeCompare(b.clubCode))
       }
     }, (err) => {})
   }
@@ -154,10 +157,13 @@ export class ClubUsersComponent implements OnInit {
       this.clubUserModel.token = sessionStorage.getItem("authToken");
       this.clubUserModel.flag  = sessionStorage.getItem("role");
 
+      this.spinner.show();
       this.userServcie.createClubUser(this.clubUserModel).subscribe((resp: any) => {
 
         if (resp.code === 1) {
           this.tostr.success("Create Club User", "Club User Create Successfully");
+          this.spinner.hide();
+          
           location.reload();
         } else if (resp.code === 0) {
           this.tostr.error("Create Club User", resp.message);

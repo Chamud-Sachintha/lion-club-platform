@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   checkInfoPageData: RCCheckInfoModel[] = [];
   role!: string;
   zcUserCheckInfoData: ZCCheckInfoModel[] = [];
+  clubName!: string;
 
   constructor(private dashboardService: DashboardService, private clubService: ClubService, private reChairPersonService: UsersService
             , private zcPersonService: UsersService) {}
@@ -123,6 +124,7 @@ export class HomeComponent implements OnInit {
           this.dashboardModel.userName = dataList.data[0].first_name + " " + dataList.data[0].last_name;
         } else if (this.role == "CU") {
           this.dashboardModel.userName = dataList.data[0].name;
+          this.clubName = dataList.data[0].club_code;
         } else if (this.role == "CNTU") {
           this.dashboardModel.userName = dataList.data[0].name;
         } else if (this.role == "E") {

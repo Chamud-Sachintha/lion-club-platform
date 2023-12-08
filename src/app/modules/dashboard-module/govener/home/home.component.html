@@ -154,13 +154,16 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="page-header">
         <div class="row">
-          <div class="col-8">
+          <div class="col-6">
             <h2 class="pageheader-title">
               Hello. Welcome back, {{ this.dashboardModel.userName }}
             </h2>
           </div>
           <div class="col-4">
-            <h5>Club Rank : {{ this.dashboardTable.clubRank }}</h5>
+            <h5>Club : {{ this.clubName }}</h5>
+          </div>
+          <div class="col-2">
+            <h5>Rank: {{ this.dashboardTable.clubRank }}</h5>
           </div>
         </div>
         <p class="pageheader-text">
