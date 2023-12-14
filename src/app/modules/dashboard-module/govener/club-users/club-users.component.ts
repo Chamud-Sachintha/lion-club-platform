@@ -113,6 +113,8 @@ export class ClubUsersComponent implements OnInit {
         dataList.data[0].forEach((eachUser: ClubUser) => {
           this.clubUserList.push(eachUser);
         })
+
+        this.clubUserList.sort((a, b) => a.clubCode.localeCompare(b.clubCode));
       }
     })
   }

@@ -36,6 +36,8 @@ export class CheckInformationsComponent implements OnInit {
         dataList.data[0].forEach((eachClub: Club) => {
           this.clubList.push(eachClub);
         })
+
+        this.clubList.sort((a, b) => a.clubCode.localeCompare(b.clubCode));
       }
     })
   }
@@ -52,6 +54,8 @@ export class CheckInformationsComponent implements OnInit {
         dataList.data[0].forEach((eachData: ZCCheckInfoModel) => {
           this.zcUserCheckInfoData.push(eachData);
         })
+
+        this.zcUserCheckInfoData.sort((a, b) => a.clubCode.localeCompare(b.clubCode));
       }
     })
   }
