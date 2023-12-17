@@ -22,6 +22,12 @@ export class SigninComponent implements OnInit {
     this.initUserAuthForm();
   }
 
+  onClickForgotPw() {
+    this.router.navigate(['auth/forgot-pw'])
+
+    return false;
+  }
+
   onSubmitUserAuthForm() {
     this.authInfo.username = this.userAuthForm.controls['userName'].value;
     this.authInfo.password = this.userAuthForm.controls['password'].value;
