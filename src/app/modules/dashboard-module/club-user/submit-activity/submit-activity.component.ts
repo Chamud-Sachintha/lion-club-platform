@@ -284,6 +284,9 @@ export class SubmitActivityComponent implements OnInit {
           this.spinner.hide();
 
           this.getClubActivityList();
+        } else {
+          this.toastr.error("New Club Activity", resp.message);
+          this.spinner.hide();
         }
       }, (err) => {
         this.spinner.hide();
