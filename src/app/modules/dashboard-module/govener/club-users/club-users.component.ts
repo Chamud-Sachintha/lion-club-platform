@@ -51,6 +51,23 @@ export class ClubUsersComponent implements OnInit {
     })
   }
 
+  activateClubUserByCode(clubUserCode: string) {
+    this.searchParamModel.token = sessionStorage.getItem("authToken");
+    this.searchParamModel.flag = sessionStorage.getItem("role");
+    this.searchParamModel.clubUserCode = clubUserCode;
+
+    this.userServcie.activateClubUserByCode(this.searchParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Enable Club User", "User Enable Successfully.");
+        location.reload();
+      } else {
+        this.tostr.error("Enable Club User", resp.message);
+        location.reload();
+      }
+    })
+  }
+
   onLoadClubUserInfo(clubUserCode: string) {
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");

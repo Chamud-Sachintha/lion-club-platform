@@ -101,6 +101,11 @@ export class UsersService {
     return this.http.post(path, chairPersonModel)
   }
 
+  activateClubUserByCode(searchParamModel: SearchParam) {
+    const path = environment.apiRoot + "activate-club-user";
+    return this.http.post(path, searchParamModel);
+  }
+
   updateZonalChairPersonByCode(chairpersonModel: ChairPerson) {
     const path = environment.apiRoot + "update-zonal-user-by-code";
     return this.http.post(path, chairpersonModel);

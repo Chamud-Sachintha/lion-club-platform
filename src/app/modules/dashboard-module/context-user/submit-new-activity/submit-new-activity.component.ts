@@ -251,6 +251,8 @@ export class SubmitNewActivityComponent implements OnInit {
       this.toastr.error("Empty Feilds Founded", "Images is required.");
     } else if (conditionType == "") {
       this.toastr.error("Empty Feilds Founded", "Condition Type is required.");
+    } else if (clubCode == "") {
+      this.toastr.error("Empty Feilds Founded", "Club Code is required.");
     // } else if (documentValueList.length == 0) {
     //   this.toastr.error("Empty Feilds Founded", "Documents is required.");
     } else {

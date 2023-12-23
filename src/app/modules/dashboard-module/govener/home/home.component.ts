@@ -210,6 +210,8 @@ export class HomeComponent implements OnInit {
   }
 
   loadClubUserCounts() {
+    location.reload();
+    
     this.searchParamModel.token = sessionStorage.getItem("authToken");
     this.searchParamModel.flag = sessionStorage.getItem("role");
     this.searchParamModel.clubCode = sessionStorage.getItem("clubCode");

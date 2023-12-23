@@ -5,4 +5,5 @@ export class ClubUser {
     fullName!: string;
     email!: string;
     clubCode!: string;
+    status!: string;
 }

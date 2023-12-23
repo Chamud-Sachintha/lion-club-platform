@@ -239,8 +239,8 @@ export class SubmitActivityComponent implements OnInit {
 
     if (activityCode == "") {
       this.toastr.error("Empty Feilds Found", "Activity Code is required.");
-    } else if (value.length == 0) {
-      this.toastr.error("Empty Feilds Found", "Exact Value is Required.");
+    // } else if (value.length == 0) {
+    //   this.toastr.error("Empty Feilds Found", "Image is Required.");
     } else if (conditionType == "") {
       this.toastr.error("Empty Feilds Found", "Range is Required.");
     } else {

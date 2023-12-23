@@ -138,11 +138,20 @@
                         Update
                       </button>
                       <button
+                        *ngIf="this.eachUser.status == '1'"
                         class="btn btn-danger btn-sm"
                         style="margin-left: 10px"
                         (click)="deleteClubUserByCode(eachUser.clubUserCode)"
                       >
-                        Delete
+                        Deactivate
+                      </button>
+                      <button
+                        *ngIf="this.eachUser.status == '0'"
+                        class="btn btn-success btn-sm"
+                        style="margin-left: 10px"
+                        (click)="activateClubUserByCode(eachUser.clubUserCode)"
+                      >
+                        Activate
                       </button>
                     </td>
                   </tr>
