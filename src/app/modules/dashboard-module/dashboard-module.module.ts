@@ -30,6 +30,7 @@ import { CheckInformationsComponent as zoneCheckInfoComp } from './zonal-chairpe
 import { ReportsComponent } from './govener/reports/reports.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FilterDataPipe } from 'src/app/shared/pipes/filter-data.pipe';
+import { ClubReportComponent } from './govener/club-report/club-report.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FilterDataPipe } from 'src/app/shared/pipes/filter-data.pipe';
        CheckInformationsComponent,
        zoneCheckInfoComp,
        ReportsComponent,
+       ClubReportComponent,
   ],
   imports: [
     CommonModule,

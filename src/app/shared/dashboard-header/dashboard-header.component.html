@@ -111,8 +111,23 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="#/app/point-tables"><i class="fa fa-fw fa-user-circle"></i>Point Table Management</a>
                     </li>
-                    <li class="nav-item ">
+                    <!-- <li class="nav-item ">
                         <a class="nav-link" href="#/app/gov-reports"><i class="fa fa-fw fa-user-circle"></i>Reports</a>
+                    </li> -->
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/app/user-management" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                                class="fa fa-fw fa-user-circle"></i>Reports <span
+                                class="badge badge-success">6</span></a>
+                        <div id="submenu-4" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#/app/club-report">Club Report</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#/app/gov-reports">Activity Report</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="#" (click)="onClickSignOut()"><i class="fa fa-fw fa-user-circle"></i>Sign Out</a>

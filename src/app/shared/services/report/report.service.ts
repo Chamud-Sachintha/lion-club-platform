@@ -14,4 +14,9 @@ export class ReportService {
     const path = environment.apiRoot + "gov-reports-data";
     return this.http.post(path, reportDataModel);
   }
+
+  getClubReportData(reportDataModel: Report) {
+    const path = environment.apiRoot + "get-club-report-data";
+    return this.http.post(path, reportDataModel);
+  }
 }

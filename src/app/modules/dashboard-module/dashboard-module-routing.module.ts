@@ -22,6 +22,7 @@ import { SubmitNewActivityComponent } from './context-user/submit-new-activity/s
 import { CheckInformationsComponent as ReCheckInfoComponent } from './region-chairperson/check-informations/check-informations.component';
 import { CheckInformationsComponent as ZonalCheckInfoComponent } from './zonal-chairperson/check-informations/check-informations.component';
 import { ReportsComponent } from './govener/reports/reports.component';
+import { ClubReportComponent } from './govener/club-report/club-report.component';
 
 const routes: Routes = [
   {
@@ -111,6 +112,10 @@ const routes: Routes = [
       {
         path: 'gov-reports',
         component: ReportsComponent
+      },
+      {
+        path: 'club-report',
+        component: ClubReportComponent
       },
 
 
