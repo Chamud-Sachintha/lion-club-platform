@@ -27,7 +27,7 @@
                                 <label for="input-select" class="col-form-label">Select Main Category</label>
                                 <select class="form-control" id="input-select" #maiActivityRef (change)="onChangeMainActivityCode(maiActivityRef.value)">
                                     <option value="">-- Select Main Category --</option>
-                                    <option value="{{ this.mainCategory.mainCategoryCode }}" *ngFor="let mainCategory of this.mainCategoryList">{{ this.mainCategory.mainCategoryCode }}</option>
+                                    <option value="{{ this.mainCategory.mainCategoryCode }}" *ngFor="let mainCategory of this.mainCategoryList">{{ this.mainCategory.mainCategoryCode }} - {{ this.mainCategory.categoryName }}</option>
                                 </select>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                                 <label for="input-select" class="col-form-label">Select First Category</label>
                                 <select class="form-control" id="input-select" #firstCategory (change)="onChangeFirstCategory(firstCategory.value)">
                                     <option value="">-- Select First Category --</option>
-                                    <option value="{{ this.eachCategory.firstSubCategoryCode }}" *ngFor="let eachCategory of this.firstCategoryList">{{ this.eachCategory.firstSubCategoryCode }}</option>
+                                    <option value="{{ this.eachCategory.firstSubCategoryCode }}" *ngFor="let eachCategory of this.firstCategoryList">{{ this.eachCategory.firstSubCategoryCode }} - {{ this.eachCategory.categoryName }}</option>
                                 </select>
                             </div> 
                         </div>
@@ -47,7 +47,7 @@
                                 <label for="input-select" class="col-form-label">Select Second Category</label>
                                 <select class="form-control" id="input-select" #secondCategory (change)="onChangeSecoondSubCategory(secondCategory.value)">
                                     <option value="">-- Select Scond Sub Category --</option>
-                                    <option value="{{ this.secondCategory.secondSubCategoryCode }}" *ngFor="let secondCategory of this.secondCategoryList">{{ this.secondCategory.secondSubCategoryCode }}</option>
+                                    <option value="{{ this.secondCategory.secondSubCategoryCode }}" *ngFor="let secondCategory of this.secondCategoryList">{{ this.secondCategory.secondSubCategoryCode }} - {{ this.secondCategory.categoryName}}</option>
                                 </select>
                             </div>
                         </div>
