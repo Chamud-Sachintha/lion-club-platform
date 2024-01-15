@@ -1,0 +1,146 @@
+<div class="row">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+        <p style="color: white"> Loading... </p>
+    </ngx-spinner>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title">
+                Manage All Activity First Sub categories Here.
+            </h2>
+            <p class="pageheader-text">
+                Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
+                facilisis faucibus at enim quis massa lobortis rutrum.
+            </p>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="#" class="breadcrumb-link">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Page Title
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Eveluvation History</h5>
+            <div class="card-body">
+                <!-- <form [formGroup]="filterClubActivityListForm" (ngSubmit)="onSubmitFilterClubListForm()">
+            <div class="row">
+              <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="form-group">
+                  <label for="input-select" class="col-form-label"
+                    >Select Region</label
+                  >
+                  <select
+                    class="form-control"
+                    id="input-select"
+                    #region
+                    (change)="onChangeRegion(region.value)"
+                    formControlName="reCode"
+                  >
+                    <option value="">-- Select Region --</option>
+                    <option
+                      value="{{ this.eachRegion.regionCode }}"
+                      *ngFor="let eachRegion of this.regionList"
+                    >
+                      {{ this.eachRegion.regionCode }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="form-group">
+                  <label for="input-select" class="col-form-label"
+                    >Select Zone</label
+                  >
+                  <select
+                    class="form-control"
+                    id="input-select"
+                    formControlName="zoneCode"
+                  >
+                    <option value="">-- Select Zone --</option>
+                    <option
+                      value="{{ this.eachZone.zoneCode }}"
+                      *ngFor="let eachZone of this.zoneList"
+                    >
+                      {{ this.eachZone.zoneCode }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <button class="btn btn-primary btn-sm">
+                  Filter Informations
+                </button>
+              </div>
+            </div>
+          </form> -->
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Type Activity Code to Search</label>
+                        <input type="text" class="form-control" placeholder="Type Activity Code" [(ngModel)]="searchText">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body border-top">
+                <h3>List of Club Activities Available</h3>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered first">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Activity Code</th>
+                                        <th>Club Code</th>
+                                        <th>Comment</th>
+                                        <th>Requested Range</th>
+                                        <th>Requested Points</th>
+                                        <th>Claimed Range</th>
+                                        <th>Claimed Points</th>
+                                        <th>Eveluvated Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let eachData of this.eveluvatedLogList | filterData: searchText">
+                                        <td>{{ eachData.name }}</td>
+                                        <td>{{ eachData.activityCode }}</td>
+                                        <td>{{ eachData.clubCode }}</td>
+                                        <td>{{ eachData.comment }}</td>
+                                        <td>{{ eachData.requestedRange }}</td>
+                                        <td>{{ eachData.requestedPoints }}</td>
+                                        <td>{{ eachData.claimedRange }}</td>
+                                        <td>{{ eachData.claimedPoints }}</td>
+                                        <td>{{ eachData.eveluvatedDate | date }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Activity Code</th>
+                                        <th>Club Code</th>
+                                        <th>Comment</th>
+                                        <th>Requested Range</th>
+                                        <th>Requested Points</th>
+                                        <th>Claimed Range</th>
+                                        <th>Claimed Points</th>
+                                        <th>Eveluvated Date</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

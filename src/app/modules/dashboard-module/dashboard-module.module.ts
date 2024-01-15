@@ -31,6 +31,7 @@ import { ReportsComponent } from './govener/reports/reports.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FilterDataPipe } from 'src/app/shared/pipes/filter-data.pipe';
 import { ClubReportComponent } from './govener/club-report/club-report.component';
+import { EveluvationLogComponent } from './eveluvator/eveluvation-log/eveluvation-log.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ClubReportComponent } from './govener/club-report/club-report.component
        zoneCheckInfoComp,
        ReportsComponent,
        ClubReportComponent,
+       EveluvationLogComponent,
   ],
   imports: [
     CommonModule,

@@ -23,6 +23,7 @@ import { CheckInformationsComponent as ReCheckInfoComponent } from './region-cha
 import { CheckInformationsComponent as ZonalCheckInfoComponent } from './zonal-chairperson/check-informations/check-informations.component';
 import { ReportsComponent } from './govener/reports/reports.component';
 import { ClubReportComponent } from './govener/club-report/club-report.component';
+import { EveluvationLogComponent } from './eveluvator/eveluvation-log/eveluvation-log.component';
 
 const routes: Routes = [
   {
@@ -141,6 +142,10 @@ const routes: Routes = [
       {
         path:'manage-lub-activities',
         component: ManageClubActivitiesComponent
+      },
+      {
+        path: 'eveluvation-log',
+        component: EveluvationLogComponent
       },
 
       // region chairperson routings starts here

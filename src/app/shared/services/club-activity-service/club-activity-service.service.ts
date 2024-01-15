@@ -67,4 +67,9 @@ export class ClubActivityServiceService {
     const path = environment.apiRoot + "get-docs-by-activity-code";
     return this.http.post(path, activityInfoModel);
   }
+
+  getEveluvatorLogList(requestParamModel: SearchParam) {
+    const path = environment.apiRoot + "eveluvator-log";
+    return this.http.post(path, requestParamModel);
+  }
 }
