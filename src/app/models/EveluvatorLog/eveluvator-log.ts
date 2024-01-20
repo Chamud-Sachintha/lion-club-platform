@@ -3,6 +3,7 @@ export class EveluvatorLog {
     activityCode!: string;
     clubCode!: string;
     comment!: string;
+    status!: string;
     requestedRange!: string;
     requestedPoints!: string;
     claimedRange!: string;

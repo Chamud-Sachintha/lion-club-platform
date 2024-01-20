@@ -103,6 +103,7 @@
                                         <th>Activity Code</th>
                                         <th>Club Code</th>
                                         <th>Comment</th>
+                                        <th>Status</th>
                                         <th>Requested Range</th>
                                         <th>Requested Points</th>
                                         <th>Claimed Range</th>
@@ -116,6 +117,11 @@
                                         <td>{{ eachData.activityCode }}</td>
                                         <td>{{ eachData.clubCode }}</td>
                                         <td>{{ eachData.comment }}</td>
+                                        <td *ngIf="eachData.status == 1">Approved</td>
+                                        <td *ngIf="eachData.status == 0">Pending</td>
+                                        <td *ngIf="eachData.status == 2">Rejected</td>
+                                        <td *ngIf="eachData.status == 3">Hold For Further Evaluvation</td>
+                                        <td *ngIf="eachData.status == 4">Appoved with Corrections</td>
                                         <td>{{ eachData.requestedRange }}</td>
                                         <td>{{ eachData.requestedPoints }}</td>
                                         <td>{{ eachData.claimedRange }}</td>
@@ -129,6 +135,7 @@
                                         <th>Activity Code</th>
                                         <th>Club Code</th>
                                         <th>Comment</th>
+                                        <th>Status</th>
                                         <th>Requested Range</th>
                                         <th>Requested Points</th>
                                         <th>Claimed Range</th>
