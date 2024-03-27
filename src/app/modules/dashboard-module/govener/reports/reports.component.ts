@@ -78,6 +78,7 @@ export class ReportsComponent implements OnInit {
     this.reportDataModel.token = sessionStorage.getItem("authToken");
     this.reportDataModel.flag = sessionStorage.getItem("role");
 
+    this.spinner.show();
     this.reportService.getGovernerReportData(this.reportDataModel).subscribe((resp: any) => {
 
       const dataList = JSON.parse(JSON.stringify(resp));
@@ -93,6 +94,8 @@ export class ReportsComponent implements OnInit {
           this.reportDataList.push(eachRow);
         })
       }
+
+      this.spinner.hide();
     })
   }
 
